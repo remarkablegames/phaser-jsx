@@ -15,7 +15,6 @@ const config: Config = {
     process.env.CI === 'true'
       ? [['github-actions', { silent: false }], 'summary']
       : undefined,
-  setupFiles: ['jest-canvas-mock'],
   testEnvironment: 'jsdom',
   watchPlugins: [
     'jest-watch-typeahead/filename',

@@ -1,3 +1,5 @@
+import 'global-jsdom/register';
+
 import { it } from 'node:test';
 
 import assert from 'assert';
