@@ -21,10 +21,3 @@ export function createElement(
     },
   };
 }
-
-/**
- * Alias for `createElement`.
- *
- * {@link createElement}
- */
-export const jsx = createElement;
