@@ -38,6 +38,9 @@
     "ui",
     "game"
   ],
+  "dependencies": {
+    "@types/react": "18.2.47"
+  },
   "devDependencies": {
     "@commitlint/cli": "18.4.4",
     "@commitlint/config-conventional": "18.4.4",
