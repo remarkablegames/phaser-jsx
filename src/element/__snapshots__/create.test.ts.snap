@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates element %p 1`] = `
+{
+  "props": {
+    "children": [],
+  },
+  "type": undefined,
+}
+`;
+
+exports[`creates element [Function Component] 1`] = `
+{
+  "props": {
+    "children": [],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 2`] = `
+{
+  "props": {
+    "children": [],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 3`] = `
+{
+  "props": {
+    "children": [
+      null,
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 4`] = `
+{
+  "props": {
+    "children": [],
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 5`] = `
+{
+  "props": {
+    "children": [
+      null,
+    ],
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 6`] = `
+{
+  "props": {
+    "children": [
+      [Function],
+    ],
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;

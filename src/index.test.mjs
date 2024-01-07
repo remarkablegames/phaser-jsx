@@ -1,11 +1,13 @@
-import { describe, it } from 'node:test';
+import { it } from 'node:test';
 
 import assert from 'assert';
 
-import { name } from '../cjs/index.js';
+import { createElement, jsx } from '../cjs/index.js';
 
-describe('index', () => {
-  it('exports name', () => {
-    assert.strictEqual(name, 'phaser-jsx');
-  });
+it('exports createElement', () => {
+  assert.strictEqual(typeof createElement, 'function');
+});
+
+it('exports jsx', () => {
+  assert.strictEqual(jsx, createElement);
 });

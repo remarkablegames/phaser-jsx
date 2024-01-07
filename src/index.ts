@@ -1,1 +1,1 @@
-export const name = 'phaser-jsx';
+export { createElement, jsx } from './element';
