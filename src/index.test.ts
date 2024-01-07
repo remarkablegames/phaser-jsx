@@ -1,7 +1,7 @@
-import { createElement, jsx } from '.';
+import { Container, createElement, jsx, Rectangle, Text } from '.';
 
-it('exports createElement', () => {
-  expect(createElement).toBeInstanceOf(Function);
+it.each([Container, Rectangle, Text, createElement])('exports %p', (func) => {
+  expect(func).toBeInstanceOf(Function);
 });
 
 it('exports jsx', () => {

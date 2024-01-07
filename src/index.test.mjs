@@ -4,12 +4,18 @@ import { it } from 'node:test';
 
 import assert from 'assert';
 
-import { createElement, jsx } from '../cjs/index.js';
+import { createElement, Image, jsx, Video } from '../cjs/index.js';
 
-it('exports createElement', () => {
-  assert.strictEqual(typeof createElement, 'function');
+[createElement, Image, Video].forEach((func) => {
+  it(`exports ${func.name}`, () => {
+    assert.strictEqual(typeof func, 'function');
+  });
 });
 
 it('exports jsx', () => {
   assert.strictEqual(jsx, createElement);
+});
+
+it('exports Image', () => {
+  assert.strictEqual(typeof Image, 'function');
 });
