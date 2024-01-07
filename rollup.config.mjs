@@ -5,9 +5,9 @@ import typescript from '@rollup/plugin-typescript';
 const config = (minify = false) => ({
   input: 'src/index.ts',
   output: {
-    file: `umd/npm-package-typescript-template${minify ? '.min' : ''}.js`,
+    file: `umd/phaser-jsx${minify ? '.min' : ''}.js`,
     format: 'umd',
-    name: 'npm-package-typescript-template',
+    name: 'phaser-jsx',
     sourcemap: true,
   },
   plugins: [
