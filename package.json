@@ -64,6 +64,9 @@
     "typedoc": "0.25.6",
     "typescript": "5.3.3"
   },
+  "peerDependencies": {
+    "phaser": "3"
+  },
   "files": [
     "cjs/",
     "src/",
