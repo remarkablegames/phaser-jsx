@@ -6,7 +6,7 @@
   "main": "./cjs/index.js",
   "scripts": {
     "build": "npm run build:cjs && npm run build:umd",
-    "build:cjs": "tsc",
+    "build:cjs": "tsc --project tsconfig.build.json",
     "build:umd": "rollup --config --failAfterWarnings",
     "build:watch": "tsc --watch",
     "clean": "rm -rf cjs coverage docs umd",
@@ -20,7 +20,7 @@
     "prepublishOnly": "pinst --disable && npm run lint && npm run lint:tsc && npm run test:ci && npm run test:esm && npm run clean && npm run build",
     "test": "jest",
     "test:ci": "CI=true jest --ci --colors --coverage",
-    "test:esm": "npm run build:cjs && node --test __tests__",
+    "test:esm": "npm run build:cjs && node --test src",
     "test:watch": "jest --watch"
   },
   "repository": {

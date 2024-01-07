@@ -1,4 +1,4 @@
-import { name } from '../src/index';
+import { name } from '.';
 
 it('exports name', () => {
   expect(name).toBe('phaser-jsx');
