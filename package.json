@@ -1,7 +1,7 @@
 {
   "name": "phaser-jsx",
   "version": "0.1.0-alpha",
-  "description": "npm package TypeScript template",
+  "description": "Use JSX in Phaser.",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "./cjs/index.js",
   "scripts": {
