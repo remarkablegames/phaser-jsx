@@ -1,1 +1,1 @@
-module.exports = require('../jsx-runtime');
+module.exports = require('../cjs/jsx-dev-runtime');
