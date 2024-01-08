@@ -7,3 +7,5 @@ export interface GameObjectProps extends Partial<Events> {
   children?: JSX.Element | JSX.Element[] | null;
   ref?: (gameObject: GameObject) => void;
 }
+
+export type Props = Record<string, unknown>;

@@ -1,8 +1,7 @@
 import Phaser from 'phaser';
 
 import { events } from '../constants';
-
-type Props = Record<string, unknown>;
+import type { Props } from '../types';
 
 /**
  * Sets game object props.
