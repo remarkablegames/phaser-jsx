@@ -11,6 +11,11 @@
 
 Use [JSX](https://facebook.github.io/jsx/) in [Phaser](https://phaser.io/).
 
+### Demo
+
+- [Replit](https://replit.com/@remarkablemark/phaser-jsx)
+- [JSFiddle](https://jsfiddle.net/remarkablemark/dLhvuo42/)
+
 ## Quick Start
 
 With JSX:
