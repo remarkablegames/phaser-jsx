@@ -80,3 +80,40 @@ exports[`creates element [Function Component] 6`] = `
   "type": [Function],
 }
 `;
+
+exports[`creates element [Function Component] 7`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 8`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element [Function Component] 9`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;

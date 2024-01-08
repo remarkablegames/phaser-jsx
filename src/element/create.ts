@@ -23,6 +23,10 @@ export function createElement(
     props.children = children;
   }
 
+  if (props.children && !Array.isArray(props.children)) {
+    props.children = [props.children];
+  }
+
   return {
     type,
     props,
