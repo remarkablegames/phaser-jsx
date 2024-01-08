@@ -7,6 +7,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/phaser-jsx.svg)](https://www.npmjs.com/package/phaser-jsx)
 [![build](https://github.com/remarkablegames/phaser-jsx/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/phaser-jsx/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/remarkablegames/phaser-jsx/graph/badge.svg?token=EZEOFDL9ME)](https://codecov.io/gh/remarkablegames/phaser-jsx)
 
 Use [JSX](https://facebook.github.io/jsx/) in [Phaser](https://phaser.io/).
 
