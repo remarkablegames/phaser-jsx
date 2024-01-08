@@ -1,4 +1,4 @@
-import type { Props } from '../types';
+import type { GameObjectProps } from '../types';
 
 /**
  * Attaches game object ref.
@@ -8,7 +8,7 @@ import type { Props } from '../types';
  */
 export function attachRef(
   gameObject: Phaser.GameObjects.GameObject,
-  ref: Props['ref'],
+  ref: GameObjectProps['ref'],
 ) {
   if (typeof ref === 'function') {
     ref(gameObject);

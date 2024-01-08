@@ -1,8 +1,7 @@
 import { GameObjects } from 'phaser';
 import type { FC } from 'react';
 
-import type { Props } from '../types/props';
-import type { RecursivePartial } from '../types/utils';
+import type { GameObjectProps as Props, RecursivePartial } from '../types';
 
 /**
  * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
