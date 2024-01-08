@@ -4,9 +4,9 @@ import { it } from 'node:test';
 
 import assert from 'assert';
 
-import { Container } from '../cjs/components/index.js';
-import { createElement } from '../cjs/element/create.js';
-import { Fragment, jsx, jsxDEV, jsxs } from './index.js';
+import { Container } from '../../cjs/components/index.js';
+import { createElement } from '../../cjs/element/create.js';
+import { Fragment, jsx, jsxDEV, jsxs } from '../../cjs/jsx-runtime/index.js';
 
 it('exports Fragment', () => {
   assert.strictEqual(Fragment, Container);
