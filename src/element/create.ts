@@ -1,5 +1,7 @@
 import type { ComponentClass, FC, JSX } from 'react';
 
+import type { Props } from '../types';
+
 /**
  * Creates an element.
  *
@@ -10,14 +12,20 @@ import type { ComponentClass, FC, JSX } from 'react';
  */
 export function createElement(
   type: FC | ComponentClass,
-  props?: React.Attributes | null,
+  props?: Props | null,
   ...children: JSX.Element[]
-) {
+): JSX.Element {
+  if (!props) {
+    props = {};
+  }
+
+  if (children.length) {
+    props.children = children;
+  }
+
   return {
     type,
-    props: {
-      ...props,
-      children,
-    },
+    props,
+    key: null,
   };
 }

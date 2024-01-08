@@ -2,33 +2,31 @@
 
 exports[`creates element %p 1`] = `
 {
-  "props": {
-    "children": [],
-  },
+  "key": null,
+  "props": {},
   "type": undefined,
 }
 `;
 
 exports[`creates element [Function Component] 1`] = `
 {
-  "props": {
-    "children": [],
-  },
+  "key": null,
+  "props": {},
   "type": [Function],
 }
 `;
 
 exports[`creates element [Function Component] 2`] = `
 {
-  "props": {
-    "children": [],
-  },
+  "key": null,
+  "props": {},
   "type": [Function],
 }
 `;
 
 exports[`creates element [Function Component] 3`] = `
 {
+  "key": null,
   "props": {
     "children": [
       null,
@@ -40,8 +38,8 @@ exports[`creates element [Function Component] 3`] = `
 
 exports[`creates element [Function Component] 4`] = `
 {
+  "key": null,
   "props": {
-    "children": [],
     "style": {
       "height": 200,
       "width": 100,
@@ -53,6 +51,7 @@ exports[`creates element [Function Component] 4`] = `
 
 exports[`creates element [Function Component] 5`] = `
 {
+  "key": null,
   "props": {
     "children": [
       null,
@@ -68,6 +67,7 @@ exports[`creates element [Function Component] 5`] = `
 
 exports[`creates element [Function Component] 6`] = `
 {
+  "key": null,
   "props": {
     "children": [
       [Function],
