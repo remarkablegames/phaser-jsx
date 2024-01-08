@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.1.0...v0.1.1) (2024-01-08)
+
+
+### Bug Fixes
+
+* **element:** ensure props.children is an array in createElement ([83ab991](https://github.com/remarkablegames/phaser-jsx/commit/83ab991102898e2ebea0918ca3a0b2c16c476231))
+* **jsx-dev-runtime:** remove last 4 arguments from jsxDEV ([06fc624](https://github.com/remarkablegames/phaser-jsx/commit/06fc624a17577839a71e10f453f69d83de08408d))
+
 ## 0.1.0 (2024-01-08)
 
 ### Features
