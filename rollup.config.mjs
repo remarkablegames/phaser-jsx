@@ -3,11 +3,15 @@ import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
 const config = (minify = false) => ({
+  external: ['phaser'],
   input: 'src/index.ts',
   output: {
     file: `umd/phaser-jsx${minify ? '.min' : ''}.js`,
     format: 'umd',
-    name: 'phaser-jsx',
+    globals: {
+      phaser: 'Phaser',
+    },
+    name: 'PhaserJSX',
     sourcemap: true,
   },
   plugins: [
