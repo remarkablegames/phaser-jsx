@@ -1,7 +1,7 @@
 import { Container, createElement } from '..';
-import { Fragment, jsx, jsxDEV, jsxs } from '.';
+import { Fragment, jsx, jsxs } from '.';
 
-it.each([jsx, jsxDEV, jsxs])('exports %p', (func) => {
+it.each([jsx, jsxs])('exports %p', (func) => {
   expect(func).toBe(createElement);
 });
 
