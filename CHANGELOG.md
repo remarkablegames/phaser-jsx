@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.1.1...v0.2.0) (2024-01-09)
+
+
+### Features
+
+* **element:** warn instead of error if element is invalid ([776ef79](https://github.com/remarkablegames/phaser-jsx/commit/776ef79db55b9a9971dcecd352e47c8265ebf5d3))
+
 ## [0.1.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.1.0...v0.1.1) (2024-01-08)
 
 
