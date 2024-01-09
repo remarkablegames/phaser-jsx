@@ -32,14 +32,15 @@ function Children(props: { children: JSX.Element[] }) {
   return <Container {...props} />;
 }
 
-it('throws error for invalid element', () => {
+it('logs warning for invalid element', () => {
+  const spy = jest.spyOn(console, 'warn').mockImplementation();
   const element = {} as JSX.Element;
   const container = new Phaser.GameObjects.Container(scene);
-  expect(() => {
-    createGameObject(element, scene, container);
-  }).toThrow(
+  expect(createGameObject(element, scene, container)).toBe(undefined);
+  expect(spy).toBeCalledWith(
     'Invalid JSX type. Expected a class or function but got: undefined',
   );
+  spy.mockRestore();
 });
 
 it('creates game object from element', () => {

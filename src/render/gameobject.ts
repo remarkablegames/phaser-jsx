@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { validateElement } from '../element/validate';
+import { isValidElement } from '../element/valid';
 import { createContainer } from './container';
 import { setProps } from './props';
 import { attachRef } from './ref';
@@ -19,7 +19,9 @@ export function createGameObject(
   scene: Phaser.Scene,
   container: Phaser.GameObjects.Container,
 ) {
-  validateElement(element);
+  if (!isValidElement(element)) {
+    return;
+  }
 
   const gameObject: Phaser.GameObjects.GameObject = new element.type(scene);
 

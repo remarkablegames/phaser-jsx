@@ -12,6 +12,10 @@ import { createGameObject } from './gameobject';
  */
 export function render(element: JSX.Element, scene: Phaser.Scene) {
   const container = createContainer(scene);
-  container.add(createGameObject(element, scene, container));
-  scene.add.existing(container);
+  const gameObject = createGameObject(element, scene, container);
+
+  if (gameObject) {
+    container.add(gameObject);
+    scene.add.existing(container);
+  }
 }
