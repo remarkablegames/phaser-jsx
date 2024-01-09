@@ -1,11 +1,13 @@
 import type { JSX } from 'react';
 
-import type { Events } from './events';
-import type { GameObject } from './phaser';
+import type { Events, GameObject, RecursivePartial } from '.';
 
-export interface GameObjectProps<Type = GameObject> extends Partial<Events> {
+interface ObjectProps<Type> extends Partial<Events> {
   children?: JSX.Element | JSX.Element[] | null;
   ref?: (gameObject: Type) => void;
 }
+
+export type GameObjectProps<Type = GameObject> = ObjectProps<Type> &
+  RecursivePartial<Type>;
 
 export type Props = Record<string, unknown>;

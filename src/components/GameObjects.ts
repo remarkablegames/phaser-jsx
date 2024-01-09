@@ -1,7 +1,7 @@
 import { GameObjects } from 'phaser';
 import type { FC } from 'react';
 
-import type { GameObjectProps as Props, RecursivePartial } from '../types';
+import type { GameObjectProps as Props } from '../types';
 
 /**
  * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
@@ -19,7 +19,7 @@ import type { GameObjectProps as Props, RecursivePartial } from '../types';
  * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
  */
 export const BitmapText = GameObjects.BitmapText as unknown as FC<
-  Props<GameObjects.BitmapText> & RecursivePartial<GameObjects.BitmapText>
+  Props<GameObjects.BitmapText>
 >;
 
 /**
@@ -40,8 +40,7 @@ export const BitmapText = GameObjects.BitmapText as unknown as FC<
  * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
  */
 export const DynamicBitmapText = GameObjects.DynamicBitmapText as unknown as FC<
-  Props<GameObjects.DynamicBitmapText> &
-    RecursivePartial<GameObjects.DynamicBitmapText>
+  Props<GameObjects.DynamicBitmapText>
 >;
 
 /**
@@ -54,7 +53,7 @@ export const DynamicBitmapText = GameObjects.DynamicBitmapText as unknown as FC<
  * If you have a need to blast a large volume of frames around the screen then Blitter objects are well worth investigating. They are especially useful for using as a base for your own special effects systems.
  */
 export const Blitter = GameObjects.Blitter as unknown as FC<
-  Props<GameObjects.Blitter> & RecursivePartial<GameObjects.Blitter>
+  Props<GameObjects.Blitter>
 >;
 
 /**
@@ -68,9 +67,7 @@ export const Blitter = GameObjects.Blitter as unknown as FC<
  *
  * You can manipulate Bob objects directly from your game code, but the creation and destruction of them should be handled via the Blitter parent.
  */
-export const Bob = GameObjects.Bob as unknown as FC<
-  Props<GameObjects.Bob> & RecursivePartial<GameObjects.Bob>
->;
+export const Bob = GameObjects.Bob as unknown as FC<Props<GameObjects.Bob>>;
 
 /**
  * A Container Game Object.
@@ -98,7 +95,7 @@ export const Bob = GameObjects.Bob as unknown as FC<
  * It's important to understand the impact of using Containers. They add additional processing overhead into every one of their children. The deeper you nest them, the more the cost escalates. This is especially true for input events. You also loose the ability to set the display depth of Container children in the same flexible manner as those not within them. In short, don't use them for the sake of it. You pay a small cost every time you create one, try to structure your game around avoiding that where possible.
  */
 export const Container = GameObjects.Container as unknown as FC<
-  Props<GameObjects.Container> & RecursivePartial<GameObjects.Container>
+  Props<GameObjects.Container>
 >;
 
 /**
@@ -140,7 +137,7 @@ export const Container = GameObjects.Container as unknown as FC<
  * DOM Elements are a powerful way to align native HTML with your Phaser Game Objects. For example, you can insert a login form for a multiplayer game directly into your title screen. Or a text input box for a highscore table. Or a banner ad from a 3rd party service. Or perhaps you'd like to use them for high resolution text display and UI. The choice is up to you, just remember that you're dealing with standard HTML and CSS floating over the top of your game, and should treat it accordingly.
  */
 export const DOMElement = GameObjects.DOMElement as unknown as FC<
-  Props<GameObjects.DOMElement> & RecursivePartial<GameObjects.DOMElement>
+  Props<GameObjects.DOMElement>
 >;
 
 /**
@@ -153,7 +150,7 @@ export const DOMElement = GameObjects.DOMElement as unknown as FC<
  * Although this object has lots of properties such as Alpha, Blend Mode and Tint, none of them are used during rendering unless you take advantage of them in your own render code.
  */
 export const Extern = GameObjects.Extern as unknown as FC<
-  Props<GameObjects.Extern> & RecursivePartial<GameObjects.Extern>
+  Props<GameObjects.Extern>
 >;
 
 /**
@@ -186,7 +183,7 @@ export const Extern = GameObjects.Extern as unknown as FC<
  * As you can tell, Graphics objects are a bit of a trade-off. While they are extremely useful, you need to be careful in their complexity and quantity of them in your game.
  */
 export const Graphics = GameObjects.Graphics as unknown as FC<
-  Props<GameObjects.Graphics> & RecursivePartial<GameObjects.Graphics>
+  Props<GameObjects.Graphics>
 >;
 
 /**
@@ -197,7 +194,7 @@ export const Graphics = GameObjects.Graphics as unknown as FC<
  * Groups themselves aren't displayable, and can't be positioned, rotated, scaled, or hidden.
  */
 export const Group = GameObjects.Group as unknown as FC<
-  Props<GameObjects.Group> & RecursivePartial<GameObjects.Group>
+  Props<GameObjects.Group>
 >;
 
 /**
@@ -206,7 +203,7 @@ export const Group = GameObjects.Group as unknown as FC<
  * An Image is a light-weight Game Object useful for the display of static images in your game, such as logos, backgrounds, scenery or other non-animated elements. Images can have input events and physics bodies, or be tweened, tinted or scrolled. The main difference between an Image and a Sprite is that you cannot animate an Image as they do not have the Animation component.
  */
 export const Image = GameObjects.Image as unknown as FC<
-  Props<GameObjects.Image> & RecursivePartial<GameObjects.Image>
+  Props<GameObjects.Image>
 >;
 
 /**
@@ -239,7 +236,7 @@ export const Image = GameObjects.Image as unknown as FC<
  * However, you can set the Alpha, Blend Mode, Depth, Mask and Visible state of a Layer. These settings will impact all children being rendered by the Layer.
  */
 export const Layer = GameObjects.Layer as unknown as FC<
-  Props<GameObjects.Layer> & RecursivePartial<GameObjects.Layer>
+  Props<GameObjects.Layer>
 >;
 
 /**
@@ -247,8 +244,7 @@ export const Layer = GameObjects.Layer as unknown as FC<
  */
 export const ParticleEmitter = GameObjects.Particles
   .ParticleEmitter as unknown as FC<
-  Props<GameObjects.Particles.ParticleEmitter> &
-    RecursivePartial<GameObjects.Particles.ParticleEmitter>
+  Props<GameObjects.Particles.ParticleEmitter>
 >;
 
 /**
@@ -261,7 +257,7 @@ export const ParticleEmitter = GameObjects.Particles
  * PathFollowers are bound to a single Path at any one time and can traverse the length of the Path, from start to finish, forwards or backwards, or from any given point on the Path to its end. They can optionally rotate to face the direction of the path, be offset from the path coordinates or rotate independently of the Path.
  */
 export const PathFollower = GameObjects.PathFollower as unknown as FC<
-  Props<GameObjects.PathFollower> & RecursivePartial<GameObjects.PathFollower>
+  Props<GameObjects.PathFollower>
 >;
 
 /**
@@ -278,7 +274,7 @@ export const PathFollower = GameObjects.PathFollower as unknown as FC<
  * Point Lights are a WebGL only feature and do not have a Canvas counterpart.
  */
 export const PointLight = GameObjects.PointLight as unknown as FC<
-  Props<GameObjects.PointLight> & RecursivePartial<GameObjects.PointLight>
+  Props<GameObjects.PointLight>
 >;
 
 /**
@@ -289,14 +285,14 @@ export const PointLight = GameObjects.PointLight as unknown as FC<
  * Note that under WebGL a FrameBuffer, which is what the Render Texture uses internally, cannot be anti-aliased. This means that when drawing objects such as Shapes to a Render Texture they will appear to be drawn with no aliasing, however this is a technical limitation of WebGL. To get around it, create your shape as a texture in an art package, then draw that to the Render Texture.
  */
 export const RenderTexture = GameObjects.RenderTexture as unknown as FC<
-  Props<GameObjects.RenderTexture> & RecursivePartial<GameObjects.RenderTexture>
+  Props<GameObjects.RenderTexture>
 >;
 
 /**
  * The Shape Game Object is a base class for the various different shapes, such as the Arc, Star or Polygon. You cannot add a Shape directly to your Scene, it is meant as a base for your own custom Shape classes.
  */
 export const Shape = GameObjects.Shape as unknown as FC<
-  Props<GameObjects.Shape> & RecursivePartial<GameObjects.Shape>
+  Props<GameObjects.Shape>
 >;
 
 /**
@@ -307,7 +303,7 @@ export const Shape = GameObjects.Shape as unknown as FC<
  * The main difference between a Sprite and an Image Game Object is that you cannot animate Images. As such, Sprites take a fraction longer to process and have a larger API footprint due to the Animation Component. If you do not require animation then you can safely use Images to replace Sprites in all cases.
  */
 export const Sprite = GameObjects.Sprite as unknown as FC<
-  Props<GameObjects.Sprite> & RecursivePartial<GameObjects.Sprite>
+  Props<GameObjects.Sprite>
 >;
 
 /**
@@ -333,9 +329,7 @@ export const Sprite = GameObjects.Sprite as unknown as FC<
  *
  * A note on performance: Every time the contents of a Text object changes, i.e. changing the text being displayed, or the style of the text, it needs to remake the Text canvas, and if on WebGL, re-upload the new texture to the GPU. This can be an expensive operation if used often, or with large quantities of Text objects in your game. If you run into performance issues you would be better off using Bitmap Text instead, as it benefits from batching and avoids expensive Canvas API calls.
  */
-export const Text = GameObjects.Text as unknown as FC<
-  Props<GameObjects.Text> & RecursivePartial<GameObjects.Text>
->;
+export const Text = GameObjects.Text as unknown as FC<Props<GameObjects.Text>>;
 
 /**
  * A TileSprite is a Sprite that has a repeating texture.
@@ -347,7 +341,7 @@ export const Text = GameObjects.Text as unknown as FC<
  * An important note about Tile Sprites and NPOT textures: Internally, TileSprite textures use GL_REPEAT to provide seamless repeating of the textures. This, combined with the way in which the textures are handled in WebGL, means they need to be POT (power-of-two) sizes in order to wrap. If you provide a NPOT (non power-of-two) texture to a TileSprite it will generate a POT sized canvas and draw your texture to it, scaled up to the POT size. It's then scaled back down again during rendering to the original dimensions. While this works, in that it allows you to use any size texture for a Tile Sprite, it does mean that NPOT textures are going to appear anti-aliased when rendered, due to the interpolation that took place when it was resized into a POT texture. This is especially visible in pixel art graphics. If you notice it and it becomes an issue, the only way to avoid it is to ensure that you provide POT textures for Tile Sprites.
  */
 export const TileSprite = GameObjects.TileSprite as unknown as FC<
-  Props<GameObjects.TileSprite> & RecursivePartial<GameObjects.TileSprite>
+  Props<GameObjects.TileSprite>
 >;
 
 /**
@@ -356,7 +350,7 @@ export const TileSprite = GameObjects.TileSprite as unknown as FC<
  * This Game Object is capable of handling playback of a previously loaded video from the Phaser Video Cache, or playing a video based on a given URL. Videos can be either local, or streamed.
  */
 export const Video = GameObjects.Video as unknown as FC<
-  Props<GameObjects.Video> & RecursivePartial<GameObjects.Video>
+  Props<GameObjects.Video>
 >;
 
 /**
@@ -366,9 +360,7 @@ export const Video = GameObjects.Video as unknown as FC<
  *
  * Its primary use is for creating Drop Zones and Input Hit Areas and it has a couple of helper methods specifically for this. It is also useful for object overlap checks, or as a base for your own non-displaying Game Objects. The default origin is 0.5, the center of the Zone, the same as with Game Objects.
  */
-export const Zone = GameObjects.Zone as unknown as FC<
-  Props<GameObjects.Zone> & RecursivePartial<GameObjects.Zone>
->;
+export const Zone = GameObjects.Zone as unknown as FC<Props<GameObjects.Zone>>;
 
 /**
  * The Arc Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
@@ -379,9 +371,7 @@ export const Zone = GameObjects.Zone as unknown as FC<
  *
  * Arcs also have an iterations property and corresponding setIterations method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction.
  */
-export const Arc = GameObjects.Arc as unknown as FC<
-  Props<GameObjects.Arc> & RecursivePartial<GameObjects.Arc>
->;
+export const Arc = GameObjects.Arc as unknown as FC<Props<GameObjects.Arc>>;
 
 /**
  * The Curve Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
@@ -393,7 +383,7 @@ export const Arc = GameObjects.Arc as unknown as FC<
  * The Curve shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
  */
 export const Curve = GameObjects.Curve as unknown as FC<
-  Props<GameObjects.Curve> & RecursivePartial<GameObjects.Curve>
+  Props<GameObjects.Curve>
 >;
 
 /**
@@ -406,7 +396,7 @@ export const Curve = GameObjects.Curve as unknown as FC<
  * The Ellipse shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
  */
 export const Ellipse = GameObjects.Ellipse as unknown as FC<
-  Props<GameObjects.Ellipse> & RecursivePartial<GameObjects.Ellipse>
+  Props<GameObjects.Ellipse>
 >;
 
 /**
@@ -416,9 +406,7 @@ export const Ellipse = GameObjects.Ellipse as unknown as FC<
  *
  * A Grid Shape allows you to display a grid in your game, where you can control the size of the grid as well as the width and height of the grid cells. You can set a fill color for each grid cell as well as an alternate fill color. When the alternate fill color is set then the grid cells will alternate the fill colors as they render, creating a chess-board effect. You can also optionally have an outline fill color. If set, this draws lines between the grid cells in the given color. If you specify an outline color with an alpha of zero, then it will draw the cells spaced out, but without the lines between them.
  */
-export const Grid = GameObjects.Grid as unknown as FC<
-  Props<GameObjects.Grid> & RecursivePartial<GameObjects.Grid>
->;
+export const Grid = GameObjects.Grid as unknown as FC<Props<GameObjects.Grid>>;
 
 /**
  * The IsoBox Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
@@ -430,7 +418,7 @@ export const Grid = GameObjects.Grid as unknown as FC<
  * You cannot view an IsoBox from under-neath, however you can change the 'angle' by setting the projection property.
  */
 export const IsoBox = GameObjects.IsoBox as unknown as FC<
-  Props<GameObjects.IsoBox> & RecursivePartial<GameObjects.IsoBox>
+  Props<GameObjects.IsoBox>
 >;
 
 /**
@@ -443,7 +431,7 @@ export const IsoBox = GameObjects.IsoBox as unknown as FC<
  * You cannot view an IsoTriangle from under-neath, however you can change the 'angle' by setting the projection property. The reversed property controls if the IsoTriangle is rendered upside down or not.
  */
 export const IsoTriangle = GameObjects.IsoTriangle as unknown as FC<
-  Props<GameObjects.IsoTriangle> & RecursivePartial<GameObjects.IsoTriangle>
+  Props<GameObjects.IsoTriangle>
 >;
 
 /**
@@ -457,9 +445,7 @@ export const IsoTriangle = GameObjects.IsoTriangle as unknown as FC<
  *
  * Be aware that as with all Game Objects the default origin is 0.5. If you need to draw a Line between two points and want the x1/y1 values to match the x/y values, then set the origin to 0.
  */
-export const Line = GameObjects.Line as unknown as FC<
-  Props<GameObjects.Line> & RecursivePartial<GameObjects.Line>
->;
+export const Line = GameObjects.Line as unknown as FC<Props<GameObjects.Line>>;
 
 /**
  * The Polygon Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
@@ -477,7 +463,7 @@ export const Line = GameObjects.Line as unknown as FC<
  * By default the x and y coordinates of this Shape refer to the center of it. However, depending on the coordinates of the points provided, the final shape may be rendered offset from its origin.
  */
 export const Polygon = GameObjects.Polygon as unknown as FC<
-  Props<GameObjects.Polygon> & RecursivePartial<GameObjects.Polygon>
+  Props<GameObjects.Polygon>
 >;
 
 /**
@@ -488,7 +474,7 @@ export const Polygon = GameObjects.Polygon as unknown as FC<
  * You can change the size of the rectangle by changing the `width` and `height` properties.
  */
 export const Rectangle = GameObjects.Rectangle as unknown as FC<
-  Props<GameObjects.Rectangle> & RecursivePartial<GameObjects.Rectangle>
+  Props<GameObjects.Rectangle>
 >;
 
 /**
@@ -500,9 +486,7 @@ export const Rectangle = GameObjects.Rectangle as unknown as FC<
  *
  * You can also control the inner and outer radius, which is how 'long' each point of the star is. Modify these values to create more interesting shapes.
  */
-export const Star = GameObjects.Star as unknown as FC<
-  Props<GameObjects.Star> & RecursivePartial<GameObjects.Star>
->;
+export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
 
 /**
  * The Triangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
@@ -512,7 +496,7 @@ export const Star = GameObjects.Star as unknown as FC<
  * The Triangle consists of 3 lines, joining up to form a triangular shape. You can control the position of each point of these lines. The triangle is always closed and cannot have an open face. If you require that, consider using a Polygon instead.
  */
 export const Triangle = GameObjects.Triangle as unknown as FC<
-  Props<GameObjects.Triangle> & RecursivePartial<GameObjects.Triangle>
+  Props<GameObjects.Triangle>
 >;
 
 /**
@@ -524,9 +508,7 @@ export const Triangle = GameObjects.Triangle as unknown as FC<
  *
  * A Ropes origin is always 0.5 x 0.5 and cannot be changed.
  */
-export const Rope = GameObjects.Rope as unknown as FC<
-  Props<GameObjects.Rope> & RecursivePartial<GameObjects.Rope>
->;
+export const Rope = GameObjects.Rope as unknown as FC<Props<GameObjects.Rope>>;
 
 /**
  * A Shader Game Object.
@@ -534,14 +516,14 @@ export const Rope = GameObjects.Rope as unknown as FC<
  * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. Shaders can be masked with either Bitmap or Geometry masks and can also be used as a Bitmap Mask for a Camera or other Game Object. They can also be made interactive and used for input events.
  */
 export const Shader = GameObjects.Shader as unknown as FC<
-  Props<GameObjects.Shader> & RecursivePartial<GameObjects.Shader>
+  Props<GameObjects.Shader>
 >;
 
 /**
  * A Scene plugin that provides a Phaser.GameObjects.LightsManager for the Light2D pipeline.
  */
 export const Light = GameObjects.Light as unknown as FC<
-  Props<GameObjects.Light> & RecursivePartial<GameObjects.Light>
+  Props<GameObjects.Light>
 >;
 
 /**
@@ -561,6 +543,4 @@ export const Light = GameObjects.Light as unknown as FC<
  *
  * The Mesh origin is always 0.5 x 0.5 and cannot be changed.
  */
-export const Mesh = GameObjects.Mesh as unknown as FC<
-  Props<GameObjects.Mesh> & RecursivePartial<GameObjects.Mesh>
->;
+export const Mesh = GameObjects.Mesh as unknown as FC<Props<GameObjects.Mesh>>;
