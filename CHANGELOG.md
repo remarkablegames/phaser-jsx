@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.2.0...v0.2.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* **types:** pass generic type to GameObjectProps ([d2040c0](https://github.com/remarkablegames/phaser-jsx/commit/d2040c06c7acb03aa7f5b4c52c311b307f5a2e02))
+
 ## [0.2.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.1.1...v0.2.0) (2024-01-09)
 
 
