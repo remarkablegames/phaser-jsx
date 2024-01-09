@@ -21,6 +21,7 @@ Use [JSX](https://facebook.github.io/jsx/) in [Phaser](https://phaser.io/).
 With JSX:
 
 ```jsx
+// index.jsx
 import Phaser from 'phaser';
 import { Text, render } from 'phaser-jsx';
 
@@ -36,6 +37,7 @@ new Phaser.Game({
 Without JSX:
 
 ```js
+// index.js
 import Phaser from 'phaser';
 import { jsx, render } from 'phaser-jsx';
 
@@ -95,10 +97,47 @@ UMD:
 
 ## TypeScript
 
-To get better type support, import the GameObject from `phaser-jsx` instead of `phaser`:
+To get better type support, import the [GameObject](https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.html) from `phaser-jsx` instead of `phaser`:
 
 ```ts
 import { Text } from 'phaser-jsx';
+```
+
+> [!TIP]
+> All GameObjects exported from `phaser-jsx` are aliases of GameObjects from `phaser`.
+
+Update `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "phaser-jsx"
+  }
+}
+```
+
+## Vite
+
+Update `vite.config.mjs`:
+
+```js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  esbuild: {
+    jsxImportSource: 'phaser-jsx',
+  },
+});
+```
+
+### JSX Pragma
+
+If you're not using `jsxImportSource`, you can set JSX pragma at the top of your file:
+
+```jsx
+/** @jsx jsx */
+import { jsx } from 'phaser-jsx';
 ```
 
 ## Release
