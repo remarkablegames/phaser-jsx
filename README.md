@@ -51,7 +51,7 @@ new Phaser.Game({
 });
 ```
 
-## Installation
+## Install
 
 [NPM](https://www.npmjs.com/package/phaser-jsx):
 
