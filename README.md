@@ -13,6 +13,7 @@ Use [JSX](https://facebook.github.io/jsx/) in [Phaser](https://phaser.io/).
 
 ### Demo
 
+- [CodeSandbox](https://codesandbox.io/p/devbox/phaser-jsx-9ldp6n)
 - [Replit](https://replit.com/@remarkablemark/phaser-jsx)
 - [JSFiddle](https://jsfiddle.net/remarkablemark/dLhvuo42/)
 
