@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import type { JSX } from 'react';
 
 import { Container, Text } from '..';
-import { createGameObject } from '.';
+import { createGameObject, setProps } from '.';
 
 jest.mock('phaser', () => {
   const GameObject = jest.fn();
@@ -21,6 +21,10 @@ jest.mock('./container', () => ({
   createContainer: jest.fn(() => ({
     add: jest.fn(),
   })),
+}));
+
+jest.mock('./props', () => ({
+  setProps: jest.fn(),
 }));
 
 const scene = new Phaser.Scene();
@@ -109,5 +113,21 @@ describe('Text', () => {
       props.text,
       props.style,
     );
+  });
+
+  it('does not pass certain Text props to setProps', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const props = {
+      children: [],
+      key: null,
+      ref: () => {},
+      text: 'a',
+      style: {},
+    };
+    const element = <Text {...props} />;
+    expect(createGameObject(element, scene, container)).toBeInstanceOf(Object);
+    expect(container.add).toBeCalledTimes(1);
+    expect(setProps).toBeCalledWith(expect.any(Object), {}, scene);
+    spy.mockRestore();
   });
 });
