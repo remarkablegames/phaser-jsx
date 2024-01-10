@@ -2,7 +2,9 @@ import Phaser from 'phaser';
 import type { JSX } from 'react';
 
 import { isValidElement } from '../element';
-import { attachRef, createContainer, setProps } from '.';
+import { createContainer } from './container';
+import { setProps } from './props';
+import { attachRef } from './ref';
 
 /**
  * Creates Phaser game object and adds it to the container.
