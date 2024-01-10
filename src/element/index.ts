@@ -1,2 +1,3 @@
-export { createElement } from './create';
-export { jsx } from './jsx';
+export * from './create';
+export * from './jsx';
+export * from './valid';

@@ -1,8 +1,7 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { createContainer } from './container';
-import { createGameObject } from './gameobject';
+import { createContainer, createGameObject } from '.';
 
 /**
  * Renders a piece of JSX into a Phaser scene.
