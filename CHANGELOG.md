@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.1...v0.3.2) (2024-01-10)
+
+
+### Bug Fixes
+
+* **render:** don't pass certain Text props to setProps ([6b13e88](https://github.com/remarkablegames/phaser-jsx/commit/6b13e884dafd2347ad1cd554a36233045a52cb10))
+
 ## [0.3.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.0...v0.3.1) (2024-01-10)
 
 
