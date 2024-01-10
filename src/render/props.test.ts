@@ -26,23 +26,6 @@ it('does not set invalid props', () => {
   expect(JSON.stringify(gameObject)).toBe('{}');
 });
 
-it('sets prop style', () => {
-  const gameObject = new Phaser.GameObjects.Text(scene, 1, 2, 'text', {
-    fontFamily: 'Arial',
-  });
-  const props = {
-    style: {
-      fontSize: '42px',
-    },
-  };
-
-  gameObject.setStyle = jest.fn();
-  expect(setProps(gameObject, props, scene)).toBe(undefined);
-
-  expect(gameObject.setStyle).toBeCalledTimes(1);
-  expect(gameObject.setStyle).toBeCalledWith(props.style);
-});
-
 it('sets prop onPointerDown', () => {
   const gameObject = new Phaser.GameObjects.Container(scene);
   const props = {

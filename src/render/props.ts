@@ -18,15 +18,6 @@ export function setProps(
   for (const key in props) {
     const value = props[key];
 
-    if (
-      key === 'style' &&
-      value instanceof Object &&
-      gameObject instanceof Phaser.GameObjects.Text
-    ) {
-      gameObject.setStyle(value);
-      continue;
-    }
-
     if (events[key] && typeof value === 'function') {
       gameObject.setInteractive();
       gameObject.on(key.slice(2).toLowerCase(), value, scene);

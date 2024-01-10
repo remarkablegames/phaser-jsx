@@ -23,14 +23,30 @@ export function createGameObject(
     return;
   }
 
-  const gameObject: Phaser.GameObjects.GameObject = new element.type(scene);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { children, key, ref, ...props } = element.props;
+
+  let gameObject: Phaser.GameObjects.GameObject;
+
+  switch (element.type) {
+    case Phaser.GameObjects.Text:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.text,
+        props.style,
+      );
+      break;
+
+    default:
+      gameObject = new element.type(scene);
+      break;
+  }
 
   if (!(gameObject instanceof Phaser.GameObjects.GameObject)) {
     return createGameObject(new element.type(element.props), scene, container);
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, key, ref, ...props } = element.props;
 
   setProps(gameObject, props, scene);
   attachRef(gameObject, ref);
