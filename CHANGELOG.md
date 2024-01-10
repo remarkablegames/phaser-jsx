@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.0...v0.3.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* **render:** pass Text props (x, y, text, style) via instantiation ([9ea0815](https://github.com/remarkablegames/phaser-jsx/commit/9ea0815a077c716b5883992d3514722516ae23fc))
+
 ## [0.3.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.2.1...v0.3.0) (2024-01-10)
 
 
