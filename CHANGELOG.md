@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.2.1...v0.3.0) (2024-01-10)
+
+
+### Features
+
+* export types GameObjectProps and Ref ([25ab9e2](https://github.com/remarkablegames/phaser-jsx/commit/25ab9e2a7844fddf43abd0ecc99330b94bad598a))
+* **ref:** export createRef ([e3e3b6b](https://github.com/remarkablegames/phaser-jsx/commit/e3e3b6ba7bea0d9e6b28e44ac95416a747d65f64))
+
 ## [0.2.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.2.0...v0.2.1) (2024-01-09)
 
 
