@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Container } from '..';
+import { Container, createRef } from '..';
 import { createGameObject } from './gameobject';
 
 jest.mock('phaser', () => {

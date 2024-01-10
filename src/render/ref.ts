@@ -12,5 +12,7 @@ export function attachRef(
 ) {
   if (typeof ref === 'function') {
     ref(gameObject);
+  } else if (ref && typeof ref === 'object') {
+    ref.current = gameObject;
   }
 }
