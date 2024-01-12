@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.2...v0.4.0) (2024-01-12)
+
+
+### Features
+
+* **components:** export additional GameObjects from version 3.70.0 ([d0bb6fb](https://github.com/remarkablegames/phaser-jsx/commit/d0bb6fb22b26270d7652516f4f653cce60810f6f))
+
 ## [0.3.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.1...v0.3.2) (2024-01-10)
 
 
