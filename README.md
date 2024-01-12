@@ -16,6 +16,7 @@
 - [CodeSandbox](https://codesandbox.io/p/devbox/phaser-jsx-9ldp6n)
 - [Replit](https://replit.com/@remarkablemark/phaser-jsx)
 - [JSFiddle](https://jsfiddle.net/remarkablemark/dLhvuo42/)
+- [Examples](https://github.com/remarkablegames/phaser-jsx/tree/master/examples)
 
 ## Quick Start
 
