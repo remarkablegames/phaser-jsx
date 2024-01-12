@@ -4,6 +4,17 @@ import type { FC } from 'react';
 import type { GameObjectProps as Props } from '../types';
 
 /**
+ * The Arc Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * When it renders it displays an arc shape. You can control the start and end angles of the arc, as well as if the angles are winding clockwise or anti-clockwise. With the default settings it renders as a complete circle. By changing the angles you can create other arc shapes, such as half-circles.
+ *
+ * Arcs also have an iterations property and corresponding setIterations method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction.
+ */
+export const Arc = GameObjects.Arc as unknown as FC<Props<GameObjects.Arc>>;
+
+/**
  * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
  *
  * During rendering for each letter of the text is rendered to the display, proportionally spaced out and aligned to match the font structure.
@@ -20,27 +31,6 @@ import type { GameObjectProps as Props } from '../types';
  */
 export const BitmapText = GameObjects.BitmapText as unknown as FC<
   Props<GameObjects.BitmapText>
->;
-
-/**
- * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
- *
- * During rendering for each letter of the text is rendered to the display, proportionally spaced out and aligned to match the font structure.
- *
- * Dynamic Bitmap Text objects are different from Static Bitmap Text in that they invoke a callback for each letter being rendered during the render pass. This callback allows you to manipulate the properties of each letter being rendered, such as its position, scale or tint, allowing you to create interesting effects like jiggling text, which can't be done with Static text. This means that Dynamic Text takes more processing time, so only use them if you require the callback ability they have.
- *
- * BitmapText objects are less flexible than Text objects, in that they have less features such as shadows, fills and the ability to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by processing the font texture in an image editor, applying fills and any other effects required.
- *
- * To create multi-line text insert `\r`, `\n` or `\r\n` escape codes into the text string.
- *
- * To create a BitmapText data files you need a 3rd party app such as:
- *
- * BMFont (Windows, free): http://www.angelcode.com/products/bmfont/ Glyph Designer (OS X, commercial): http://www.71squared.com/en/glyphdesigner Littera (Web-based, free): http://kvazars.com/littera/
- *
- * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
- */
-export const DynamicBitmapText = GameObjects.DynamicBitmapText as unknown as FC<
-  Props<GameObjects.DynamicBitmapText>
 >;
 
 /**
@@ -99,6 +89,19 @@ export const Container = GameObjects.Container as unknown as FC<
 >;
 
 /**
+ * The Curve Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * To render a Curve Shape you must first create a Phaser.Curves.Curve object, then pass it to the Curve Shape in the constructor.
+ *
+ * The Curve shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
+ */
+export const Curve = GameObjects.Curve as unknown as FC<
+  Props<GameObjects.Curve>
+>;
+
+/**
  * DOM Element Game Objects are a way to control and manipulate HTML Elements over the top of your game.
  *
  * In order for DOM Elements to display you have to enable them by adding the following to your game configuration object:
@@ -138,6 +141,40 @@ export const Container = GameObjects.Container as unknown as FC<
  */
 export const DOMElement = GameObjects.DOMElement as unknown as FC<
   Props<GameObjects.DOMElement>
+>;
+
+/**
+ * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
+ *
+ * During rendering for each letter of the text is rendered to the display, proportionally spaced out and aligned to match the font structure.
+ *
+ * Dynamic Bitmap Text objects are different from Static Bitmap Text in that they invoke a callback for each letter being rendered during the render pass. This callback allows you to manipulate the properties of each letter being rendered, such as its position, scale or tint, allowing you to create interesting effects like jiggling text, which can't be done with Static text. This means that Dynamic Text takes more processing time, so only use them if you require the callback ability they have.
+ *
+ * BitmapText objects are less flexible than Text objects, in that they have less features such as shadows, fills and the ability to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by processing the font texture in an image editor, applying fills and any other effects required.
+ *
+ * To create multi-line text insert `\r`, `\n` or `\r\n` escape codes into the text string.
+ *
+ * To create a BitmapText data files you need a 3rd party app such as:
+ *
+ * BMFont (Windows, free): http://www.angelcode.com/products/bmfont/ Glyph Designer (OS X, commercial): http://www.71squared.com/en/glyphdesigner Littera (Web-based, free): http://kvazars.com/littera/
+ *
+ * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
+ */
+export const DynamicBitmapText = GameObjects.DynamicBitmapText as unknown as FC<
+  Props<GameObjects.DynamicBitmapText>
+>;
+
+/**
+ * The Ellipse Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * When it renders it displays an ellipse shape. You can control the width and height of the ellipse. If the width and height match it will render as a circle. If the width is less than the height, it will look more like an egg shape.
+ *
+ * The Ellipse shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
+ */
+export const Ellipse = GameObjects.Ellipse as unknown as FC<
+  Props<GameObjects.Ellipse>
 >;
 
 /**
@@ -187,6 +224,15 @@ export const Graphics = GameObjects.Graphics as unknown as FC<
 >;
 
 /**
+ * The Grid Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports only fill colors and cannot be stroked.
+ *
+ * A Grid Shape allows you to display a grid in your game, where you can control the size of the grid as well as the width and height of the grid cells. You can set a fill color for each grid cell as well as an alternate fill color. When the alternate fill color is set then the grid cells will alternate the fill colors as they render, creating a chess-board effect. You can also optionally have an outline fill color. If set, this draws lines between the grid cells in the given color. If you specify an outline color with an alpha of zero, then it will draw the cells spaced out, but without the lines between them.
+ */
+export const Grid = GameObjects.Grid as unknown as FC<Props<GameObjects.Grid>>;
+
+/**
  * A Group is a way for you to create, manipulate, or recycle similar Game Objects.
  *
  * Group membership is non-exclusive. A Game Object can belong to several groups, one group, or none.
@@ -204,6 +250,32 @@ export const Group = GameObjects.Group as unknown as FC<
  */
 export const Image = GameObjects.Image as unknown as FC<
   Props<GameObjects.Image>
+>;
+
+/**
+ * The IsoBox Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports only fill colors and cannot be stroked.
+ *
+ * An IsoBox is an 'isometric' rectangle. Each face of it has a different fill color. You can set the color of the top, left and right faces of the rectangle respectively. You can also choose which of the faces are rendered via the showTop, showLeft and showRight properties.
+ *
+ * You cannot view an IsoBox from under-neath, however you can change the 'angle' by setting the projection property.
+ */
+export const IsoBox = GameObjects.IsoBox as unknown as FC<
+  Props<GameObjects.IsoBox>
+>;
+
+/**
+ * The IsoTriangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports only fill colors and cannot be stroked.
+ *
+ * An IsoTriangle is an 'isometric' triangle. Think of it like a pyramid. Each face has a different fill color. You can set the color of the top, left and right faces of the triangle respectively You can also choose which of the faces are rendered via the showTop, showLeft and showRight properties.
+ *
+ * You cannot view an IsoTriangle from under-neath, however you can change the 'angle' by setting the projection property. The reversed property controls if the IsoTriangle is rendered upside down or not.
+ */
+export const IsoTriangle = GameObjects.IsoTriangle as unknown as FC<
+  Props<GameObjects.IsoTriangle>
 >;
 
 /**
@@ -238,6 +310,45 @@ export const Image = GameObjects.Image as unknown as FC<
 export const Layer = GameObjects.Layer as unknown as FC<
   Props<GameObjects.Layer>
 >;
+
+/**
+ * A Scene plugin that provides a Phaser.GameObjects.LightsManager for the Light2D pipeline.
+ */
+export const Light = GameObjects.Light as unknown as FC<
+  Props<GameObjects.Light>
+>;
+
+/**
+ * The Line Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports only stroke colors and cannot be filled.
+ *
+ * A Line Shape allows you to draw a line between two points in your game. You can control the stroke color and thickness of the line. In WebGL only you can also specify a different thickness for the start and end of the line, allowing you to render lines that taper-off.
+ *
+ * If you need to draw multiple lines in a sequence you may wish to use the Polygon Shape instead.
+ *
+ * Be aware that as with all Game Objects the default origin is 0.5. If you need to draw a Line between two points and want the x1/y1 values to match the x/y values, then set the origin to 0.
+ */
+export const Line = GameObjects.Line as unknown as FC<Props<GameObjects.Line>>;
+
+/**
+ * A Mesh Game Object.
+ *
+ * The Mesh Game Object allows you to render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.
+ *
+ * Support for generating mesh data from grids, model data or Wavefront OBJ Files is included.
+ *
+ * Although you can use this to render 3D objects, its primary use is for displaying more complex Sprites, or Sprites where you need fine-grained control over the vertice positions in order to achieve special effects in your games. Note that rendering still takes place using Phasers orthographic camera. As a result, all depth and face tests are done in orthographic space.
+ *
+ * The rendering process will iterate through the faces of this Mesh and render out each face that is considered as being in view of the camera. No depth buffer is used, and because of this, you should be careful not to use model data with too many vertices, or overlapping geometry, or you'll probably encounter z-depth fighting. The Mesh was designed to allow for more advanced 2D layouts, rather than displaying 3D objects, even though it can do this to a degree.
+ *
+ * In short, if you want to remake Crysis, use a 3D engine, not a Mesh. However, if you want to easily add some small fun 3D elements into your game, or create some special effects involving vertex warping, this is the right object for you. Mesh data becomes part of the WebGL batch, just like standard Sprites, so doesn't introduce any additional shader overhead. Because the Mesh just generates vertices into the WebGL batch, like any other Sprite, you can use all of the common Game Object components on a Mesh too, such as a custom pipeline, mask, blend mode or texture.
+ *
+ * Note that the Mesh object is WebGL only and does not have a Canvas counterpart.
+ *
+ * The Mesh origin is always 0.5 x 0.5 and cannot be changed.
+ */
+export const Mesh = GameObjects.Mesh as unknown as FC<Props<GameObjects.Mesh>>;
 
 /**
  * A particle emitter represents a single particle stream. It controls a pool of Particles and is controlled by a Particle Emitter Manager.
@@ -278,6 +389,36 @@ export const PointLight = GameObjects.PointLight as unknown as FC<
 >;
 
 /**
+ * The Polygon Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * The Polygon Shape is created by providing a list of points, which are then used to create an internal Polygon geometry object. The points can be set from a variety of formats:
+ *
+ * - A string containing paired values separated by a single space: '40 0 40 20 100 20 100 80 40 80 40 100 0 50'
+ * - An array of Point or Vector2 objects: [new Phaser.Math.Vector2(x1, y1), ...]
+ * - An array of objects with public x/y properties: [obj1, obj2, ...]
+ * - An array of paired numbers that represent point coordinates: [x1,y1, x2,y2, ...]
+ * - An array of arrays with two elements representing x/y coordinates: [[x1, y1], [x2, y2], ...]
+ *
+ * By default the x and y coordinates of this Shape refer to the center of it. However, depending on the coordinates of the points provided, the final shape may be rendered offset from its origin.
+ */
+export const Polygon = GameObjects.Polygon as unknown as FC<
+  Props<GameObjects.Polygon>
+>;
+
+/**
+ * The Rectangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * You can change the size of the rectangle by changing the `width` and `height` properties.
+ */
+export const Rectangle = GameObjects.Rectangle as unknown as FC<
+  Props<GameObjects.Rectangle>
+>;
+
+/**
  * A Render Texture.
  *
  * A Render Texture is a special texture that allows any number of Game Objects to be drawn to it. You can take many complex objects and draw them all to this one texture, which can they be used as the texture for other Game Object's. It's a way to generate dynamic textures at run-time that are WebGL friendly and don't invoke expensive GPU uploads.
@@ -286,6 +427,26 @@ export const PointLight = GameObjects.PointLight as unknown as FC<
  */
 export const RenderTexture = GameObjects.RenderTexture as unknown as FC<
   Props<GameObjects.RenderTexture>
+>;
+
+/**
+ * A Rope Game Object.
+ *
+ * The Rope object is WebGL only and does not have a Canvas counterpart.
+ *
+ * A Rope is a special kind of Game Object that has a texture that repeats along its entire length. Unlike a Sprite, it isn't restricted to using just a quad and can have as many vertices as you define when creating it. The vertices can be arranged in a horizontal or vertical strip and have their own color and alpha values as well.
+ *
+ * A Ropes origin is always 0.5 x 0.5 and cannot be changed.
+ */
+export const Rope = GameObjects.Rope as unknown as FC<Props<GameObjects.Rope>>;
+
+/**
+ * A Shader Game Object.
+ *
+ * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. Shaders can be masked with either Bitmap or Geometry masks and can also be used as a Bitmap Mask for a Camera or other Game Object. They can also be made interactive and used for input events.
+ */
+export const Shader = GameObjects.Shader as unknown as FC<
+  Props<GameObjects.Shader>
 >;
 
 /**
@@ -304,6 +465,28 @@ export const Shape = GameObjects.Shape as unknown as FC<
  */
 export const Sprite = GameObjects.Sprite as unknown as FC<
   Props<GameObjects.Sprite>
+>;
+
+/**
+ * The Star Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * As the name implies, the Star shape will display a star in your game. You can control several aspects of it including the number of points that constitute the star. The default is 5. If you change it to 4 it will render as a diamond. If you increase them, you'll get a more spiky star shape.
+ *
+ * You can also control the inner and outer radius, which is how 'long' each point of the star is. Modify these values to create more interesting shapes.
+ */
+export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
+
+/**
+ * The Triangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * The Triangle consists of 3 lines, joining up to form a triangular shape. You can control the position of each point of these lines. The triangle is always closed and cannot have an open face. If you require that, consider using a Polygon instead.
+ */
+export const Triangle = GameObjects.Triangle as unknown as FC<
+  Props<GameObjects.Triangle>
 >;
 
 /**
@@ -361,186 +544,3 @@ export const Video = GameObjects.Video as unknown as FC<
  * Its primary use is for creating Drop Zones and Input Hit Areas and it has a couple of helper methods specifically for this. It is also useful for object overlap checks, or as a base for your own non-displaying Game Objects. The default origin is 0.5, the center of the Zone, the same as with Game Objects.
  */
 export const Zone = GameObjects.Zone as unknown as FC<Props<GameObjects.Zone>>;
-
-/**
- * The Arc Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * When it renders it displays an arc shape. You can control the start and end angles of the arc, as well as if the angles are winding clockwise or anti-clockwise. With the default settings it renders as a complete circle. By changing the angles you can create other arc shapes, such as half-circles.
- *
- * Arcs also have an iterations property and corresponding setIterations method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction.
- */
-export const Arc = GameObjects.Arc as unknown as FC<Props<GameObjects.Arc>>;
-
-/**
- * The Curve Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * To render a Curve Shape you must first create a Phaser.Curves.Curve object, then pass it to the Curve Shape in the constructor.
- *
- * The Curve shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
- */
-export const Curve = GameObjects.Curve as unknown as FC<
-  Props<GameObjects.Curve>
->;
-
-/**
- * The Ellipse Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * When it renders it displays an ellipse shape. You can control the width and height of the ellipse. If the width and height match it will render as a circle. If the width is less than the height, it will look more like an egg shape.
- *
- * The Ellipse shape also has a smoothness property and corresponding setSmoothness method. This allows you to control how smooth the shape renders in WebGL, by controlling the number of iterations that take place during construction. Increase and decrease the default value for smoother, or more jagged, shapes.
- */
-export const Ellipse = GameObjects.Ellipse as unknown as FC<
-  Props<GameObjects.Ellipse>
->;
-
-/**
- * The Grid Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports only fill colors and cannot be stroked.
- *
- * A Grid Shape allows you to display a grid in your game, where you can control the size of the grid as well as the width and height of the grid cells. You can set a fill color for each grid cell as well as an alternate fill color. When the alternate fill color is set then the grid cells will alternate the fill colors as they render, creating a chess-board effect. You can also optionally have an outline fill color. If set, this draws lines between the grid cells in the given color. If you specify an outline color with an alpha of zero, then it will draw the cells spaced out, but without the lines between them.
- */
-export const Grid = GameObjects.Grid as unknown as FC<Props<GameObjects.Grid>>;
-
-/**
- * The IsoBox Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports only fill colors and cannot be stroked.
- *
- * An IsoBox is an 'isometric' rectangle. Each face of it has a different fill color. You can set the color of the top, left and right faces of the rectangle respectively. You can also choose which of the faces are rendered via the showTop, showLeft and showRight properties.
- *
- * You cannot view an IsoBox from under-neath, however you can change the 'angle' by setting the projection property.
- */
-export const IsoBox = GameObjects.IsoBox as unknown as FC<
-  Props<GameObjects.IsoBox>
->;
-
-/**
- * The IsoTriangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports only fill colors and cannot be stroked.
- *
- * An IsoTriangle is an 'isometric' triangle. Think of it like a pyramid. Each face has a different fill color. You can set the color of the top, left and right faces of the triangle respectively You can also choose which of the faces are rendered via the showTop, showLeft and showRight properties.
- *
- * You cannot view an IsoTriangle from under-neath, however you can change the 'angle' by setting the projection property. The reversed property controls if the IsoTriangle is rendered upside down or not.
- */
-export const IsoTriangle = GameObjects.IsoTriangle as unknown as FC<
-  Props<GameObjects.IsoTriangle>
->;
-
-/**
- * The Line Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports only stroke colors and cannot be filled.
- *
- * A Line Shape allows you to draw a line between two points in your game. You can control the stroke color and thickness of the line. In WebGL only you can also specify a different thickness for the start and end of the line, allowing you to render lines that taper-off.
- *
- * If you need to draw multiple lines in a sequence you may wish to use the Polygon Shape instead.
- *
- * Be aware that as with all Game Objects the default origin is 0.5. If you need to draw a Line between two points and want the x1/y1 values to match the x/y values, then set the origin to 0.
- */
-export const Line = GameObjects.Line as unknown as FC<Props<GameObjects.Line>>;
-
-/**
- * The Polygon Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * The Polygon Shape is created by providing a list of points, which are then used to create an internal Polygon geometry object. The points can be set from a variety of formats:
- *
- * - A string containing paired values separated by a single space: '40 0 40 20 100 20 100 80 40 80 40 100 0 50'
- * - An array of Point or Vector2 objects: [new Phaser.Math.Vector2(x1, y1), ...]
- * - An array of objects with public x/y properties: [obj1, obj2, ...]
- * - An array of paired numbers that represent point coordinates: [x1,y1, x2,y2, ...]
- * - An array of arrays with two elements representing x/y coordinates: [[x1, y1], [x2, y2], ...]
- *
- * By default the x and y coordinates of this Shape refer to the center of it. However, depending on the coordinates of the points provided, the final shape may be rendered offset from its origin.
- */
-export const Polygon = GameObjects.Polygon as unknown as FC<
-  Props<GameObjects.Polygon>
->;
-
-/**
- * The Rectangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * You can change the size of the rectangle by changing the `width` and `height` properties.
- */
-export const Rectangle = GameObjects.Rectangle as unknown as FC<
-  Props<GameObjects.Rectangle>
->;
-
-/**
- * The Star Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * As the name implies, the Star shape will display a star in your game. You can control several aspects of it including the number of points that constitute the star. The default is 5. If you change it to 4 it will render as a diamond. If you increase them, you'll get a more spiky star shape.
- *
- * You can also control the inner and outer radius, which is how 'long' each point of the star is. Modify these values to create more interesting shapes.
- */
-export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
-
-/**
- * The Triangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * The Triangle consists of 3 lines, joining up to form a triangular shape. You can control the position of each point of these lines. The triangle is always closed and cannot have an open face. If you require that, consider using a Polygon instead.
- */
-export const Triangle = GameObjects.Triangle as unknown as FC<
-  Props<GameObjects.Triangle>
->;
-
-/**
- * A Rope Game Object.
- *
- * The Rope object is WebGL only and does not have a Canvas counterpart.
- *
- * A Rope is a special kind of Game Object that has a texture that repeats along its entire length. Unlike a Sprite, it isn't restricted to using just a quad and can have as many vertices as you define when creating it. The vertices can be arranged in a horizontal or vertical strip and have their own color and alpha values as well.
- *
- * A Ropes origin is always 0.5 x 0.5 and cannot be changed.
- */
-export const Rope = GameObjects.Rope as unknown as FC<Props<GameObjects.Rope>>;
-
-/**
- * A Shader Game Object.
- *
- * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. Shaders can be masked with either Bitmap or Geometry masks and can also be used as a Bitmap Mask for a Camera or other Game Object. They can also be made interactive and used for input events.
- */
-export const Shader = GameObjects.Shader as unknown as FC<
-  Props<GameObjects.Shader>
->;
-
-/**
- * A Scene plugin that provides a Phaser.GameObjects.LightsManager for the Light2D pipeline.
- */
-export const Light = GameObjects.Light as unknown as FC<
-  Props<GameObjects.Light>
->;
-
-/**
- * A Mesh Game Object.
- *
- * The Mesh Game Object allows you to render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.
- *
- * Support for generating mesh data from grids, model data or Wavefront OBJ Files is included.
- *
- * Although you can use this to render 3D objects, its primary use is for displaying more complex Sprites, or Sprites where you need fine-grained control over the vertice positions in order to achieve special effects in your games. Note that rendering still takes place using Phasers orthographic camera. As a result, all depth and face tests are done in orthographic space.
- *
- * The rendering process will iterate through the faces of this Mesh and render out each face that is considered as being in view of the camera. No depth buffer is used, and because of this, you should be careful not to use model data with too many vertices, or overlapping geometry, or you'll probably encounter z-depth fighting. The Mesh was designed to allow for more advanced 2D layouts, rather than displaying 3D objects, even though it can do this to a degree.
- *
- * In short, if you want to remake Crysis, use a 3D engine, not a Mesh. However, if you want to easily add some small fun 3D elements into your game, or create some special effects involving vertex warping, this is the right object for you. Mesh data becomes part of the WebGL batch, just like standard Sprites, so doesn't introduce any additional shader overhead. Because the Mesh just generates vertices into the WebGL batch, like any other Sprite, you can use all of the common Game Object components on a Mesh too, such as a custom pipeline, mask, blend mode or texture.
- *
- * Note that the Mesh object is WebGL only and does not have a Canvas counterpart.
- *
- * The Mesh origin is always 0.5 x 0.5 and cannot be changed.
- */
-export const Mesh = GameObjects.Mesh as unknown as FC<Props<GameObjects.Mesh>>;
