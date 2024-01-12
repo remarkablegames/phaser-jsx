@@ -3,14 +3,22 @@ import Phaser from 'phaser';
 import type { Props } from '../types';
 import * as GameObjects from './GameObjects';
 
-const names = Object.keys(GameObjects).filter(
-  (name) => name !== 'ParticleEmitter',
+const keys = Object.keys(Phaser.GameObjects).filter(
+  (key) =>
+    typeof (Phaser.GameObjects as Record<string, unknown>)[key] ===
+      'function' &&
+    ![
+      'GetCalcMatrix',
+      'BuildGameObject',
+      'BuildGameObjectAnimation',
+      'GetTextSize',
+      'MeasureText',
+      'Sprite3D',
+    ].includes(key),
 );
 
-it.each(names)('exports %s', (name) => {
-  expect((GameObjects as Props)[name]).toBe(
-    (Phaser.GameObjects as Props)[name],
-  );
+it.each(keys)('exports %p', (key) => {
+  expect((GameObjects as Props)[key]).toBe((Phaser.GameObjects as Props)[key]);
 });
 
 it('exports GameObjects', () => {

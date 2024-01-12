@@ -144,6 +144,17 @@ export const DOMElement = GameObjects.DOMElement as unknown as FC<
 >;
 
 /**
+ * The Display List plugin.
+ *
+ * Display Lists belong to a Scene and maintain the list of Game Objects to render every frame.
+ *
+ * Some of these Game Objects may also be part of the Scene's Update List, for updating.
+ */
+export const DisplayList = GameObjects.DisplayList as unknown as FC<
+  Props<GameObjects.DisplayList>
+>;
+
+/**
  * BitmapText objects work by taking a texture file and an XML or JSON file that describes the font structure.
  *
  * During rendering for each letter of the text is rendered to the display, proportionally spaced out and aligned to match the font structure.
@@ -188,6 +199,31 @@ export const Ellipse = GameObjects.Ellipse as unknown as FC<
  */
 export const Extern = GameObjects.Extern as unknown as FC<
   Props<GameObjects.Extern>
+>;
+
+/**
+ * The base class that all Game Objects extend. You don't create GameObjects directly and they cannot be added to the display list. Instead, use them as the base for your own custom classes.
+ */
+export const GameObject = GameObjects.GameObject as unknown as FC<
+  Props<GameObjects.GameObject>
+>;
+
+/**
+ * The Game Object Creator is a Scene plugin that allows you to quickly create many common types of Game Objects and return them using a configuration object, rather than having to specify a limited set of parameters such as with the GameObjectFactory.
+ *
+ * Game Objects made via this class are automatically added to the Scene and Update List unless you explicitly set the add property in the configuration object to false.
+ */
+export const GameObjectCreator = GameObjects.GameObjectCreator as unknown as FC<
+  Props<GameObjects.GameObjectCreator>
+>;
+
+/**
+ * The Game Object Factory is a Scene plugin that allows you to quickly create many common types of Game Objects and have them automatically registered with the Scene.
+ *
+ * Game Objects directly register themselves with the Factory and inject their own creation methods into the class.
+ */
+export const GameObjectFactory = GameObjects.GameObjectFactory as unknown as FC<
+  Props<GameObjects.GameObjectFactory>
 >;
 
 /**
@@ -319,6 +355,42 @@ export const Light = GameObjects.Light as unknown as FC<
 >;
 
 /**
+ * Manages Lights for a Scene.
+ *
+ * Affects the rendering of Game Objects using the Light2D pipeline.
+ */
+export const LightsManager = GameObjects.LightsManager as unknown as FC<
+  Props<GameObjects.LightsManager>
+>;
+
+/**
+ * A Scene plugin that provides a Phaser.GameObjects.LightsManager for the Light2D pipeline.
+ *
+ * Available from within a Scene via this.lights.
+ *
+ * Add Lights using the Phaser.GameObjects.LightsManager#addLight method:
+ *
+ * ```js
+ * // Enable the Lights Manager because it is disabled by default
+ * this.lights.enable();
+ *
+ * // Create a Light at [400, 300] with a radius of 200
+ * this.lights.addLight(400, 300, 200);
+ * ```
+ *
+ * For Game Objects to be affected by the Lights when rendered, you will need to set them to use the Light2D pipeline like so:
+ *
+ * ```js
+ * sprite.setPipeline('Light2D');
+ * ```
+ *
+ * Note that you cannot use this pipeline on Graphics Game Objects or Shape Game Objects.
+ */
+export const LightsPlugin = GameObjects.LightsPlugin as unknown as FC<
+  Props<GameObjects.LightsPlugin>
+>;
+
+/**
  * The Line Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
  *
  * This shape supports only stroke colors and cannot be filled.
@@ -351,6 +423,86 @@ export const Line = GameObjects.Line as unknown as FC<Props<GameObjects.Line>>;
 export const Mesh = GameObjects.Mesh as unknown as FC<Props<GameObjects.Mesh>>;
 
 /**
+ * A Nine Slice Game Object allows you to display a texture-based object that
+ * can be stretched both horizontally and vertically, but that retains
+ * fixed-sized corners. The dimensions of the corners are set via the
+ * parameters to this class.
+ *
+ * This is extremely useful for UI and button like elements, where you need
+ * them to expand to accommodate the content without distorting the texture.
+ *
+ * The texture you provide for this Game Object should be based on the
+ * following layout structure:
+ *
+ * ```
+ *      A                          B
+ *    +---+----------------------+---+
+ *  C | 1 |          2           | 3 |
+ *    +---+----------------------+---+
+ *    |   |                      |   |
+ *    | 4 |          5           | 6 |
+ *    |   |                      |   |
+ *    +---+----------------------+---+
+ *  D | 7 |          8           | 9 |
+ *    +---+----------------------+---+
+ * ```
+ *
+ * When changing this objects width and / or height:
+ *
+ *     areas 1, 3, 7 and 9 (the corners) will remain unscaled
+ *     areas 2 and 8 will be stretched horizontally only
+ *     areas 4 and 6 will be stretched vertically only
+ *     area 5 will be stretched both horizontally and vertically
+ *
+ * You can also create a 3 slice Game Object:
+ *
+ * This works in a similar way, except you can only stretch it horizontally.
+ * Therefore, it requires less configuration:
+ *
+ * ```
+ *      A                          B
+ *    +---+----------------------+---+
+ *    |   |                      |   |
+ *  C | 1 |          2           | 3 |
+ *    |   |                      |   |
+ *    +---+----------------------+---+
+ * ```
+ *
+ * When changing this objects width (you cannot change its height)
+ *
+ *     areas 1 and 3 will remain unscaled
+ *     area 2 will be stretched horizontally
+ *
+ * The above configuration concept is adapted from the Pixi NineSlicePlane.
+ *
+ * To specify a 3 slice object instead of a 9 slice you should only
+ * provide the `leftWidth` and `rightWidth` parameters. To create a 9 slice
+ * you must supply all parameters.
+ *
+ * The _minimum_ width this Game Object can be is the total of
+ * `leftWidth` + `rightWidth`.  The _minimum_ height this Game Object
+ * can be is the total of `topHeight` + `bottomHeight`.
+ * If you need to display this object at a smaller size, you can scale it.
+ *
+ * In terms of performance, using a 3 slice Game Object is the equivalent of
+ * having 3 Sprites in a row. Using a 9 slice Game Object is the equivalent
+ * of having 9 Sprites in a row. The vertices of this object are all batched
+ * together and can co-exist with other Sprites and graphics on the display
+ * list, without incurring any additional overhead.
+ *
+ * As of Phaser 3.60 this Game Object is WebGL only.
+ *
+ * As of Phaser 3.70 this Game Object can now populate its values automatically
+ * if they have been set within Texture Packer 7.1.0 or above and exported with
+ * the atlas json. If this is the case, you can just call this method without
+ * specifying anything more than the texture key and frame and it will pull the
+ * area data from the atlas.
+ */
+export const NineSlice = GameObjects.NineSlice as unknown as FC<
+  Props<GameObjects.NineSlice>
+>;
+
+/**
  * A particle emitter represents a single particle stream. It controls a pool of Particles and is controlled by a Particle Emitter Manager.
  */
 export const ParticleEmitter = GameObjects.Particles
@@ -369,6 +521,27 @@ export const ParticleEmitter = GameObjects.Particles
  */
 export const PathFollower = GameObjects.PathFollower as unknown as FC<
   Props<GameObjects.PathFollower>
+>;
+
+/**
+ * A Plane Game Object.
+ *
+ * The Plane Game Object is a helper class that takes the Mesh Game Object and extends it, allowing for fast and easy creation of Planes. A Plane is a one-sided grid of cells, where you specify the number of cells in each dimension. The Plane can have a texture that is either repeated (tiled) across each cell, or applied to the full Plane.
+ *
+ * The Plane can then be manipulated in 3D space, with rotation across all 3 axis.
+ *
+ * This allows you to create effects not possible with regular Sprites, such as perspective distortion. You can also adjust the vertices on a per-vertex basis. Plane data becomes part of the WebGL batch, just like standard Sprites, so doesn't introduce any additional shader overhead. Because the Plane just generates vertices into the WebGL batch, like any other Sprite, you can use all of the common Game Object components on a Plane too, such as a custom pipeline, mask, blend mode or texture.
+ *
+ * You can use the uvScroll and uvScale methods to adjust the placement and scaling of the texture if this Plane is using a single texture, and not a frame from a texture atlas or sprite sheet.
+ *
+ * The Plane Game Object also has the Animation component, allowing you to play animations across the Plane just as you would with a Sprite.
+ *
+ * Note that the Plane object is WebGL only and does not have a Canvas counterpart.
+ *
+ * The Plane origin is always 0.5 x 0.5 and cannot be changed.
+ */
+export const Plane = GameObjects.Plane as unknown as FC<
+  Props<GameObjects.Plane>
 >;
 
 /**
@@ -479,17 +652,6 @@ export const Sprite = GameObjects.Sprite as unknown as FC<
 export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
 
 /**
- * The Triangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
- *
- * This shape supports both fill and stroke colors.
- *
- * The Triangle consists of 3 lines, joining up to form a triangular shape. You can control the position of each point of these lines. The triangle is always closed and cannot have an open face. If you require that, consider using a Polygon instead.
- */
-export const Triangle = GameObjects.Triangle as unknown as FC<
-  Props<GameObjects.Triangle>
->;
-
-/**
  * A Text Game Object.
  *
  * Text objects work by creating their own internal hidden Canvas and then renders text to it using the standard Canvas fillText API. It then creates a texture from this canvas which is rendered to your game during the render pass.
@@ -515,6 +677,15 @@ export const Triangle = GameObjects.Triangle as unknown as FC<
 export const Text = GameObjects.Text as unknown as FC<Props<GameObjects.Text>>;
 
 /**
+ * A TextStyle class manages all of the style settings for a Text object.
+ *
+ * Text Game Objects create a TextStyle instance automatically, which is accessed via the Text.style property. You do not normally need to instantiate one yourself.
+ */
+export const TextStyle = GameObjects.TextStyle as unknown as FC<
+  Props<GameObjects.TextStyle>
+>;
+
+/**
  * A TileSprite is a Sprite that has a repeating texture.
  *
  * The texture can be scrolled and scaled independently of the TileSprite itself. Textures will automatically wrap and are designed so that you can create game backdrops using seamless textures as a source.
@@ -525,6 +696,28 @@ export const Text = GameObjects.Text as unknown as FC<Props<GameObjects.Text>>;
  */
 export const TileSprite = GameObjects.TileSprite as unknown as FC<
   Props<GameObjects.TileSprite>
+>;
+
+/**
+ * The Triangle Shape is a Game Object that can be added to a Scene, Group or Container. You can treat it like any other Game Object in your game, such as tweening it, scaling it, or enabling it for input or physics. It provides a quick and easy way for you to render this shape in your game without using a texture, while still taking advantage of being fully batched in WebGL.
+ *
+ * This shape supports both fill and stroke colors.
+ *
+ * The Triangle consists of 3 lines, joining up to form a triangular shape. You can control the position of each point of these lines. The triangle is always closed and cannot have an open face. If you require that, consider using a Polygon instead.
+ */
+export const Triangle = GameObjects.Triangle as unknown as FC<
+  Props<GameObjects.Triangle>
+>;
+
+/**
+ * The Update List plugin.
+ *
+ * Update Lists belong to a Scene and maintain the list Game Objects to be updated every frame.
+ *
+ * Some or all of these Game Objects may also be part of the Scene's Display List, for Rendering.
+ */
+export const UpdateList = GameObjects.UpdateList as unknown as FC<
+  Props<GameObjects.UpdateList>
 >;
 
 /**
