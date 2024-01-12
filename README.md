@@ -142,6 +142,15 @@ If you're not using `jsxImportSource`, you can set JSX pragma at the top of your
 import { jsx } from 'phaser-jsx';
 ```
 
+## How Does It Work?
+
+This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
+
+The `render` function renders the objects inside `Phaser.GameObjects.Container`.
+
+> [!IMPORTANT]  
+> This allows for nesting and for child objects to be positioned relative to its `Container`.
+
 ## Release
 
 Release is automated with [Release Please](https://github.com/googleapis/release-please).
