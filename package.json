@@ -38,7 +38,7 @@
     "game"
   ],
   "dependencies": {
-    "@types/react": "18.2.63"
+    "@types/react": "18.2.64"
   },
   "devDependencies": {
     "@commitlint/cli": "19.0.3",
