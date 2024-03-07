@@ -68,7 +68,7 @@
     "react": "18.2.0",
     "rollup": "4.12.1",
     "ts-jest": "29.1.2",
-    "typedoc": "0.25.10",
+    "typedoc": "0.25.11",
     "typescript": "5.3.3"
   },
   "peerDependencies": {
