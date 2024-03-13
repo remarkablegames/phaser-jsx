@@ -41,7 +41,7 @@
     "@types/react": "18.2.65"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.0.3",
+    "@commitlint/cli": "19.1.0",
     "@commitlint/config-conventional": "19.0.3",
     "@rollup/plugin-commonjs": "25.0.7",
     "@rollup/plugin-terser": "0.4.4",
