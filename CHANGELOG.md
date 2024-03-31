@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.1...v0.4.2) (2024-03-31)
+
+
+### Build System
+
+* **package:** move @types/react to peerDependencies ([19def0a](https://github.com/remarkablegames/phaser-jsx/commit/19def0af25bc84ca712d9d84ae98986ce3f7411a))
+
 ## [0.4.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.0...v0.4.1) (2024-03-31)
 
 

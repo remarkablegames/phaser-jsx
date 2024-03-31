@@ -1,6 +1,6 @@
 {
   "name": "phaser-jsx",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Use JSX in Phaser.",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "./cjs/index.js",
