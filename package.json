@@ -36,9 +36,6 @@
     "ui",
     "game"
   ],
-  "dependencies": {
-    "@types/react": "18.2.73"
-  },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
     "@commitlint/config-conventional": "19.1.0",
@@ -47,6 +44,7 @@
     "@rollup/plugin-typescript": "11.1.6",
     "@types/jest": "29.5.12",
     "@types/node": "20.12.2",
+    "@types/react": "18.2.73",
     "@typescript-eslint/eslint-plugin": "7.4.0",
     "@typescript-eslint/parser": "7.4.0",
     "canvas": "2.11.2",
@@ -70,7 +68,13 @@
     "typescript": "5.4.3"
   },
   "peerDependencies": {
+    "@types/react": "17 || 18",
     "phaser": "3"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "files": [
     "cjs/",
