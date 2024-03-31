@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.2...v0.5.0) (2024-03-31)
+
+
+### Features
+
+* **render:** don't create extraneous Container ([c58226d](https://github.com/remarkablegames/phaser-jsx/commit/c58226d1f06b9c51fd1bc410bc11d8b5509c10a6))
+
 ## [0.4.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.1...v0.4.2) (2024-03-31)
 
 
