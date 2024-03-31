@@ -1,5 +1,5 @@
 > [!NOTE]
-> This package is under development so expect breaking changes in future releases.
+> This package is under development so expect _breaking changes_ in future releases.
 
 # phaser-jsx
 
@@ -99,7 +99,7 @@ UMD:
 
 ## TypeScript
 
-To get better type support, import the [GameObject](https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.html) from `phaser-jsx` instead of `phaser`:
+For better type support, import [GameObject](https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.html) from `phaser-jsx` instead of `phaser`:
 
 ```ts
 import { Text } from 'phaser-jsx';
@@ -144,7 +144,7 @@ import { jsx } from 'phaser-jsx';
 
 ## How Does It Work?
 
-This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
+The package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
 
 The `render` function renders the objects inside `Phaser.GameObjects.Container`.
 
