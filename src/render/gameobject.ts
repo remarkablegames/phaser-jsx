@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import type { JSX } from 'react';
 
 import { isValidElement } from '../element';
-import { createContainer } from './container';
 import { setProps } from './props';
 import { attachRef } from './ref';
 
@@ -11,20 +10,22 @@ import { attachRef } from './ref';
  *
  * @param element - Element that you want to create.
  * @param scene - Phaser scene.
- * @param container - Parent Phaser container.
- * @returns - Child Phaser container.
+ * @returns - Phaser game object.
  */
-export function createGameObject(
-  element: JSX.Element,
-  scene: Phaser.Scene,
-  container: Phaser.GameObjects.Container,
-) {
+export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
   if (!isValidElement(element)) {
     return;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, key, ref, style, text, ...props } = element.props;
+  const {
+    children,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    key,
+    ref,
+    style,
+    text,
+    ...props
+  } = element.props;
 
   let gameObject: Phaser.GameObjects.GameObject;
 
@@ -39,19 +40,28 @@ export function createGameObject(
   }
 
   if (!(gameObject instanceof Phaser.GameObjects.GameObject)) {
-    return createGameObject(new element.type(element.props), scene, container);
+    return createGameObject(new element.type(element.props), scene);
   }
 
   setProps(gameObject, props, scene);
   attachRef(gameObject, ref);
 
-  const childContainer = createContainer(scene);
-  container.add(childContainer);
-  childContainer.add(gameObject);
+  if (Array.isArray(children)) {
+    children.forEach((element: JSX.Element) => {
+      const childGameObject = createGameObject(element, scene);
 
-  children?.forEach((element: JSX.Element) => {
-    createGameObject(element, scene, childContainer);
-  });
+      /* istanbul ignore if */
+      if (!childGameObject) {
+        return;
+      }
 
-  return childContainer;
+      if (gameObject instanceof Phaser.GameObjects.Container) {
+        gameObject.add(childGameObject);
+      } else {
+        scene.add.existing(childGameObject);
+      }
+    });
+  }
+
+  return gameObject;
 }
