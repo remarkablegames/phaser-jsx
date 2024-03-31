@@ -11,37 +11,27 @@ jest.mock('phaser', () => {
       GameObject,
       Particles: {},
     },
-    Scene: jest.fn(),
+    Scene: jest.fn(() => ({
+      add: {
+        existing: jest.fn(),
+      },
+    })),
   };
 });
 
-const mockContainerAdd = jest.fn();
-
-jest.mock('./container', () => ({
-  createContainer: jest.fn(() => ({
-    add: mockContainerAdd,
-  })),
-}));
-
 it('does not render element into the scene', () => {
   const spy = jest.spyOn(console, 'warn').mockImplementation();
-  const scene = new Phaser.Scene();
-  scene.add = {} as Phaser.GameObjects.GameObjectFactory;
-  scene.add.existing = jest.fn();
   const element = {} as JSX.Element;
+  const scene = new Phaser.Scene();
   expect(render(element, scene)).toBe(undefined);
   expect(scene.add.existing).not.toBeCalled();
-  expect(mockContainerAdd).not.toBeCalled();
   expect(spy).toBeCalledTimes(1);
   spy.mockRestore();
 });
 
 it('renders element into the scene', () => {
-  const scene = new Phaser.Scene();
-  scene.add = {} as Phaser.GameObjects.GameObjectFactory;
-  scene.add.existing = jest.fn();
   const element = createElement(Container);
+  const scene = new Phaser.Scene();
   expect(render(element, scene)).toBe(undefined);
   expect(scene.add.existing).toBeCalledTimes(1);
-  expect(mockContainerAdd).toBeCalled();
 });

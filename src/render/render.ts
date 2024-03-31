@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { createContainer } from './container';
 import { createGameObject } from './gameobject';
 
 /**
@@ -11,11 +10,9 @@ import { createGameObject } from './gameobject';
  * @param scene - Phaser scene.
  */
 export function render(element: JSX.Element, scene: Phaser.Scene) {
-  const container = createContainer(scene);
-  const gameObject = createGameObject(element, scene, container);
+  const gameObject = createGameObject(element, scene);
 
   if (gameObject) {
-    container.add(gameObject);
-    scene.add.existing(container);
+    scene.add.existing(gameObject);
   }
 }

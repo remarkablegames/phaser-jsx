@@ -146,10 +146,16 @@ import { jsx } from 'phaser-jsx';
 
 The package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
 
-The `render` function renders the objects inside `Phaser.GameObjects.Container`.
+The `render` function renders the game object(s) inside the scene.
 
-> [!IMPORTANT]  
-> This allows for nesting and for child objects to be positioned relative to its `Container`.
+If you need nesting and relative positioning, use `Container`:
+
+```jsx
+<Container>
+  <Text text="Child 1" />
+  <Text text="Child 2" />
+</Container>
+```
 
 ## Release
 
