@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.0...v0.4.1) (2024-03-31)
+
+
+### Documentation
+
+* **readme:** improve grammar ([15d9d5c](https://github.com/remarkablegames/phaser-jsx/commit/15d9d5cfa279a0fc45b757930c3feee5e771eaa3))
+
 ## [0.4.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.3.2...v0.4.0) (2024-01-12)
 
 

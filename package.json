@@ -1,6 +1,6 @@
 {
   "name": "phaser-jsx",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Use JSX in Phaser.",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "./cjs/index.js",
@@ -47,7 +47,7 @@
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "11.1.6",
     "@types/jest": "29.5.12",
-    "@types/node": "20.12.2",
+    "@types/node": "20.11.30",
     "@typescript-eslint/eslint-plugin": "7.4.0",
     "@typescript-eslint/parser": "7.4.0",
     "canvas": "2.11.2",
