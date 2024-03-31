@@ -45,7 +45,7 @@ jobs:
         run: npm run docs
 
       - name: Deploy
-        if: github.ref == 'refs/heads/master'
+        if: github.ref_name == 'master'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
