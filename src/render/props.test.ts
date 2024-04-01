@@ -36,10 +36,10 @@ it('sets prop onPointerDown', () => {
   gameObject.on = jest.fn();
   expect(setProps(gameObject, props, scene)).toBe(undefined);
 
-  expect(gameObject.setInteractive).toBeCalledTimes(1);
-  expect(gameObject.setInteractive).toBeCalledWith();
-  expect(gameObject.on).toBeCalledTimes(1);
-  expect(gameObject.on).toBeCalledWith(
+  expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
+  expect(gameObject.setInteractive).toHaveBeenCalledWith();
+  expect(gameObject.on).toHaveBeenCalledTimes(1);
+  expect(gameObject.on).toHaveBeenCalledWith(
     'pointerdown',
     props.onPointerDown,
     scene,

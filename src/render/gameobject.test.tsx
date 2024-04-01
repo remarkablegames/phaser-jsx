@@ -46,7 +46,7 @@ describe('invalid element', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation();
     const invalidElement = {} as JSX.Element;
     expect(createGameObject(invalidElement, scene)).toBe(undefined);
-    expect(spy).toBeCalledWith(
+    expect(spy).toHaveBeenCalledWith(
       'Invalid JSX type. Expected a class or function but got: undefined',
     );
     spy.mockRestore();
@@ -92,7 +92,7 @@ describe('children', () => {
 describe('Text', () => {
   it('creates text with no props', () => {
     expect(createGameObject(<Text />, scene)).toBeInstanceOf(GameObject);
-    expect(Phaser.GameObjects.Text).toBeCalledWith(
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
       undefined,
       undefined,
@@ -112,7 +112,7 @@ describe('Text', () => {
     };
     const element = <Text {...props} />;
     expect(createGameObject(element, scene)).toBeInstanceOf(GameObject);
-    expect(Phaser.GameObjects.Text).toBeCalledWith(
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
@@ -132,7 +132,7 @@ describe('Text', () => {
     };
     const element = <Text {...props} />;
     expect(createGameObject(element, scene)).toBeInstanceOf(GameObject);
-    expect(setProps).toBeCalledWith(expect.any(Object), {}, scene);
+    expect(setProps).toHaveBeenCalledWith(expect.any(Object), {}, scene);
     spy.mockRestore();
   });
 });

@@ -14,8 +14,8 @@ it('does not attach ref', () => {
 it('attaches ref callback', () => {
   const callback = jest.fn();
   expect(attachRef(gameObject, callback));
-  expect(callback).toBeCalledTimes(1);
-  expect(callback).toBeCalledWith(gameObject);
+  expect(callback).toHaveBeenCalledTimes(1);
+  expect(callback).toHaveBeenCalledWith(gameObject);
 });
 
 it('attaches ref object', () => {
