@@ -34,7 +34,7 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
 
   if (element.type === Phaser.GameObjects.Text) {
     gameObject = new element.type(scene, props.x, props.y, text, style);
-  } else if (gameObjects.includes(element.type)) {
+  } else if (gameObjects.indexOf(element.type) > -1) {
     gameObject = new element.type(scene);
   } else {
     return createGameObject(new element.type(element.props), scene);
