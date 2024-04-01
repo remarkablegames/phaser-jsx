@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.5.0...v0.5.1) (2024-04-01)
+
+
+### Bug Fixes
+
+* **render:** differentiate between Phaser GameObject and FunctionComponent ([aa1fc4e](https://github.com/remarkablegames/phaser-jsx/commit/aa1fc4e9c99cf21263541854c968d485295701ab))
+
 ## [0.5.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.4.2...v0.5.0) (2024-03-31)
 
 
