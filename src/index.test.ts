@@ -1,9 +1,17 @@
-import { Container, createElement, jsx, Rectangle, render, Text } from '.';
+import {
+  Container,
+  createElement,
+  jsx,
+  Rectangle,
+  render,
+  Text,
+  useScene,
+} from '.';
 
-it.each([Container, Rectangle, Text, createElement, render])(
+it.each([Container, Rectangle, Text, createElement, render, useScene])(
   'exports %p',
-  (func) => {
-    expect(func).toBeInstanceOf(Function);
+  (fun) => {
+    expect(fun).toBeInstanceOf(Function);
   },
 );
 

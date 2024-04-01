@@ -157,6 +157,21 @@ If you need nesting and relative positioning, use `Container`:
 </Container>
 ```
 
+## Hooks
+
+### `useScene`
+
+If you start a single Scene, retrieve it with the `useScene` hook:
+
+```js
+import { useScene } from 'phaser-jsx';
+
+const scene = useScene();
+```
+
+> [!WARNING]
+> Don't use this hook if you start multiple Scenes.
+
 ## Release
 
 Release is automated with [Release Please](https://github.com/googleapis/release-please).

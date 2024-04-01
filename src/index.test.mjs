@@ -10,12 +10,13 @@ import {
   Image,
   jsx,
   render,
+  useScene,
   Video,
 } from '../cjs/index.js';
 
-[createElement, Image, render, Video].forEach((func) => {
-  it(`exports ${func.name}`, () => {
-    assert.strictEqual(typeof func, 'function');
+[createElement, Image, render, Video, useScene].forEach((fun) => {
+  it(`exports ${fun.name}`, () => {
+    assert.strictEqual(typeof fun, 'function');
   });
 });
 
