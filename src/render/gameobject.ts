@@ -1,9 +1,12 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
+import * as GameObjects from '../components/GameObjects';
 import { isValidElement } from '../element';
 import { setProps } from './props';
 import { attachRef } from './ref';
+
+const gameObjects = Object.values(GameObjects);
 
 /**
  * Creates Phaser game object and adds it to the container.
@@ -29,17 +32,11 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
 
   let gameObject: Phaser.GameObjects.GameObject;
 
-  switch (element.type) {
-    case Phaser.GameObjects.Text:
-      gameObject = new element.type(scene, props.x, props.y, text, style);
-      break;
-
-    default:
-      gameObject = new element.type(scene);
-      break;
-  }
-
-  if (!(gameObject instanceof Phaser.GameObjects.GameObject)) {
+  if (element.type === Phaser.GameObjects.Text) {
+    gameObject = new element.type(scene, props.x, props.y, text, style);
+  } else if (gameObjects.includes(element.type)) {
+    gameObject = new element.type(scene);
+  } else {
     return createGameObject(new element.type(element.props), scene);
   }
 
