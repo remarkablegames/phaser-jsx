@@ -15,3 +15,7 @@ it('returns scene', () => {
   expect(useScene()).toEqual(scene);
   expect(mockedGetScene).toHaveBeenCalledTimes(1);
 });
+
+it('returns undefined', () => {
+  expect(useScene<undefined>()).toEqual(undefined);
+});
