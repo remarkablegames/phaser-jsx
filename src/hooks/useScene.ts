@@ -1,3 +1,5 @@
+import type { Scene } from 'phaser';
+
 import { getScene } from '../helpers';
 
 /**
@@ -7,6 +9,6 @@ import { getScene } from '../helpers';
  *
  * @returns Phaser.Scene
  */
-export function useScene() {
-  return getScene();
+export function useScene<Type = Scene>() {
+  return getScene<Type>();
 }

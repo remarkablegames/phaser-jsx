@@ -172,6 +172,14 @@ const scene = useScene();
 > [!WARNING]
 > Don't use this hook if you start multiple Scenes.
 
+To specify a Scene class in TypeScript:
+
+```ts
+class MyScene extends Phaser.Scene {}
+
+const scene = useScene<typeof MyScene>();
+```
+
 ## Release
 
 Release is automated with [Release Please](https://github.com/googleapis/release-please).
