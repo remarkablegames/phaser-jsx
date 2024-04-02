@@ -177,7 +177,7 @@ To specify a Scene class in TypeScript:
 ```ts
 class MyScene extends Phaser.Scene {}
 
-const scene = useScene<typeof MyScene>();
+const scene = useScene<MyScene>();
 ```
 
 ## Release
