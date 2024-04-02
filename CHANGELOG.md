@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.6.0...v0.7.0) (2024-04-02)
+
+
+### Features
+
+* **hooks:** pass optional type generic to useScene ([6d0d619](https://github.com/remarkablegames/phaser-jsx/commit/6d0d619e3158429be34c86ec1f107bb9bdc964d8))
+
 ## [0.6.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.5.1...v0.6.0) (2024-04-01)
 
 
