@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.0...v0.7.1) (2024-04-02)
+
+
+### Documentation
+
+* **readme:** fix type usage in useScene ([165de5d](https://github.com/remarkablegames/phaser-jsx/commit/165de5ddfcf2a24798b29fcdadebe97cbfabcd70))
+
 ## [0.7.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.6.0...v0.7.0) (2024-04-02)
 
 
