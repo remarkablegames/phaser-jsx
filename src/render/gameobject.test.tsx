@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Container, GameObject, Text } from '..';
+import { Container, GameObject, Rectangle, Text } from '..';
 import { createGameObject, setProps } from '.';
 
 jest.mock('phaser', () => {
@@ -9,6 +9,7 @@ jest.mock('phaser', () => {
   class Container extends GameObject {
     add = jest.fn();
   }
+  class Rectangle extends GameObject {}
   class Text extends GameObject {}
 
   return {
@@ -16,6 +17,7 @@ jest.mock('phaser', () => {
       Container,
       GameObject,
       Particles: {},
+      Rectangle,
       Text,
     },
 
@@ -53,8 +55,8 @@ describe('invalid element', () => {
   });
 });
 
-it('creates game object from element', () => {
-  expect(createGameObject(<Text />, scene)).toBeInstanceOf(GameObject);
+it.each([Rectangle, Text])('creates game object from %p', (Component) => {
+  expect(createGameObject(<Component />, scene)).toBeInstanceOf(GameObject);
 });
 
 it('creates game object from component', () => {
