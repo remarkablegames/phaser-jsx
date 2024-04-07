@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.1...v0.7.2) (2024-04-07)
+
+
+### Bug Fixes
+
+* **render:** instantiate Rectangle in gameobject ([80ba8e2](https://github.com/remarkablegames/phaser-jsx/commit/80ba8e2cd221bb2e7254ee179d055160e777cd90))
+
 ## [0.7.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.0...v0.7.1) (2024-04-02)
 
 
