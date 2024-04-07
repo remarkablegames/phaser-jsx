@@ -37,6 +37,18 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
       gameObject = new element.type(scene, props.x, props.y, text, style);
       break;
 
+    case element.type === Phaser.GameObjects.Rectangle:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.width,
+        props.height,
+        props.fillColor,
+        props.fillAlpha,
+      );
+      break;
+
     case gameObjects.indexOf(element.type) > -1:
       gameObject = new element.type(scene);
       break;
