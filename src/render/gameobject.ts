@@ -32,12 +32,17 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
 
   let gameObject: Phaser.GameObjects.GameObject;
 
-  if (element.type === Phaser.GameObjects.Text) {
-    gameObject = new element.type(scene, props.x, props.y, text, style);
-  } else if (gameObjects.indexOf(element.type) > -1) {
-    gameObject = new element.type(scene);
-  } else {
-    return createGameObject(new element.type(element.props), scene);
+  switch (true) {
+    case element.type === Phaser.GameObjects.Text:
+      gameObject = new element.type(scene, props.x, props.y, text, style);
+      break;
+
+    case gameObjects.indexOf(element.type) > -1:
+      gameObject = new element.type(scene);
+      break;
+
+    default:
+      return createGameObject(new element.type(element.props), scene);
   }
 
   setProps(gameObject, props, scene);
