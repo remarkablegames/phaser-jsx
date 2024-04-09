@@ -34,24 +34,47 @@ it('does not set invalid props', () => {
   expect(JSON.stringify(gameObject)).toBe('{}');
 });
 
-it('sets prop onPointerDown', () => {
-  const gameObject = new Phaser.GameObjects.Container(scene);
-  const props = {
-    onPointerDown: () => {},
-  };
+describe('input', () => {
+  it('sets prop onPointerDown', () => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = {
+      onPointerDown: jest.fn(),
+    };
 
-  gameObject.setInteractive = jest.fn();
-  gameObject.on = jest.fn();
-  expect(setProps(gameObject, props, scene)).toBe(undefined);
+    gameObject.setInteractive = jest.fn();
+    gameObject.on = jest.fn();
+    expect(setProps(gameObject, props, scene)).toBe(undefined);
 
-  expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
-  expect(gameObject.setInteractive).toHaveBeenCalledWith();
-  expect(gameObject.on).toHaveBeenCalledTimes(1);
-  expect(gameObject.on).toHaveBeenCalledWith(
-    'pointerdown',
-    props.onPointerDown,
-    scene,
-  );
+    expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
+    expect(gameObject.setInteractive).toHaveBeenCalledWith(undefined);
+    expect(gameObject.on).toHaveBeenCalledTimes(1);
+    expect(gameObject.on).toHaveBeenCalledWith(
+      'pointerdown',
+      props.onPointerDown,
+      scene,
+    );
+  });
+
+  it('sets props onPointerOver and input', () => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = {
+      onPointerOver: jest.fn(),
+      input: { cursor: 'pointer' },
+    };
+
+    gameObject.setInteractive = jest.fn();
+    gameObject.on = jest.fn();
+    expect(setProps(gameObject, props, scene)).toBe(undefined);
+
+    expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
+    expect(gameObject.setInteractive).toHaveBeenCalledWith(props.input);
+    expect(gameObject.on).toHaveBeenCalledTimes(1);
+    expect(gameObject.on).toHaveBeenCalledWith(
+      'pointerover',
+      props.onPointerOver,
+      scene,
+    );
+  });
 });
 
 it('sets prop width and height', () => {
