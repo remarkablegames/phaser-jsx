@@ -19,7 +19,7 @@ export function setProps(
     const value = props[key];
 
     if (events[key] && typeof value === 'function') {
-      gameObject.setInteractive();
+      gameObject.setInteractive(props.input);
       gameObject.on(key.slice(2).toLowerCase(), value, scene);
       continue;
     }
