@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.8.0...v0.9.0) (2024-04-09)
+
+
+### Features
+
+* **render:** pass `props.input` to gameObject `setInteractive` ([4feb278](https://github.com/remarkablegames/phaser-jsx/commit/4feb2785356ec7c55e9ada05189ea3d2b84f8897))
+
 ## [0.8.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.2...v0.8.0) (2024-04-09)
 
 
