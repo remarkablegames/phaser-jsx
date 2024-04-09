@@ -29,4 +29,14 @@ export function setProps(
       continue;
     }
   }
+
+  if (
+    (typeof props.originX === 'number' || typeof props.originY === 'number') &&
+    typeof (gameObject as Phaser.GameObjects.Sprite).setOrigin === 'function'
+  ) {
+    (gameObject as Phaser.GameObjects.Sprite).setOrigin(
+      props.originX as number | undefined,
+      props.originY as number | undefined,
+    );
+  }
 }
