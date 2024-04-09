@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.2...v0.8.0) (2024-04-09)
+
+
+### Features
+
+* **render:** set props `originX` and `originY` ([216e2ab](https://github.com/remarkablegames/phaser-jsx/commit/216e2ab365ee12f7bae2c79192138f4ee4b8f726))
+
 ## [0.7.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.7.1...v0.7.2) (2024-04-07)
 
 
