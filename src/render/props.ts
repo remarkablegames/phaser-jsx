@@ -16,6 +16,10 @@ export function setProps(
   scene: Phaser.Scene,
 ) {
   for (const key in props) {
+    if (key === 'input') {
+      continue;
+    }
+
     const value = props[key];
 
     if (events[key] && typeof value === 'function') {
