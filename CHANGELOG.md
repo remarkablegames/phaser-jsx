@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.9.0...v0.9.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* **render:** don't set `input` prop ([75ff8bb](https://github.com/remarkablegames/phaser-jsx/commit/75ff8bb053905097c06fee683a9331fbdb63368a))
+
 ## [0.9.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.8.0...v0.9.0) (2024-04-09)
 
 
