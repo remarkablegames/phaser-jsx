@@ -43,6 +43,24 @@ describe('skip prop keys', () => {
   });
 });
 
+describe('data', () => {
+  it('sets prop data', () => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = {
+      data: {
+        foo: 'bar',
+        baz: false,
+      },
+    };
+
+    gameObject.setData = jest.fn();
+    expect(setProps(gameObject, props, scene)).toBe(undefined);
+
+    expect(gameObject.setData).toHaveBeenCalledTimes(1);
+    expect(gameObject.setData).toHaveBeenCalledWith(props.data);
+  });
+});
+
 describe('input', () => {
   it('sets prop onPointerDown', () => {
     const gameObject = new Phaser.GameObjects.Container(scene);
