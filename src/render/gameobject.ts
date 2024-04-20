@@ -6,7 +6,9 @@ import { isValidElement } from '../element';
 import { setProps } from './props';
 import { attachRef } from './ref';
 
-const gameObjects = Object.values(GameObjects);
+const gameObjects = Object.keys(GameObjects).map(
+  (key) => GameObjects[key as keyof typeof GameObjects],
+);
 
 /**
  * Creates Phaser game object and adds it to the container.
