@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import { events } from '../constants';
 import type { Props } from '../types';
 
+export const skipPropKeys = ['input'];
+
 /**
  * Sets game object props.
  *
@@ -16,7 +18,7 @@ export function setProps(
   scene: Phaser.Scene,
 ) {
   for (const key in props) {
-    if (key === 'input') {
+    if (skipPropKeys.indexOf(key) !== -1) {
       continue;
     }
 

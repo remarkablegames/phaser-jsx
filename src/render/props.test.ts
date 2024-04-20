@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { setProps } from './props';
+import { setProps, skipPropKeys } from './props';
 
 jest.mock('phaser', () => ({
   GameObjects: {
@@ -32,6 +32,15 @@ it('does not set invalid props', () => {
   const props = { invalid: 'invalid' };
   expect(setProps(gameObject, props, scene)).toBe(undefined);
   expect(JSON.stringify(gameObject)).toBe('{}');
+});
+
+describe('skip prop keys', () => {
+  it.each(skipPropKeys)('does not set prop %p', (key) => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = { [key]: 'skip' };
+    expect(setProps(gameObject, props, scene)).toBe(undefined);
+    expect(JSON.stringify(gameObject)).toBe('{}');
+  });
 });
 
 describe('input', () => {
