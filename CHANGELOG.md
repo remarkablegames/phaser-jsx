@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.9.1...v0.10.0) (2024-04-20)
+
+
+### Features
+
+* **render:** set data if prop exists ([3780d86](https://github.com/remarkablegames/phaser-jsx/commit/3780d86e1d0653430dec8f2ea79303aad20e9616))
+
 ## [0.9.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.9.0...v0.9.1) (2024-04-10)
 
 
