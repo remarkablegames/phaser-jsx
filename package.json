@@ -46,7 +46,7 @@
     "@types/node": "20.14.10",
     "@types/react": "18.3.3",
     "@typescript-eslint/eslint-plugin": "7.16.0",
-    "@typescript-eslint/parser": "7.16.0",
+    "@typescript-eslint/parser": "7.16.1",
     "canvas": "2.11.2",
     "eslint": "8.57.0",
     "eslint-plugin-prettier": "5.1.3",
