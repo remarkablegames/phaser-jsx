@@ -49,7 +49,7 @@
     "@typescript-eslint/parser": "7.16.1",
     "canvas": "2.11.2",
     "eslint": "8.57.0",
-    "eslint-plugin-prettier": "5.1.3",
+    "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-tsdoc": "0.3.0",
     "global-jsdom": "24.0.0",
