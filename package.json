@@ -62,7 +62,7 @@
     "phaser3spectorjs": "0.0.8",
     "prettier": "3.3.3",
     "react": "18.3.1",
-    "rollup": "4.19.1",
+    "rollup": "4.19.2",
     "ts-jest": "29.2.3",
     "typedoc": "0.26.5",
     "typescript": "5.5.4"
