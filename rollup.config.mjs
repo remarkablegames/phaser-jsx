@@ -19,6 +19,9 @@ const config = (minify = false) => ({
       declaration: false,
       declarationMap: false,
       module: 'esnext',
+      compilerOptions: {
+        outDir: 'umd',
+      },
     }),
     commonjs(),
     minify && terser(),
