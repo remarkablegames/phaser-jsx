@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.10.0...v0.11.0) (2024-12-06)
+
+
+### Features
+
+* **package:** add @types/react 19 to package.json peerDependencies ([23e2346](https://github.com/remarkablegames/phaser-jsx/commit/23e234698c32a7c3dbfe95b5316db4c4d5206722))
+
 ## [0.10.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.9.1...v0.10.0) (2024-04-20)
 
 
