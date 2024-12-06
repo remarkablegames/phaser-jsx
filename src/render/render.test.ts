@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import type { JSX } from 'react';
 
 import { Container, createElement } from '..';
 import { setScene } from '../helpers';
