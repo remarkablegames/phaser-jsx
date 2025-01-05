@@ -96,16 +96,22 @@ UMD:
 
 ## TypeScript
 
-For better type support, import the [GameObject](https://docs.phaser.io/phaser/concepts/gameobjects) from `phaser-jsx` instead of `phaser`:
+For better type support, install [@types/react](https://www.npmjs.com/package/@types/react):
+
+```sh
+npm install @types/react --save-dev
+```
+
+Import the [GameObject](https://docs.phaser.io/phaser/concepts/gameobjects) from `phaser-jsx` instead of `phaser`:
 
 ```ts
 import { Text } from 'phaser-jsx';
 ```
 
 > [!TIP]
-> All GameObjects exported from `phaser-jsx` are aliases of GameObjects from `phaser`.
+> All GameObjects exported from `phaser-jsx` are aliases of the GameObjects from `phaser`.
 
-Update `tsconfig.json`:
+Update your `tsconfig.json`:
 
 ```json
 {
@@ -168,7 +174,7 @@ const scene = useScene();
 ```
 
 > [!WARNING]
-> Don't use this hook if you start multiple Scenes.
+> Don't use the `useScene` hook if you start multiple Scenes.
 
 To specify a Scene class in TypeScript:
 
