@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.0...v0.11.1) (2025-01-05)
+
+
+### Documentation
+
+* **readme:** remove note and replace deprecated link ([b24fb31](https://github.com/remarkablegames/phaser-jsx/commit/b24fb31b0b8c29c3a1a1d077764b08040578fc64))
+
 ## [0.11.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.10.0...v0.11.0) (2024-12-06)
 
 
