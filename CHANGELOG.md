@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.1...v0.11.2) (2025-01-05)
+
+
+### Documentation
+
+* **readme:** improve TypeScript instructions ([cb63d46](https://github.com/remarkablegames/phaser-jsx/commit/cb63d469d4816226183f099040fd30830d5ae2bb))
+
 ## [0.11.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.0...v0.11.1) (2025-01-05)
 
 
