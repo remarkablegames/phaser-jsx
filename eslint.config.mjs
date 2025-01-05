@@ -34,15 +34,15 @@ export default [
 
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      prettier,
       'simple-import-sort': simpleImportSort,
+      prettier,
       tsdoc,
     },
 
     languageOptions: {
       globals: {
-        ...globals.node,
         ...globals.jest,
+        ...globals.node,
       },
       parser: tsParser,
     },
