@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.2...v0.11.3) (2025-01-05)
+
+
+### Bug Fixes
+
+* **gameobject:** update Sprite props texture and frame ([1b8efde](https://github.com/remarkablegames/phaser-jsx/commit/1b8efde5ef6bb6676bc1e7af727a7d2cba2cafa1))
+
 ## [0.11.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.1...v0.11.2) (2025-01-05)
 
 
