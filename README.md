@@ -1,6 +1,3 @@
-> [!NOTE]
-> This package is under development so expect _breaking changes_ in future releases.
-
 # phaser-jsx
 
 [![NPM](https://nodei.co/npm/phaser-jsx.png)](https://nodei.co/npm/phaser-jsx/)
@@ -99,7 +96,7 @@ UMD:
 
 ## TypeScript
 
-For better type support, import [GameObject](https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.html) from `phaser-jsx` instead of `phaser`:
+For better type support, import the [GameObject](https://docs.phaser.io/phaser/concepts/gameobjects) from `phaser-jsx` instead of `phaser`:
 
 ```ts
 import { Text } from 'phaser-jsx';
@@ -121,9 +118,10 @@ Update `tsconfig.json`:
 
 ## Vite
 
-Update `vite.config.mjs`:
+Update your Vite config:
 
 ```js
+// vite.config.mjs
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -135,7 +133,7 @@ export default defineConfig({
 
 ### JSX Pragma
 
-If you're not using `jsxImportSource`, you can set JSX pragma at the top of your file:
+If you're not using `jsxImportSource`, you can set a JSX pragma at the top of your file:
 
 ```jsx
 /** @jsx jsx */
@@ -144,9 +142,9 @@ import { jsx } from 'phaser-jsx';
 
 ## How Does It Work?
 
-The package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
+This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
 
-The `render` function renders the game object(s) inside the scene.
+The `render` function renders game objects inside a scene.
 
 If you need nesting and relative positioning, use `Container`:
 
@@ -161,7 +159,7 @@ If you need nesting and relative positioning, use `Container`:
 
 ### `useScene`
 
-If you start a single Scene, retrieve it with the `useScene` hook:
+If you have a single Scene, retrieve it with the `useScene` hook:
 
 ```js
 import { useScene } from 'phaser-jsx';
@@ -175,7 +173,7 @@ const scene = useScene();
 To specify a Scene class in TypeScript:
 
 ```ts
-class MyScene extends Phaser.Scene {}
+class MyScene extends Phaser.Scene {/* ... */}
 
 const scene = useScene<MyScene>();
 ```
