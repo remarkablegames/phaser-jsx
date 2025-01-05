@@ -637,7 +637,10 @@ export const Shape = GameObjects.Shape as unknown as FC<
  * The main difference between a Sprite and an Image Game Object is that you cannot animate Images. As such, Sprites take a fraction longer to process and have a larger API footprint due to the Animation Component. If you do not require animation then you can safely use Images to replace Sprites in all cases.
  */
 export const Sprite = GameObjects.Sprite as unknown as FC<
-  Props<GameObjects.Sprite>
+  Props<Omit<GameObjects.Sprite, 'texture' | 'frame'>> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
 >;
 
 /**
