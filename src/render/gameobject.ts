@@ -51,6 +51,16 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
       );
       break;
 
+    case element.type === Phaser.GameObjects.Sprite:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.texture,
+        props.frame,
+      );
+      break;
+
     case gameObjects.indexOf(element.type) > -1:
       gameObject = new element.type(scene);
       break;
