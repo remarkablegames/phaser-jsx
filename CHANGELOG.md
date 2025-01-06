@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.6](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.5...v0.11.6) (2025-01-06)
+
+
+### Bug Fixes
+
+* **gameobject:** do not omit Sprite and Text props ([5a6d9c6](https://github.com/remarkablegames/phaser-jsx/commit/5a6d9c6f8117b8d82e0d4d3c286bae7e6e2b25cd))
+
 ## [0.11.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.4...v0.11.5) (2025-01-06)
 
 
