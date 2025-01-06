@@ -637,7 +637,7 @@ export const Shape = GameObjects.Shape as unknown as FC<
  * The main difference between a Sprite and an Image Game Object is that you cannot animate Images. As such, Sprites take a fraction longer to process and have a larger API footprint due to the Animation Component. If you do not require animation then you can safely use Images to replace Sprites in all cases.
  */
 export const Sprite = GameObjects.Sprite as unknown as FC<
-  Props<Omit<GameObjects.Sprite, 'texture' | 'frame'>> & {
+  Props<GameObjects.Sprite> & {
     texture: string | Phaser.Textures.Texture;
     frame?: string | number;
   }
@@ -678,7 +678,7 @@ export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
  * A note on performance: Every time the contents of a Text object changes, i.e. changing the text being displayed, or the style of the text, it needs to remake the Text canvas, and if on WebGL, re-upload the new texture to the GPU. This can be an expensive operation if used often, or with large quantities of Text objects in your game. If you run into performance issues you would be better off using Bitmap Text instead, as it benefits from batching and avoids expensive Canvas API calls.
  */
 export const Text = GameObjects.Text as unknown as FC<
-  Props<Omit<GameObjects.Text, 'style'>> & {
+  Props<GameObjects.Text> & {
     style?: Phaser.Types.GameObjects.Text.TextStyle;
   }
 >;
