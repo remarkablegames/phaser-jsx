@@ -24,11 +24,12 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
 
   const {
     children,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    key,
+    frame,
+    key, // eslint-disable-line @typescript-eslint/no-unused-vars
     ref,
     style,
     text,
+    texture,
     ...props
   } = element.props;
 
@@ -52,13 +53,7 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
       break;
 
     case element.type === Phaser.GameObjects.Sprite:
-      gameObject = new element.type(
-        scene,
-        props.x,
-        props.y,
-        props.texture,
-        props.frame,
-      );
+      gameObject = new element.type(scene, props.x, props.y, texture, frame);
       break;
 
     case gameObjects.indexOf(element.type) > -1:

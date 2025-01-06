@@ -62,9 +62,9 @@ it.each([Rectangle, Text])('creates game object from %p', (Component) => {
 });
 
 it('creates game object from Sprite', () => {
-  expect(createGameObject(<Sprite texture="key" />, scene)).toBeInstanceOf(
-    GameObject,
-  );
+  expect(
+    createGameObject(<Sprite texture="texture" frame="frame" />, scene),
+  ).toBeInstanceOf(GameObject);
 });
 
 it('creates game object from component', () => {
