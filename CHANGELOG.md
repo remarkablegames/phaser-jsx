@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.3...v0.11.4) (2025-01-06)
+
+
+### Bug Fixes
+
+* **gameobject:** don't override Sprite props texture and frame ([9b254f3](https://github.com/remarkablegames/phaser-jsx/commit/9b254f39ef2dd0e06dbb96d80071eb2507fffc74))
+
 ## [0.11.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.2...v0.11.3) (2025-01-05)
 
 
