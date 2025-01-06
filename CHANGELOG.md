@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.4...v0.11.5) (2025-01-06)
+
+
+### Bug Fixes
+
+* **gameobject:** fix type for Text prop style ([0aa834a](https://github.com/remarkablegames/phaser-jsx/commit/0aa834af6a79db0ede7a7de8ab132c5f08731be5))
+
 ## [0.11.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.3...v0.11.4) (2025-01-06)
 
 
