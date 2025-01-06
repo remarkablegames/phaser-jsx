@@ -38,7 +38,15 @@ jest.mock('./props', () => ({
 const scene = new Phaser.Scene();
 
 function Component() {
-  return <Text />;
+  return (
+    <Text
+      text="text"
+      style={{
+        color: '#fff',
+        font: '42px Arial',
+      }}
+    />
+  );
 }
 
 beforeEach(() => {

@@ -677,7 +677,11 @@ export const Star = GameObjects.Star as unknown as FC<Props<GameObjects.Star>>;
  *
  * A note on performance: Every time the contents of a Text object changes, i.e. changing the text being displayed, or the style of the text, it needs to remake the Text canvas, and if on WebGL, re-upload the new texture to the GPU. This can be an expensive operation if used often, or with large quantities of Text objects in your game. If you run into performance issues you would be better off using Bitmap Text instead, as it benefits from batching and avoids expensive Canvas API calls.
  */
-export const Text = GameObjects.Text as unknown as FC<Props<GameObjects.Text>>;
+export const Text = GameObjects.Text as unknown as FC<
+  Props<Omit<GameObjects.Text, 'style'>> & {
+    style?: Phaser.Types.GameObjects.Text.TextStyle;
+  }
+>;
 
 /**
  * A TextStyle class manages all of the style settings for a Text object.
