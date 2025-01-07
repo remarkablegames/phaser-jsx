@@ -1,1 +1,1 @@
-export { Container as Fragment, jsx, jsx as jsxs } from '..';
+export { Fragment, jsx, jsx as jsxs } from '..';

@@ -1,23 +1,25 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
+import { Fragment } from '../components';
 import * as GameObjects from '../components/GameObjects';
 import { isValidElement } from '../element';
 import { setProps } from './props';
 import { attachRef } from './ref';
 
-const gameObjects = Object.keys(GameObjects).map(
-  (key) => GameObjects[key as keyof typeof GameObjects],
-);
-
 /**
- * Creates Phaser game object and adds it to the container.
+ * Instantiates Phaser game object in the scene.
  *
  * @param element - Element that you want to create.
  * @param scene - Phaser scene.
+ * @param container - Phaser container.
  * @returns - Phaser game object.
  */
-export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
+export function addGameObject(
+  element: JSX.Element,
+  scene: Phaser.Scene,
+  container?: Phaser.GameObjects.Container,
+) {
   if (!isValidElement(element)) {
     return;
   }
@@ -36,8 +38,25 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
   let gameObject: Phaser.GameObjects.GameObject;
 
   switch (true) {
-    case element.type === Phaser.GameObjects.Text:
-      gameObject = new element.type(scene, props.x, props.y, text, style);
+    case element.type === Fragment:
+      if (children) {
+        toArray(children).forEach((child: JSX.Element) => {
+          addGameObject(child, scene);
+        });
+      }
+      return;
+
+    case element.type === Phaser.GameObjects.Container:
+      gameObject = new element.type(scene, props.x, props.y);
+      if (children) {
+        toArray(children).forEach((child: JSX.Element) => {
+          addGameObject(
+            child,
+            scene,
+            gameObject as Phaser.GameObjects.Container,
+          );
+        });
+      }
       break;
 
     case element.type === Phaser.GameObjects.Rectangle:
@@ -56,33 +75,35 @@ export function createGameObject(element: JSX.Element, scene: Phaser.Scene) {
       gameObject = new element.type(scene, props.x, props.y, texture, frame);
       break;
 
-    case gameObjects.indexOf(element.type) > -1:
+    case element.type === Phaser.GameObjects.Text:
+      gameObject = new element.type(scene, props.x, props.y, text, style);
+      break;
+
+    // Phaser component
+    case gameObjects.indexOf(element.type) !== -1:
       gameObject = new element.type(scene);
       break;
 
+    // composite component (class/function)
     default:
-      return createGameObject(new element.type(element.props), scene);
+      addGameObject(new element.type(element.props), scene);
+      return;
   }
 
   setProps(gameObject, props, scene);
   attachRef(gameObject, ref);
 
-  if (Array.isArray(children)) {
-    children.forEach((element: JSX.Element) => {
-      const childGameObject = createGameObject(element, scene);
-
-      /* istanbul ignore if */
-      if (!childGameObject) {
-        return;
-      }
-
-      if (gameObject instanceof Phaser.GameObjects.Container) {
-        gameObject.add(childGameObject);
-      } else {
-        scene.add.existing(childGameObject);
-      }
-    });
+  if (container) {
+    container.add(gameObject);
+  } else {
+    scene.add.existing(gameObject);
   }
+}
 
-  return gameObject;
+const gameObjects = Object.keys(GameObjects).map(
+  (key) => GameObjects[key as keyof typeof GameObjects],
+);
+
+function toArray<T>(item: T | T[]) {
+  return Array.isArray(item) ? item : [item];
 }

@@ -1,4 +1,4 @@
-import { Container, createElement } from '..';
+import { createElement } from '..';
 import { Fragment, jsx, jsxDEV, jsxs } from '.';
 
 it.each([jsx, jsxs])('exports %p', (func) => {
@@ -6,7 +6,7 @@ it.each([jsx, jsxs])('exports %p', (func) => {
 });
 
 it('exports Fragment', () => {
-  expect(Fragment).toBe(Container);
+  expect(Fragment).toBeInstanceOf(Function);
 });
 
 type Args = Parameters<typeof createElement>;

@@ -1,6 +1,6 @@
 import { createElement } from '..';
 
-export { Container as Fragment, jsx, jsx as jsxs } from '..';
+export { Fragment, jsx, jsx as jsxs } from '..';
 
 type Args = Parameters<typeof createElement>;
 

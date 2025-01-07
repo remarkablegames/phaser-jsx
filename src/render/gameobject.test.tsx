@@ -1,32 +1,23 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Container, GameObject, Rectangle, Sprite, Text } from '..';
-import { createGameObject, setProps } from '.';
+import { Bob, Container, Fragment, Rectangle, Sprite, Text } from '..';
+import { addGameObject, setProps } from '.';
+
+const mockAdd = jest.fn();
 
 jest.mock('phaser', () => {
-  const GameObject = jest.fn();
-  class Container extends GameObject {
-    add = jest.fn();
-  }
-  class Rectangle extends GameObject {}
-  class Sprite extends GameObject {}
-  class Text extends GameObject {}
-
   return {
     GameObjects: {
-      Container,
-      GameObject,
+      Bob: jest.fn(),
+      Container: jest.fn(() => ({ add: mockAdd })),
       Particles: {},
-      Rectangle,
-      Sprite,
-      Text,
+      Rectangle: jest.fn(),
+      Sprite: jest.fn(),
+      Text: jest.fn(),
     },
-
     Scene: jest.fn(() => ({
-      add: {
-        existing: jest.fn(),
-      },
+      add: { existing: jest.fn() },
     })),
   };
 });
@@ -37,18 +28,6 @@ jest.mock('./props', () => ({
 
 const scene = new Phaser.Scene();
 
-function Component() {
-  return (
-    <Text
-      text="text"
-      style={{
-        color: '#fff',
-        font: '42px Arial',
-      }}
-    />
-  );
-}
-
 beforeEach(() => {
   jest.clearAllMocks();
 });
@@ -57,7 +36,7 @@ describe('invalid element', () => {
   it('logs warning', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation();
     const invalidElement = {} as JSX.Element;
-    expect(createGameObject(invalidElement, scene)).toBe(undefined);
+    addGameObject(invalidElement, scene);
     expect(spy).toHaveBeenCalledWith(
       'Invalid JSX type. Expected a class or function but got: undefined',
     );
@@ -65,51 +44,62 @@ describe('invalid element', () => {
   });
 });
 
-it.each([Rectangle, Text])('creates game object from %p', (Component) => {
-  expect(createGameObject(<Component />, scene)).toBeInstanceOf(GameObject);
+it.each([
+  ['Bob', Bob],
+  ['Container', Container],
+  ['Rectangle', Rectangle],
+  ['Sprite', Sprite],
+  ['Text', Text],
+])('adds %s', (name, Component) => {
+  // @ts-expect-error missing props
+  addGameObject(<Component />, scene);
+  const C = Phaser.GameObjects[name as keyof typeof Phaser.GameObjects];
+  expect(C).toHaveBeenCalledTimes(1);
+  expect((C as jest.Mock).mock.calls[0][0]).toBe(scene);
 });
 
-it('creates game object from Sprite', () => {
-  expect(
-    createGameObject(<Sprite texture="texture" frame="frame" />, scene),
-  ).toBeInstanceOf(GameObject);
-});
-
-it('creates game object from component', () => {
-  expect(createGameObject(<Component />, scene)).toBeInstanceOf(GameObject);
-});
-
-describe('children', () => {
-  it('creates game objects', () => {
-    expect(
-      createGameObject(
-        // this is technically invalid
-        <Text>
-          <Container />
-          <Text />
-        </Text>,
-        scene,
-      ),
-    ).toBeInstanceOf(GameObject);
+describe('Fragment', () => {
+  it('adds single child', () => {
+    addGameObject(
+      <Fragment>
+        <Text />
+      </Fragment>,
+      scene,
+    );
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
   });
 
-  it('nests game objects under Container', () => {
+  it('adds children', () => {
+    addGameObject(
+      <Fragment>
+        <Text />
+        <Container />
+      </Fragment>,
+      scene,
+    );
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
+    expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('Container', () => {
+  it('nests game objects', () => {
     function Children() {
       return (
         <Container>
-          <Component />
           <Container />
           <Text />
         </Container>
       );
     }
-    expect(createGameObject(<Children />, scene)).toBeInstanceOf(GameObject);
+    addGameObject(<Children />, scene);
+    expect(mockAdd).toHaveBeenCalledTimes(2);
   });
 });
 
 describe('Text', () => {
-  it('creates text with no props', () => {
-    expect(createGameObject(<Text />, scene)).toBeInstanceOf(GameObject);
+  it('adds text with no props', () => {
+    addGameObject(<Text />, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
       undefined,
@@ -119,7 +109,7 @@ describe('Text', () => {
     );
   });
 
-  it('creates text with props', () => {
+  it('adds text with props', () => {
     const props = {
       x: 1,
       y: 2,
@@ -129,7 +119,7 @@ describe('Text', () => {
       },
     };
     const element = <Text {...props} />;
-    expect(createGameObject(element, scene)).toBeInstanceOf(GameObject);
+    addGameObject(element, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
       props.x,
@@ -149,8 +139,39 @@ describe('Text', () => {
       style: {},
     };
     const element = <Text {...props} />;
-    expect(createGameObject(element, scene)).toBeInstanceOf(GameObject);
+    addGameObject(element, scene);
     expect(setProps).toHaveBeenCalledWith(expect.any(Object), {}, scene);
     spy.mockRestore();
+  });
+});
+
+describe('Function', () => {
+  function FunctionComponent() {
+    return (
+      <Fragment>
+        <Text
+          text="text"
+          style={{
+            color: '#fff',
+            font: '42px Arial',
+          }}
+        />
+        <Sprite texture="texture" frame="frame" />
+      </Fragment>
+    );
+  }
+
+  it('renders function component', () => {
+    function MyComponent() {
+      return (
+        <Fragment>
+          <FunctionComponent />
+          <Text />
+        </Fragment>
+      );
+    }
+    addGameObject(<MyComponent />, scene);
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(2);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
   });
 });
