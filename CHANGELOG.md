@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.6...v0.12.0) (2025-01-07)
+
+
+### Features
+
+* **components:** don't export Container as Fragment ([bcfba76](https://github.com/remarkablegames/phaser-jsx/commit/bcfba76f7a140bc3b59e60920a24801458ef21c0))
+* **render:** handle when element type is Fragment ([55a2f34](https://github.com/remarkablegames/phaser-jsx/commit/55a2f34d8b45e25249faf24d1a379c4bed20c563))
+
 ## [0.11.6](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.5...v0.11.6) (2025-01-06)
 
 
