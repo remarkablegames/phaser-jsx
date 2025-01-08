@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.2...v0.12.3) (2025-01-08)
+
+
+### Bug Fixes
+
+* **gameobject:** remove invalid and unused props ([67bd178](https://github.com/remarkablegames/phaser-jsx/commit/67bd17851ffc55dfedb571bdea44dc65cbc15d3b))
+
 ## [0.12.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.1...v0.12.2) (2025-01-08)
 
 
