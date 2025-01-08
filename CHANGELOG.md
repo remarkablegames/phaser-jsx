@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.0...v0.12.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* **render:** handle array of elements ([452f678](https://github.com/remarkablegames/phaser-jsx/commit/452f6788cd088bd4d743e4177d611393f5b66ba0))
+
 ## [0.12.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.11.6...v0.12.0) (2025-01-07)
 
 
