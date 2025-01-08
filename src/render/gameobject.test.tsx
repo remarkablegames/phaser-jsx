@@ -1,7 +1,16 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Bob, Container, Fragment, Rectangle, Sprite, Text } from '..';
+import {
+  BitmapText,
+  Bob,
+  Container,
+  DynamicBitmapText,
+  Fragment,
+  Rectangle,
+  Sprite,
+  Text,
+} from '..';
 import { addGameObject, setProps } from '.';
 
 const mockAdd = jest.fn();
@@ -9,8 +18,10 @@ const mockAdd = jest.fn();
 jest.mock('phaser', () => {
   return {
     GameObjects: {
+      BitmapText: jest.fn(),
       Bob: jest.fn(),
       Container: jest.fn(() => ({ add: mockAdd })),
+      DynamicBitmapText: jest.fn(),
       Particles: {},
       Rectangle: jest.fn(),
       Sprite: jest.fn(),
@@ -45,8 +56,10 @@ describe('invalid element', () => {
 });
 
 it.each([
+  ['BitmapText', BitmapText],
   ['Bob', Bob],
   ['Container', Container],
+  ['DynamicBitmapText', DynamicBitmapText],
   ['Rectangle', Rectangle],
   ['Sprite', Sprite],
   ['Text', Text],
