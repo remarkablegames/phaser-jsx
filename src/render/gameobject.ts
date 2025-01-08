@@ -51,6 +51,19 @@ export function addGameObject(
       }
       return;
 
+    case element.type === Phaser.GameObjects.BitmapText:
+    case element.type === Phaser.GameObjects.DynamicBitmapText:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.font,
+        text,
+        props.size,
+        props.align,
+      );
+      break;
+
     case element.type === Phaser.GameObjects.Container:
       gameObject = new element.type(scene, props.x, props.y);
       if (children) {

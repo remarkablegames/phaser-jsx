@@ -30,7 +30,10 @@ export const Arc = GameObjects.Arc as unknown as FC<Props<GameObjects.Arc>>;
  * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
  */
 export const BitmapText = GameObjects.BitmapText as unknown as FC<
-  Props<GameObjects.BitmapText>
+  Props<GameObjects.BitmapText> & {
+    size?: number;
+    align?: number;
+  }
 >;
 
 /**
@@ -172,7 +175,10 @@ export const DisplayList = GameObjects.DisplayList as unknown as FC<
  * For most use cases it is recommended to use XML. If you wish to use JSON, the formatting should be equal to the result of converting a valid XML file through the popular X2JS library. An online tool for conversion can be found here: http://codebeautify.org/xmltojson
  */
 export const DynamicBitmapText = GameObjects.DynamicBitmapText as unknown as FC<
-  Props<GameObjects.DynamicBitmapText>
+  Props<GameObjects.DynamicBitmapText> & {
+    size?: number;
+    align?: number;
+  }
 >;
 
 /**
