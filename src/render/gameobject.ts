@@ -53,19 +53,11 @@ export function addGameObject(
 
     case element.type === Phaser.GameObjects.BitmapText:
     case element.type === Phaser.GameObjects.DynamicBitmapText:
-      gameObject = new element.type(
-        scene,
-        props.x,
-        props.y,
-        props.font,
-        text,
-        props.size,
-        props.align,
-      );
+      gameObject = new element.type(scene, props.x, props.y, props.font);
       break;
 
     case element.type === Phaser.GameObjects.Container:
-      gameObject = new element.type(scene, props.x, props.y);
+      gameObject = new element.type(scene);
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
           addGameObject(
@@ -78,15 +70,7 @@ export function addGameObject(
       break;
 
     case element.type === Phaser.GameObjects.Rectangle:
-      gameObject = new element.type(
-        scene,
-        props.x,
-        props.y,
-        props.width,
-        props.height,
-        props.fillColor,
-        props.fillAlpha,
-      );
+      gameObject = new element.type(scene, props.x, props.y);
       break;
 
     case element.type === Phaser.GameObjects.Sprite:

@@ -1,16 +1,8 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import {
-  BitmapText,
-  Bob,
-  Container,
-  DynamicBitmapText,
-  Fragment,
-  Rectangle,
-  Sprite,
-  Text,
-} from '..';
+import { Fragment } from '..';
+import * as GameObjects from '../components/GameObjects';
 import { addGameObject, setProps } from '.';
 
 const mockAdd = jest.fn();
@@ -18,14 +10,53 @@ const mockAdd = jest.fn();
 jest.mock('phaser', () => {
   return {
     GameObjects: {
+      Arc: jest.fn(),
       BitmapText: jest.fn(),
+      Blitter: jest.fn(),
       Bob: jest.fn(),
       Container: jest.fn(() => ({ add: mockAdd })),
+      Curve: jest.fn(),
+      DOMElement: jest.fn(),
+      DisplayList: jest.fn(),
       DynamicBitmapText: jest.fn(),
+      Ellipse: jest.fn(),
+      Extern: jest.fn(),
+      GameObject: jest.fn(),
+      GameObjectCreator: jest.fn(),
+      GameObjectFactory: jest.fn(),
+      Graphics: jest.fn(),
+      Grid: jest.fn(),
+      Group: jest.fn(),
+      Image: jest.fn(),
+      IsoBox: jest.fn(),
+      IsoTriangle: jest.fn(),
+      Layer: jest.fn(),
+      Light: jest.fn(),
+      LightsManager: jest.fn(),
+      LightsPlugin: jest.fn(),
+      Line: jest.fn(),
+      Mesh: jest.fn(),
+      NineSlice: jest.fn(),
+      ParticleEmitter: jest.fn(),
       Particles: {},
+      PathFollower: jest.fn(),
+      Plane: jest.fn(),
+      PointLight: jest.fn(),
+      Polygon: jest.fn(),
       Rectangle: jest.fn(),
+      RenderTexture: jest.fn(),
+      Rope: jest.fn(),
+      Shader: jest.fn(),
+      Shape: jest.fn(),
       Sprite: jest.fn(),
+      Star: jest.fn(),
       Text: jest.fn(),
+      TextStyle: jest.fn(),
+      TileSprite: jest.fn(),
+      Triangle: jest.fn(),
+      UpdateList: jest.fn(),
+      Video: jest.fn(),
+      Zone: jest.fn(),
     },
     Scene: jest.fn(() => ({
       add: { existing: jest.fn() },
@@ -55,15 +86,10 @@ describe('invalid element', () => {
   });
 });
 
-it.each([
-  ['BitmapText', BitmapText],
-  ['Bob', Bob],
-  ['Container', Container],
-  ['DynamicBitmapText', DynamicBitmapText],
-  ['Rectangle', Rectangle],
-  ['Sprite', Sprite],
-  ['Text', Text],
-])('adds %s', (name, Component) => {
+it.each(Object.entries(GameObjects))('adds %s', (name, Component) => {
+  if (['ParticleEmitter'].includes(name)) {
+    return;
+  }
   // @ts-expect-error missing props
   addGameObject(<Component />, scene);
   const C = Phaser.GameObjects[name as keyof typeof Phaser.GameObjects];
@@ -75,7 +101,7 @@ describe('Fragment', () => {
   it('adds single child', () => {
     addGameObject(
       <Fragment>
-        <Text />
+        <GameObjects.Text />
       </Fragment>,
       scene,
     );
@@ -85,8 +111,8 @@ describe('Fragment', () => {
   it('adds children', () => {
     addGameObject(
       <Fragment>
-        <Text />
-        <Container />
+        <GameObjects.Text />
+        <GameObjects.Container />
       </Fragment>,
       scene,
     );
@@ -98,11 +124,11 @@ describe('Fragment', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation();
     addGameObject(
       <Fragment>
-        <Container />
+        <GameObjects.Container />
         {Array(1)
           .fill(null)
           .map((_, index) => (
-            <Text text={String(index)} />
+            <GameObjects.Text text={String(index)} />
           ))}
       </Fragment>,
       scene,
@@ -119,10 +145,10 @@ describe('Container', () => {
   it('nests game objects', () => {
     function Children() {
       return (
-        <Container>
-          <Container />
-          <Text />
-        </Container>
+        <GameObjects.Container>
+          <GameObjects.Container />
+          <GameObjects.Text />
+        </GameObjects.Container>
       );
     }
     addGameObject(<Children />, scene);
@@ -132,7 +158,7 @@ describe('Container', () => {
 
 describe('Text', () => {
   it('adds text with no props', () => {
-    addGameObject(<Text />, scene);
+    addGameObject(<GameObjects.Text />, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
       undefined,
@@ -151,7 +177,7 @@ describe('Text', () => {
         fontSize: '42px',
       },
     };
-    const element = <Text {...props} />;
+    const element = <GameObjects.Text {...props} />;
     addGameObject(element, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
@@ -171,7 +197,7 @@ describe('Text', () => {
       text: 'a',
       style: {},
     };
-    const element = <Text {...props} />;
+    const element = <GameObjects.Text {...props} />;
     addGameObject(element, scene);
     expect(setProps).toHaveBeenCalledWith(expect.any(Object), {}, scene);
     spy.mockRestore();
@@ -182,14 +208,14 @@ describe('Function', () => {
   function FunctionComponent() {
     return (
       <Fragment>
-        <Text
+        <GameObjects.Text
           text="text"
           style={{
             color: '#fff',
             font: '42px Arial',
           }}
         />
-        <Sprite texture="texture" frame="frame" />
+        <GameObjects.Sprite texture="texture" frame="frame" />
       </Fragment>
     );
   }
@@ -199,7 +225,7 @@ describe('Function', () => {
       return (
         <Fragment>
           <FunctionComponent />
-          <Text />
+          <GameObjects.Text />
         </Fragment>
       );
     }
