@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.1...v0.12.2) (2025-01-08)
+
+
+### Bug Fixes
+
+* **gameobject:** fix BitmapText and DynamicBitmapText props ([85fad4b](https://github.com/remarkablegames/phaser-jsx/commit/85fad4be1a8153533fc6383d623f33eda74eb1c0))
+
 ## [0.12.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.0...v0.12.1) (2025-01-08)
 
 
