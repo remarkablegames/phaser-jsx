@@ -20,6 +20,11 @@ export function addGameObject(
   scene: Phaser.Scene,
   container?: Phaser.GameObjects.Container,
 ) {
+  if (Array.isArray(element)) {
+    element.forEach((current) => addGameObject(current, scene, container));
+    return;
+  }
+
   if (!isValidElement(element)) {
     return;
   }
