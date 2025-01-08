@@ -80,6 +80,26 @@ describe('Fragment', () => {
     expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
     expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
   });
+
+  it('adds array of children', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+    addGameObject(
+      <Fragment>
+        <Container />
+        {Array(1)
+          .fill(null)
+          .map((_, index) => (
+            <Text text={String(index)} />
+          ))}
+      </Fragment>,
+      scene,
+    );
+    expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
+    // Each child in a list should have a unique "key" prop.
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
+  });
 });
 
 describe('Container', () => {
