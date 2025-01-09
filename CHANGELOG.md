@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.3...v0.12.4) (2025-01-09)
+
+
+### Bug Fixes
+
+* **render:** set prop text on game object ([a178766](https://github.com/remarkablegames/phaser-jsx/commit/a178766958c6e13133f16f7fb0ede4d94e426bfa))
+
 ## [0.12.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.2...v0.12.3) (2025-01-08)
 
 
