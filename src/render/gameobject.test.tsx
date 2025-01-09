@@ -157,7 +157,7 @@ describe('Container', () => {
 });
 
 describe('Text', () => {
-  it('adds text with no props', () => {
+  it('adds Text with no props', () => {
     addGameObject(<GameObjects.Text />, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
@@ -168,7 +168,7 @@ describe('Text', () => {
     );
   });
 
-  it('adds text with props', () => {
+  it('adds Text with props', () => {
     const props = {
       x: 1,
       y: 2,
@@ -194,18 +194,66 @@ describe('Text', () => {
       children: [],
       key: null,
       ref: () => {},
-      text: 'a',
       style: {},
+      text: 'text',
     };
     const element = <GameObjects.Text {...props} />;
     addGameObject(element, scene);
-    expect(setProps).toHaveBeenCalledWith(expect.any(Object), {}, scene);
+    expect(setProps).toHaveBeenCalledWith(
+      expect.anything(),
+      { text: props.text },
+      scene,
+    );
     spy.mockRestore();
   });
 });
 
-describe('Function', () => {
-  function FunctionComponent() {
+describe('Sprite', () => {
+  it('adds Sprite', () => {
+    const props = {
+      x: 1,
+      y: 2,
+      texture: 'texture',
+      frame: 'frame',
+    };
+    const element = <GameObjects.Sprite {...props} />;
+    addGameObject(element, scene);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      props.texture,
+      props.frame,
+    );
+  });
+
+  it('does not pass certain Sprite props to setProps', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const props = {
+      children: [],
+      key: null,
+      ref: () => {},
+      x: 1,
+      y: 2,
+      texture: 'texture',
+      frame: 'frame',
+    };
+    const element = <GameObjects.Sprite {...props} />;
+    addGameObject(element, scene);
+    expect(setProps).toHaveBeenCalledWith(
+      expect.anything(),
+      {
+        x: props.x,
+        y: props.y,
+      },
+      scene,
+    );
+    spy.mockRestore();
+  });
+});
+
+describe('composite', () => {
+  function CompositeComponent() {
     return (
       <Fragment>
         <GameObjects.Text
@@ -220,11 +268,11 @@ describe('Function', () => {
     );
   }
 
-  it('renders function component', () => {
+  it('renders composite component', () => {
     function MyComponent() {
       return (
         <Fragment>
-          <FunctionComponent />
+          <CompositeComponent />
           <GameObjects.Text />
         </Fragment>
       );
