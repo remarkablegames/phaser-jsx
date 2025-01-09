@@ -35,7 +35,6 @@ export function addGameObject(
     key, // eslint-disable-line @typescript-eslint/no-unused-vars
     ref,
     style,
-    text,
     texture,
     ...props
   } = element.props;
@@ -78,7 +77,7 @@ export function addGameObject(
       break;
 
     case element.type === Phaser.GameObjects.Text:
-      gameObject = new element.type(scene, props.x, props.y, text, style);
+      gameObject = new element.type(scene, props.x, props.y, props.text, style);
       break;
 
     // Phaser component
