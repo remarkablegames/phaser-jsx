@@ -55,6 +55,16 @@ export function addGameObject(
       gameObject = new element.type(scene, props.x, props.y, props.font);
       break;
 
+    case element.type === Phaser.GameObjects.Bob:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        frame,
+        props.visible,
+      );
+      break;
+
     case element.type === Phaser.GameObjects.Container:
       gameObject = new element.type(scene);
       if (children) {

@@ -57,7 +57,11 @@ export const Blitter = GameObjects.Blitter as unknown as FC<
  *
  * You can manipulate Bob objects directly from your game code, but the creation and destruction of them should be handled via the Blitter parent.
  */
-export const Bob = GameObjects.Bob as unknown as FC<Props<GameObjects.Bob>>;
+export const Bob = GameObjects.Bob as unknown as FC<
+  Props<GameObjects.Bob> & {
+    frame: string | number;
+  }
+>;
 
 /**
  * A Container Game Object.

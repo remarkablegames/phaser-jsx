@@ -141,6 +141,25 @@ describe('Fragment', () => {
   });
 });
 
+describe('Bob', () => {
+  it('instantiates game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+      frame: 'frame',
+      visible: true,
+    };
+    addGameObject(<GameObjects.Bob {...props} />, scene);
+    expect(Phaser.GameObjects.Bob).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      props.frame,
+      props.visible,
+    );
+  });
+});
+
 describe('Container', () => {
   it('nests game objects', () => {
     function Children() {
