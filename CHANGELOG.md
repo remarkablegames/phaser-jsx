@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.4...v0.12.5) (2025-01-10)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to Bob ([e43857d](https://github.com/remarkablegames/phaser-jsx/commit/e43857dcd8cf74b55a933e32622312d831c40824))
+
 ## [0.12.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.3...v0.12.4) (2025-01-09)
 
 
