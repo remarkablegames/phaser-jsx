@@ -78,6 +78,10 @@ export function addGameObject(
       }
       break;
 
+    case element.type === Phaser.GameObjects.GameObject:
+      gameObject = new element.type(scene, props.type);
+      break;
+
     case element.type === Phaser.GameObjects.Rectangle:
       gameObject = new element.type(scene, props.x, props.y);
       break;

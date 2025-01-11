@@ -175,6 +175,19 @@ describe('Container', () => {
   });
 });
 
+describe('GameObject', () => {
+  it('instantiates game object', () => {
+    const props = {
+      type: 'sprite',
+    };
+    addGameObject(<GameObjects.GameObject {...props} />, scene);
+    expect(Phaser.GameObjects.GameObject).toHaveBeenCalledWith(
+      scene,
+      props.type,
+    );
+  });
+});
+
 describe('Text', () => {
   it('adds Text with no props', () => {
     addGameObject(<GameObjects.Text />, scene);
