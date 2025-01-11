@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.11](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.10...v0.12.11) (2025-01-11)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to PathFollower ([25b6e73](https://github.com/remarkablegames/phaser-jsx/commit/25b6e73f88ebbcab49b0312f410d9e52d21438c7))
+
 ## [0.12.10](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.9...v0.12.10) (2025-01-11)
 
 
