@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.8](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.7...v0.12.8) (2025-01-11)
+
+
+### Bug Fixes
+
+* **render:** correctly add game object Layer ([a9ee486](https://github.com/remarkablegames/phaser-jsx/commit/a9ee486fe3c2db7f4e34b3289bffef131244ecbe))
+
 ## [0.12.7](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.6...v0.12.7) (2025-01-11)
 
 
