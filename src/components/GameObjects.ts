@@ -289,7 +289,10 @@ export const Group = GameObjects.Group as unknown as FC<
  * An Image is a light-weight Game Object useful for the display of static images in your game, such as logos, backgrounds, scenery or other non-animated elements. Images can have input events and physics bodies, or be tweened, tinted or scrolled. The main difference between an Image and a Sprite is that you cannot animate an Image as they do not have the Animation component.
  */
 export const Image = GameObjects.Image as unknown as FC<
-  Props<GameObjects.Image>
+  Props<GameObjects.Image> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
 >;
 
 /**

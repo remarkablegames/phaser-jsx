@@ -82,12 +82,13 @@ export function addGameObject(
       gameObject = new element.type(scene, props.type);
       break;
 
-    case element.type === Phaser.GameObjects.Rectangle:
-      gameObject = new element.type(scene, props.x, props.y);
-      break;
-
+    case element.type === Phaser.GameObjects.Image:
     case element.type === Phaser.GameObjects.Sprite:
       gameObject = new element.type(scene, props.x, props.y, texture, frame);
+      break;
+
+    case element.type === Phaser.GameObjects.Rectangle:
+      gameObject = new element.type(scene, props.x, props.y);
       break;
 
     case element.type === Phaser.GameObjects.Text:
