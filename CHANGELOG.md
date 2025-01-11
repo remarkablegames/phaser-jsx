@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.10](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.9...v0.12.10) (2025-01-11)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to NineSlice ([73173fd](https://github.com/remarkablegames/phaser-jsx/commit/73173fd9d9bc22a4ec1d473c528745ac87d2f04d))
+
 ## [0.12.9](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.8...v0.12.9) (2025-01-11)
 
 
