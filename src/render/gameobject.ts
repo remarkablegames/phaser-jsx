@@ -30,6 +30,7 @@ export function addGameObject(
 
   const {
     children,
+    color,
     frame,
     key, // eslint-disable-line @typescript-eslint/no-unused-vars
     ref,
@@ -87,6 +88,19 @@ export function addGameObject(
     case element.type === Phaser.GameObjects.Image:
     case element.type === Phaser.GameObjects.Sprite:
       gameObject = new element.type(scene, props.x, props.y, texture, frame);
+      break;
+
+    case element.type === Phaser.GameObjects.Light:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.radius,
+        color?.r,
+        color?.g,
+        color?.b,
+        props.intensity,
+      );
       break;
 
     case element.type === Phaser.GameObjects.Rectangle:

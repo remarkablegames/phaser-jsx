@@ -358,7 +358,17 @@ export const Layer = GameObjects.Layer as unknown as FC<
  * A Scene plugin that provides a Phaser.GameObjects.LightsManager for the Light2D pipeline.
  */
 export const Light = GameObjects.Light as unknown as FC<
-  Props<GameObjects.Light>
+  Props<GameObjects.Light> & {
+    x: GameObjects.Light['x'];
+    y: GameObjects.Light['y'];
+    radius: GameObjects.Light['radius'];
+    color: {
+      r: GameObjects.Light['color']['r'];
+      g: GameObjects.Light['color']['g'];
+      b: GameObjects.Light['color']['b'];
+    };
+    intensity: GameObjects.Light['intensity'];
+  }
 >;
 
 /**
