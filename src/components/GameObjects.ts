@@ -516,7 +516,10 @@ export const Mesh = GameObjects.Mesh as unknown as FC<Props<GameObjects.Mesh>>;
  * area data from the atlas.
  */
 export const NineSlice = GameObjects.NineSlice as unknown as FC<
-  Props<GameObjects.NineSlice>
+  Props<GameObjects.NineSlice> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
 >;
 
 /**

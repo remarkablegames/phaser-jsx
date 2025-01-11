@@ -327,7 +327,7 @@ describe('Text', () => {
   });
 });
 
-describe.each(['Image', 'Sprite'] as const)('%s', (component) => {
+describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
   it('adds game object', () => {
     const props = {
       x: 1,
