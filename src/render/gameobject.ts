@@ -104,6 +104,17 @@ export function addGameObject(
       );
       break;
 
+    case element.type === Phaser.GameObjects.PathFollower:
+      gameObject = new element.type(
+        scene,
+        props.path,
+        props.x,
+        props.y,
+        texture,
+        frame,
+      );
+      break;
+
     case element.type === Phaser.GameObjects.Rectangle:
       gameObject = new element.type(scene, props.x, props.y);
       break;

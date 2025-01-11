@@ -9,6 +9,9 @@ const mockAdd = jest.fn();
 
 jest.mock('phaser', () => {
   return {
+    Curves: {
+      Path: jest.fn(),
+    },
     GameObjects: {
       Arc: jest.fn(),
       BitmapText: jest.fn(),
@@ -271,6 +274,27 @@ describe('Light', () => {
       props.color.g,
       props.color.b,
       props.intensity,
+    );
+  });
+});
+
+describe('PathFollower', () => {
+  it('instantiates game object', () => {
+    const props = {
+      path: new Phaser.Curves.Path(1, 2),
+      x: 3,
+      y: 4,
+      texture: 'texture',
+      frame: 'frame',
+    };
+    addGameObject(<GameObjects.PathFollower {...props} />, scene);
+    expect(Phaser.GameObjects.PathFollower).toHaveBeenCalledWith(
+      scene,
+      props.path,
+      props.x,
+      props.y,
+      props.texture,
+      props.frame,
     );
   });
 });
