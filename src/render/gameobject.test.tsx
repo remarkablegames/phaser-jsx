@@ -248,6 +248,33 @@ describe('GameObject', () => {
   });
 });
 
+describe('Light', () => {
+  it('instantiates game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+      radius: 3,
+      color: {
+        r: 0,
+        g: 0.5,
+        b: 1,
+      },
+      intensity: 4,
+    };
+    addGameObject(<GameObjects.Light {...props} />, scene);
+    expect(Phaser.GameObjects.Light).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      props.radius,
+      props.color.r,
+      props.color.g,
+      props.color.b,
+      props.intensity,
+    );
+  });
+});
+
 describe('Text', () => {
   it('adds Text with no props', () => {
     addGameObject(<GameObjects.Text />, scene);
