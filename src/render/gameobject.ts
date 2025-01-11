@@ -45,7 +45,7 @@ export function addGameObject(
     case element.type === Fragment:
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
-          addGameObject(child, scene);
+          addGameObject(child, scene, container);
         });
       }
       return;
@@ -102,7 +102,7 @@ export function addGameObject(
 
     // composite component (class/function)
     default:
-      addGameObject(new element.type(element.props), scene);
+      addGameObject(new element.type(element.props), scene, container);
       return;
   }
 

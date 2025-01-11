@@ -120,6 +120,21 @@ describe('Fragment', () => {
     expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
   });
 
+  it('adds container', () => {
+    function Composite() {
+      return <GameObjects.Container />;
+    }
+    addGameObject(
+      <GameObjects.Container>
+        <Fragment>
+          <Composite />
+        </Fragment>
+      </GameObjects.Container>,
+      scene,
+    );
+    expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(2);
+  });
+
   it('adds array of children', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation();
     addGameObject(
@@ -287,7 +302,7 @@ describe.each(['Image', 'Sprite'] as const)('%s', (component) => {
 });
 
 describe('composite', () => {
-  function CompositeComponent() {
+  function Composite() {
     return (
       <Fragment>
         <GameObjects.Text
@@ -306,7 +321,7 @@ describe('composite', () => {
     function MyComponent() {
       return (
         <Fragment>
-          <CompositeComponent />
+          <Composite />
           <GameObjects.Text />
         </Fragment>
       );
