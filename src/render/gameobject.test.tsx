@@ -240,17 +240,18 @@ describe('Text', () => {
   });
 });
 
-describe('Sprite', () => {
-  it('adds Sprite', () => {
+describe.each(['Image', 'Sprite'] as const)('%s', (component) => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
       texture: 'texture',
       frame: 'frame',
     };
-    const element = <GameObjects.Sprite {...props} />;
+    const Component = GameObjects[component];
+    const element = <Component {...props} />;
     addGameObject(element, scene);
-    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledWith(
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
@@ -259,7 +260,7 @@ describe('Sprite', () => {
     );
   });
 
-  it('does not pass certain Sprite props to setProps', () => {
+  it('does not pass certain props to setProps', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation();
     const props = {
       children: [],
@@ -270,7 +271,8 @@ describe('Sprite', () => {
       texture: 'texture',
       frame: 'frame',
     };
-    const element = <GameObjects.Sprite {...props} />;
+    const Component = GameObjects[component];
+    const element = <Component {...props} />;
     addGameObject(element, scene);
     expect(setProps).toHaveBeenCalledWith(
       expect.anything(),
