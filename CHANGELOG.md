@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.9](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.8...v0.12.9) (2025-01-11)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to Light ([fb784cd](https://github.com/remarkablegames/phaser-jsx/commit/fb784cd3991ebfa5d15c60a315590f0cb6072bb6))
+
 ## [0.12.8](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.7...v0.12.8) (2025-01-11)
 
 
