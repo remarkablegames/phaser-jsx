@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.6](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.5...v0.12.6) (2025-01-11)
+
+
+### Bug Fixes
+
+* **render:** pass prop type to GameObject ([ac035b2](https://github.com/remarkablegames/phaser-jsx/commit/ac035b2ee7cb1ee94a4b78c1f19e5035afbc6892))
+
 ## [0.12.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.4...v0.12.5) (2025-01-10)
 
 
