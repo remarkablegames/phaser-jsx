@@ -87,6 +87,7 @@ export function addGameObject(
 
     case element.type === Phaser.GameObjects.Image:
     case element.type === Phaser.GameObjects.Sprite:
+    case element.type === Phaser.GameObjects.NineSlice:
       gameObject = new element.type(scene, props.x, props.y, texture, frame);
       break;
 
