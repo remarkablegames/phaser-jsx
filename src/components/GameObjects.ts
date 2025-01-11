@@ -540,7 +540,13 @@ export const ParticleEmitter = GameObjects.Particles
  * PathFollowers are bound to a single Path at any one time and can traverse the length of the Path, from start to finish, forwards or backwards, or from any given point on the Path to its end. They can optionally rotate to face the direction of the path, be offset from the path coordinates or rotate independently of the Path.
  */
 export const PathFollower = GameObjects.PathFollower as unknown as FC<
-  Props<GameObjects.PathFollower>
+  Props<GameObjects.PathFollower> & {
+    path: GameObjects.PathFollower['path'];
+    x: GameObjects.PathFollower['x'];
+    y: GameObjects.PathFollower['y'];
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
 >;
 
 /**
