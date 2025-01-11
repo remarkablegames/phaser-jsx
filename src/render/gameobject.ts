@@ -8,20 +8,19 @@ import { setProps } from './props';
 import { attachRef } from './ref';
 
 /**
- * Instantiates Phaser game object in the scene.
+ * Instantiates Phaser Game Object in the Scene.
  *
- * @param element - Element that you want to create.
- * @param scene - Phaser scene.
- * @param container - Phaser container.
- * @returns - Phaser game object.
+ * @param element - Element that you want to add.
+ * @param scene - Phaser Scene.
+ * @param parent - Phaser Container or Layer.
  */
 export function addGameObject(
   element: JSX.Element,
   scene: Phaser.Scene,
-  container?: Phaser.GameObjects.Container,
+  parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ) {
   if (Array.isArray(element)) {
-    element.forEach((current) => addGameObject(current, scene, container));
+    element.forEach((current) => addGameObject(current, scene, parent));
     return;
   }
 
@@ -45,7 +44,7 @@ export function addGameObject(
     case element.type === Fragment:
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
-          addGameObject(child, scene, container);
+          addGameObject(child, scene, parent);
         });
       }
       return;
@@ -66,13 +65,16 @@ export function addGameObject(
       break;
 
     case element.type === Phaser.GameObjects.Container:
+    case element.type === Phaser.GameObjects.Layer:
       gameObject = new element.type(scene);
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
           addGameObject(
             child,
             scene,
-            gameObject as Phaser.GameObjects.Container,
+            gameObject as
+              | Phaser.GameObjects.Container
+              | Phaser.GameObjects.Layer,
           );
         });
       }
@@ -102,15 +104,15 @@ export function addGameObject(
 
     // composite component (class/function)
     default:
-      addGameObject(new element.type(element.props), scene, container);
+      addGameObject(new element.type(element.props), scene, parent);
       return;
   }
 
   setProps(gameObject, props, scene);
   attachRef(gameObject, ref);
 
-  if (container) {
-    container.add(gameObject);
+  if (typeof parent?.add === 'function') {
+    parent.add(gameObject);
   } else {
     scene.add.existing(gameObject);
   }

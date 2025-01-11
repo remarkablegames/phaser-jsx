@@ -30,7 +30,7 @@ jest.mock('phaser', () => {
       Image: jest.fn(),
       IsoBox: jest.fn(),
       IsoTriangle: jest.fn(),
-      Layer: jest.fn(),
+      Layer: jest.fn(() => ({ add: mockAdd })),
       Light: jest.fn(),
       LightsManager: jest.fn(),
       LightsPlugin: jest.fn(),
@@ -76,13 +76,13 @@ beforeEach(() => {
 
 describe('invalid element', () => {
   it('logs warning', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
     const invalidElement = {} as JSX.Element;
     addGameObject(invalidElement, scene);
-    expect(spy).toHaveBeenCalledWith(
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
       'Invalid JSX type. Expected a class or function but got: undefined',
     );
-    spy.mockRestore();
+    consoleWarnSpy.mockRestore();
   });
 });
 
@@ -136,7 +136,7 @@ describe('Fragment', () => {
   });
 
   it('adds array of children', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     addGameObject(
       <Fragment>
         <GameObjects.Container />
@@ -151,8 +151,8 @@ describe('Fragment', () => {
     expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
     // Each child in a list should have a unique "key" prop.
-    expect(spy).toHaveBeenCalledTimes(1);
-    spy.mockRestore();
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+    consoleErrorSpy.mockRestore();
   });
 });
 
@@ -175,17 +175,62 @@ describe('Bob', () => {
   });
 });
 
-describe('Container', () => {
+describe.each(['Container', 'Layer'] as const)('%s', (component) => {
+  const Component = GameObjects[component];
+  let consoleErrorSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    // Each child in a list should have a unique "key" prop.
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+  });
+
+  afterAll(() => {
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('instantiates with no props', () => {
+    addGameObject(<Component />, scene);
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
+    expect(mockAdd).not.toHaveBeenCalled();
+  });
+
+  it('instantiates with single child', () => {
+    const Component = GameObjects[component];
+    addGameObject(
+      <Component>
+        <GameObjects.Sprite texture="texture" />
+      </Component>,
+      scene,
+    );
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
+    expect(mockAdd).toHaveBeenCalledTimes(1);
+  });
+
+  it('instantiates with children', () => {
+    const Component = GameObjects[component];
+    addGameObject(
+      <Component>
+        {Array(2)
+          .fill(null)
+          .map(() => (
+            <GameObjects.Sprite texture="texture" />
+          ))}
+      </Component>,
+      scene,
+    );
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
+    expect(mockAdd).toHaveBeenCalledTimes(2);
+  });
+
   it('nests game objects', () => {
-    function Children() {
-      return (
-        <GameObjects.Container>
-          <GameObjects.Container />
-          <GameObjects.Text />
-        </GameObjects.Container>
-      );
-    }
-    addGameObject(<Children />, scene);
+    addGameObject(
+      <Component>
+        <Component />
+        <GameObjects.Sprite texture="texture" />
+      </Component>,
+      scene,
+    );
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
     expect(mockAdd).toHaveBeenCalledTimes(2);
   });
 });
@@ -236,7 +281,7 @@ describe('Text', () => {
   });
 
   it('does not pass certain Text props to setProps', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     const props = {
       children: [],
       key: null,
@@ -251,7 +296,7 @@ describe('Text', () => {
       { text: props.text },
       scene,
     );
-    spy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 });
 
@@ -276,7 +321,7 @@ describe.each(['Image', 'Sprite'] as const)('%s', (component) => {
   });
 
   it('does not pass certain props to setProps', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     const props = {
       children: [],
       key: null,
@@ -297,7 +342,7 @@ describe.each(['Image', 'Sprite'] as const)('%s', (component) => {
       },
       scene,
     );
-    spy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 });
 
