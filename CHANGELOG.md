@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.7](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.6...v0.12.7) (2025-01-11)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props texture and frame to Image ([95f6a31](https://github.com/remarkablegames/phaser-jsx/commit/95f6a311e8bad67f47d021c26821019d6553e309))
+* **render:** pass container when adding game object ([33b5719](https://github.com/remarkablegames/phaser-jsx/commit/33b5719133f4f9b20fc5a40bb1729764d6b2796e))
+
 ## [0.12.6](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.5...v0.12.6) (2025-01-11)
 
 
