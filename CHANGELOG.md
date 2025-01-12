@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.3...v0.13.4) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass required props to TileSprite ([fb2ac96](https://github.com/remarkablegames/phaser-jsx/commit/fb2ac96c01ab1f5a9818ec5034c2d4bcaa506a8a))
+
 ## [0.13.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.2...v0.13.3) (2025-01-12)
 
 
