@@ -567,7 +567,10 @@ export const PathFollower = GameObjects.PathFollower as unknown as FC<
  * The Plane origin is always 0.5 x 0.5 and cannot be changed.
  */
 export const Plane = GameObjects.Plane as unknown as FC<
-  Props<GameObjects.Plane>
+  Props<GameObjects.Plane> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
 >;
 
 /**
