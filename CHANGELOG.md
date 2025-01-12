@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.0...v0.13.1) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass correct props to PointLight ([78a7435](https://github.com/remarkablegames/phaser-jsx/commit/78a74352ed1ccc9ea26ef0e660b551a3f1bd4d5e))
+
 ## [0.13.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.12...v0.13.0) (2025-01-12)
 
 
