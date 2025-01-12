@@ -246,6 +246,85 @@ describe('GameObject', () => {
   });
 });
 
+describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
+  const Component = GameObjects[component];
+
+  it('adds game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+    };
+    const texture = 'texture';
+    const frame = 'frame';
+    addGameObject(
+      <Component {...props} texture={texture} frame={frame} />,
+      scene,
+    );
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      texture,
+      frame,
+    );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+
+  it('does not pass certain props to setProps', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const props = {
+      children: [],
+      key: null,
+      ref: () => {},
+      x: 1,
+      y: 2,
+      texture: 'texture',
+      frame: 'frame',
+    };
+    addGameObject(<Component {...props} />, scene);
+    expect(setProps).toHaveBeenCalledWith(
+      expect.anything(),
+      {
+        x: props.x,
+        y: props.y,
+      },
+      scene,
+    );
+    consoleErrorSpy.mockRestore();
+  });
+});
+
+describe('composite', () => {
+  function Composite() {
+    return (
+      <Fragment>
+        <GameObjects.Text
+          text="text"
+          style={{
+            color: '#fff',
+            font: '42px Arial',
+          }}
+        />
+        <GameObjects.Sprite texture="texture" frame="frame" />
+      </Fragment>
+    );
+  }
+
+  it('renders composite component', () => {
+    function MyComponent() {
+      return (
+        <Fragment>
+          <Composite />
+          <GameObjects.Text />
+        </Fragment>
+      );
+    }
+    addGameObject(<MyComponent />, scene);
+    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(2);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe('Light', () => {
   it('adds game object', () => {
     const props = {
@@ -446,81 +525,29 @@ describe('Text', () => {
   });
 });
 
-describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
-  const Component = GameObjects[component];
-
+describe('TileSprite', () => {
   it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
+      width: 3,
+      height: 4,
     };
     const texture = 'texture';
     const frame = 'frame';
     addGameObject(
-      <Component {...props} texture={texture} frame={frame} />,
+      <GameObjects.TileSprite {...props} texture={texture} frame={frame} />,
       scene,
     );
-    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(
+    expect(Phaser.GameObjects.TileSprite).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
+      props.width,
+      props.height,
       texture,
       frame,
     );
     expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
-  });
-
-  it('does not pass certain props to setProps', () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-    const props = {
-      children: [],
-      key: null,
-      ref: () => {},
-      x: 1,
-      y: 2,
-      texture: 'texture',
-      frame: 'frame',
-    };
-    addGameObject(<Component {...props} />, scene);
-    expect(setProps).toHaveBeenCalledWith(
-      expect.anything(),
-      {
-        x: props.x,
-        y: props.y,
-      },
-      scene,
-    );
-    consoleErrorSpy.mockRestore();
-  });
-});
-
-describe('composite', () => {
-  function Composite() {
-    return (
-      <Fragment>
-        <GameObjects.Text
-          text="text"
-          style={{
-            color: '#fff',
-            font: '42px Arial',
-          }}
-        />
-        <GameObjects.Sprite texture="texture" frame="frame" />
-      </Fragment>
-    );
-  }
-
-  it('renders composite component', () => {
-    function MyComponent() {
-      return (
-        <Fragment>
-          <Composite />
-          <GameObjects.Text />
-        </Fragment>
-      );
-    }
-    addGameObject(<MyComponent />, scene);
-    expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(2);
-    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
   });
 });

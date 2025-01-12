@@ -157,6 +157,18 @@ export function addGameObject(
       gameObject = new element.type(scene, props.x, props.y, props.text, style);
       break;
 
+    case element.type === Phaser.GameObjects.TileSprite:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        props.width,
+        props.height,
+        texture,
+        frame,
+      );
+      break;
+
     // Phaser component
     case gameObjects.indexOf(element.type) !== -1:
       gameObject = new element.type(scene);
