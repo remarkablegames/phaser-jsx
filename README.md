@@ -19,7 +19,7 @@
 
 With JSX:
 
-```jsx
+```tsx
 // index.jsx
 import Phaser from 'phaser';
 import { Text, render } from 'phaser-jsx';
@@ -141,7 +141,7 @@ export default defineConfig({
 
 If you're not using `jsxImportSource`, you can set a JSX pragma at the top of your file:
 
-```jsx
+```tsx
 /** @jsx jsx */
 import { jsx } from 'phaser-jsx';
 ```
@@ -154,7 +154,7 @@ The `render` function renders game objects inside a scene.
 
 If you need nesting and relative positioning, use `Container`:
 
-```jsx
+```tsx
 <Container>
   <Text text="Child 1" />
   <Text text="Child 2" />
@@ -170,7 +170,10 @@ If you have a single Scene, retrieve it with the `useScene` hook:
 ```js
 import { useScene } from 'phaser-jsx';
 
-const scene = useScene();
+function MyComponent() {
+  const scene = useScene();
+  // ...
+}
 ```
 
 > [!WARNING]
@@ -179,7 +182,9 @@ const scene = useScene();
 To specify a Scene class in TypeScript:
 
 ```ts
-class MyScene extends Phaser.Scene {/* ... */}
+class MyScene extends Phaser.Scene {
+  // ...
+}
 
 const scene = useScene<MyScene>();
 ```
