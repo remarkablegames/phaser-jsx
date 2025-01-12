@@ -551,3 +551,21 @@ describe('TileSprite', () => {
     expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
   });
 });
+
+describe('Video', () => {
+  it('adds game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+      cacheKey: 'cacheKey',
+    };
+    addGameObject(<GameObjects.Video {...props} />, scene);
+    expect(Phaser.GameObjects.Video).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      props.cacheKey,
+    );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+});

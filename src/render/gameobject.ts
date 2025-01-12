@@ -169,6 +169,10 @@ export function addGameObject(
       );
       break;
 
+    case element.type === Phaser.GameObjects.Video:
+      gameObject = new element.type(scene, props.x, props.y, props.cacheKey);
+      break;
+
     // Phaser component
     case gameObjects.indexOf(element.type) !== -1:
       gameObject = new element.type(scene);
