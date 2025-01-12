@@ -10,15 +10,18 @@ import {
   Image,
   jsx,
   render,
+  useRef,
   useScene,
   Video,
 } from '../cjs/index.js';
 
-[createElement, Image, render, Video, useScene].forEach((fun) => {
-  it(`exports ${fun.name}`, () => {
-    assert.strictEqual(typeof fun, 'function');
-  });
-});
+[createElement, createRef, Image, render, Video, useRef, useScene].forEach(
+  (fn) => {
+    it(`exports ${fn.name}`, () => {
+      assert.strictEqual(typeof fn, 'function');
+    });
+  },
+);
 
 it('exports createElement', () => {
   assert.deepEqual(createElement(Image, { x: 42 }), {
@@ -28,8 +31,10 @@ it('exports createElement', () => {
   });
 });
 
-it('exports createRef', () => {
-  assert.deepEqual(createRef(), { current: null });
+[createRef, useRef].forEach((fn) => {
+  it(`exports ${fn.name}`, () => {
+    assert.deepEqual(fn(), { current: null });
+  });
 });
 
 it('exports jsx', () => {
