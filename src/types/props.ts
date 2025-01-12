@@ -1,12 +1,12 @@
-import type { JSX } from 'react';
+import type { JSX, RefObject } from 'react';
 
-import type { Events, GameObject, RecursivePartial, Ref } from '.';
+import type { Events, GameObject, RecursivePartial } from '.';
 
 type RefCallback<Type> = (gameObject: Type) => void;
 
 interface ObjectProps<Type> extends Partial<Events> {
   children?: JSX.Element | JSX.Element[] | null;
-  ref?: RefCallback<Type> | Ref<Type>;
+  ref?: RefCallback<Type> | RefObject<Type>;
 }
 
 export type GameObjectProps<Type = GameObject> = ObjectProps<Type> &

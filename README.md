@@ -163,6 +163,44 @@ If you need nesting and relative positioning, use `Container`:
 
 ## Hooks
 
+### `useRef`
+
+Create a ref for your game object:
+
+```ts
+import { useRef } from 'phaser-jsx';
+
+function MyComponent() {
+  const textRef = useRef<Phaser.GameObjects.Text>();
+  // ...
+}
+```
+
+Pass your ref to the JSX element:
+
+```tsx
+// ...
+return <Text ref={textRef} onPointerDown={handleClick} />;
+```
+
+Access your game object:
+
+```ts
+function handleClick() {
+  textRef.current?.text = 'Clicked';
+}
+```
+
+Alternatively, you can get the game object with a callback ref:
+
+```tsx
+<Text
+  ref={(gameObject) => {
+    gameObject.text = 'Hello, world!';
+  }}
+/>
+```
+
 ### `useScene`
 
 Retrieve the current Scene with the `useScene` hook:
