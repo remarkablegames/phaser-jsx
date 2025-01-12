@@ -781,7 +781,10 @@ export const UpdateList = GameObjects.UpdateList as unknown as FC<
  * This Game Object is capable of handling playback of a previously loaded video from the Phaser Video Cache, or playing a video based on a given URL. Videos can be either local, or streamed.
  */
 export const Video = GameObjects.Video as unknown as FC<
-  Props<GameObjects.Video>
+  Props<GameObjects.Video> & {
+    x: GameObjects.Video['x'];
+    y: GameObjects.Video['y'];
+  }
 >;
 
 /**
