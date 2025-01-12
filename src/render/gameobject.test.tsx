@@ -569,3 +569,19 @@ describe('Video', () => {
     expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
   });
 });
+
+describe('Zone', () => {
+  it('adds game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+    };
+    addGameObject(<GameObjects.Zone {...props} />, scene);
+    expect(Phaser.GameObjects.Zone).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+    );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+});
