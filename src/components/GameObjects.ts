@@ -587,7 +587,11 @@ export const Plane = GameObjects.Plane as unknown as FC<
  * Point Lights are a WebGL only feature and do not have a Canvas counterpart.
  */
 export const PointLight = GameObjects.PointLight as unknown as FC<
-  Props<GameObjects.PointLight>
+  Props<GameObjects.PointLight> & {
+    x: GameObjects.PointLight['x'];
+    y: GameObjects.PointLight['y'];
+    color?: number;
+  }
 >;
 
 /**
