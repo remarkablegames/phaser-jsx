@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.1...v0.13.2) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass correct props to Rope ([27f6721](https://github.com/remarkablegames/phaser-jsx/commit/27f6721d6457d2328312e424cc1c3a13b980ee57))
+
 ## [0.13.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.0...v0.13.1) (2025-01-12)
 
 
