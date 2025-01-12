@@ -240,14 +240,9 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
 
 describe('GameObject', () => {
   it('instantiates game object', () => {
-    const props = {
-      type: 'sprite',
-    };
-    addGameObject(<GameObjects.GameObject {...props} />, scene);
-    expect(Phaser.GameObjects.GameObject).toHaveBeenCalledWith(
-      scene,
-      props.type,
-    );
+    const type = 'sprite';
+    addGameObject(<GameObjects.GameObject type={type} />, scene);
+    expect(Phaser.GameObjects.GameObject).toHaveBeenCalledWith(scene, type);
   });
 });
 
@@ -257,24 +252,25 @@ describe('Light', () => {
       x: 1,
       y: 2,
       radius: 3,
-      color: {
-        r: 0,
-        g: 0.5,
-        b: 1,
-      },
       intensity: 4,
     };
-    addGameObject(<GameObjects.Light {...props} />, scene);
+    const color = {
+      r: 0,
+      g: 0.5,
+      b: 1,
+    };
+    addGameObject(<GameObjects.Light {...props} color={color} />, scene);
     expect(Phaser.GameObjects.Light).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
       props.radius,
-      props.color.r,
-      props.color.g,
-      props.color.b,
+      color.r,
+      color.g,
+      color.b,
       props.intensity,
     );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
   });
 });
 
@@ -284,18 +280,22 @@ describe('PathFollower', () => {
       path: new Phaser.Curves.Path(1, 2),
       x: 3,
       y: 4,
-      texture: 'texture',
-      frame: 'frame',
     };
-    addGameObject(<GameObjects.PathFollower {...props} />, scene);
+    const texture = 'texture';
+    const frame = 'frame';
+    addGameObject(
+      <GameObjects.PathFollower {...props} texture={texture} frame={frame} />,
+      scene,
+    );
     expect(Phaser.GameObjects.PathFollower).toHaveBeenCalledWith(
       scene,
       props.path,
       props.x,
       props.y,
-      props.texture,
-      props.frame,
+      texture,
+      frame,
     );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
   });
 });
 
@@ -304,23 +304,54 @@ describe('Plane', () => {
     const props = {
       x: 1,
       y: 2,
-      texture: 'texture',
-      frame: 'frame',
       width: 3,
       height: 4,
       isTiled: true,
     };
-    addGameObject(<GameObjects.Plane {...props} />, scene);
+    const texture = 'texture';
+    const frame = 'frame';
+    addGameObject(
+      <GameObjects.Plane {...props} texture={texture} frame={frame} />,
+      scene,
+    );
     expect(Phaser.GameObjects.Plane).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
-      props.texture,
-      props.frame,
+      texture,
+      frame,
       props.width,
       props.height,
       props.isTiled,
     );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+});
+
+describe('PointLight', () => {
+  it('instantiates game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+    };
+    const color = 0xffffff;
+    addGameObject(<GameObjects.PointLight {...props} color={color} />, scene);
+    expect(Phaser.GameObjects.PointLight).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      color,
+    );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+});
+
+describe('Rectangle', () => {
+  it('instantiates game object', () => {
+    const x = 1;
+    const y = 2;
+    addGameObject(<GameObjects.Rectangle x={x} y={y} />, scene);
+    expect(Phaser.GameObjects.Rectangle).toHaveBeenCalledWith(scene, x, y);
   });
 });
 
@@ -377,23 +408,27 @@ describe('Text', () => {
 });
 
 describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
+  const Component = GameObjects[component];
+
   it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
-      texture: 'texture',
-      frame: 'frame',
     };
-    const Component = GameObjects[component];
-    const element = <Component {...props} />;
-    addGameObject(element, scene);
+    const texture = 'texture';
+    const frame = 'frame';
+    addGameObject(
+      <Component {...props} texture={texture} frame={frame} />,
+      scene,
+    );
     expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(
       scene,
       props.x,
       props.y,
-      props.texture,
-      props.frame,
+      texture,
+      frame,
     );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
   });
 
   it('does not pass certain props to setProps', () => {
@@ -407,9 +442,7 @@ describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
       texture: 'texture',
       frame: 'frame',
     };
-    const Component = GameObjects[component];
-    const element = <Component {...props} />;
-    addGameObject(element, scene);
+    addGameObject(<Component {...props} />, scene);
     expect(setProps).toHaveBeenCalledWith(
       expect.anything(),
       {
