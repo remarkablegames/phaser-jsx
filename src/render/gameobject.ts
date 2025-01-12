@@ -33,6 +33,7 @@ export function addGameObject(
     color,
     frame,
     key, // eslint-disable-line @typescript-eslint/no-unused-vars
+    points,
     ref,
     style,
     texture,
@@ -134,6 +135,17 @@ export function addGameObject(
 
     case element.type === Phaser.GameObjects.Rectangle:
       gameObject = new element.type(scene, props.x, props.y);
+      break;
+
+    case element.type === Phaser.GameObjects.Rope:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        texture,
+        frame,
+        points,
+      );
       break;
 
     case element.type === Phaser.GameObjects.Text:
