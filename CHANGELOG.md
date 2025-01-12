@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.4...v0.13.5) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to Video ([66b3c06](https://github.com/remarkablegames/phaser-jsx/commit/66b3c0637307d577395792d53719b71cd470d5a8))
+* **gameobject:** pass props to Zone ([865f4f9](https://github.com/remarkablegames/phaser-jsx/commit/865f4f9f3b0727a95f7406653cc861cdadc22a80))
+
 ## [0.13.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.3...v0.13.4) (2025-01-12)
 
 
