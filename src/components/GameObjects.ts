@@ -794,4 +794,9 @@ export const Video = GameObjects.Video as unknown as FC<
  *
  * Its primary use is for creating Drop Zones and Input Hit Areas and it has a couple of helper methods specifically for this. It is also useful for object overlap checks, or as a base for your own non-displaying Game Objects. The default origin is 0.5, the center of the Zone, the same as with Game Objects.
  */
-export const Zone = GameObjects.Zone as unknown as FC<Props<GameObjects.Zone>>;
+export const Zone = GameObjects.Zone as unknown as FC<
+  Props<GameObjects.Zone> & {
+    x: GameObjects.Zone['x'];
+    y: GameObjects.Zone['y'];
+  }
+>;
