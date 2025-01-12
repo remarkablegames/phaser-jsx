@@ -658,7 +658,9 @@ export const Rope = GameObjects.Rope as unknown as FC<
  * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. Shaders can be masked with either Bitmap or Geometry masks and can also be used as a Bitmap Mask for a Camera or other Game Object. They can also be made interactive and used for input events.
  */
 export const Shader = GameObjects.Shader as unknown as FC<
-  Props<GameObjects.Shader>
+  Props<GameObjects.Shader> & {
+    shader: string | GameObjects.Shader['shader'];
+  }
 >;
 
 /**

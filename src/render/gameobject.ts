@@ -35,6 +35,7 @@ export function addGameObject(
     key, // eslint-disable-line @typescript-eslint/no-unused-vars
     points,
     ref,
+    shader,
     style,
     texture,
     ...props
@@ -146,6 +147,10 @@ export function addGameObject(
         frame,
         points,
       );
+      break;
+
+    case element.type === Phaser.GameObjects.Shader:
+      gameObject = new element.type(scene, shader);
       break;
 
     case element.type === Phaser.GameObjects.Text:

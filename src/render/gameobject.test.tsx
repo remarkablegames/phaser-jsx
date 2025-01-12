@@ -160,7 +160,7 @@ describe('Fragment', () => {
 });
 
 describe('Bob', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
@@ -191,13 +191,13 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
     consoleErrorSpy.mockRestore();
   });
 
-  it('instantiates with no props', () => {
+  it('adds game object with no props', () => {
     addGameObject(<Component />, scene);
     expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
     expect(mockAdd).not.toHaveBeenCalled();
   });
 
-  it('instantiates with single child', () => {
+  it('adds game object with single child', () => {
     const Component = GameObjects[component];
     addGameObject(
       <Component>
@@ -209,7 +209,7 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
     expect(mockAdd).toHaveBeenCalledTimes(1);
   });
 
-  it('instantiates with children', () => {
+  it('adds game object with children', () => {
     const Component = GameObjects[component];
     addGameObject(
       <Component>
@@ -239,7 +239,7 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
 });
 
 describe('GameObject', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const type = 'sprite';
     addGameObject(<GameObjects.GameObject type={type} />, scene);
     expect(Phaser.GameObjects.GameObject).toHaveBeenCalledWith(scene, type);
@@ -247,7 +247,7 @@ describe('GameObject', () => {
 });
 
 describe('Light', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
@@ -275,7 +275,7 @@ describe('Light', () => {
 });
 
 describe('PathFollower', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       path: new Phaser.Curves.Path(1, 2),
       x: 3,
@@ -300,7 +300,7 @@ describe('PathFollower', () => {
 });
 
 describe('Plane', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
@@ -329,7 +329,7 @@ describe('Plane', () => {
 });
 
 describe('PointLight', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
@@ -347,7 +347,7 @@ describe('PointLight', () => {
 });
 
 describe('Rectangle', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const x = 1;
     const y = 2;
     addGameObject(<GameObjects.Rectangle x={x} y={y} />, scene);
@@ -356,7 +356,7 @@ describe('Rectangle', () => {
 });
 
 describe('Rope', () => {
-  it('instantiates game object', () => {
+  it('adds game object', () => {
     const props = {
       x: 1,
       y: 2,
@@ -385,8 +385,17 @@ describe('Rope', () => {
   });
 });
 
+describe('Shader', () => {
+  it('adds game object', () => {
+    const shader = 'key';
+    addGameObject(<GameObjects.Shader shader={shader} />, scene);
+    expect(Phaser.GameObjects.Shader).toHaveBeenCalledWith(scene, shader);
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), {}, scene);
+  });
+});
+
 describe('Text', () => {
-  it('adds Text with no props', () => {
+  it('adds game object with no props', () => {
     addGameObject(<GameObjects.Text />, scene);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledWith(
       scene,
@@ -397,7 +406,7 @@ describe('Text', () => {
     );
   });
 
-  it('adds Text with props', () => {
+  it('adds game object with props', () => {
     const props = {
       x: 1,
       y: 2,
@@ -417,7 +426,7 @@ describe('Text', () => {
     );
   });
 
-  it('does not pass certain Text props to setProps', () => {
+  it('does not pass certain props to setProps', () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     const props = {
       children: [],
