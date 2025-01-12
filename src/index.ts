@@ -3,4 +3,4 @@ export { createElement, jsx } from './element';
 export { useRef, useScene } from './hooks';
 export { createRef } from './ref';
 export { render } from './render';
-export type { GameObjectProps, Ref } from './types';
+export type { GameObjectProps } from './types';
