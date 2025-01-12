@@ -299,6 +299,31 @@ describe('PathFollower', () => {
   });
 });
 
+describe('Plane', () => {
+  it('instantiates game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+      texture: 'texture',
+      frame: 'frame',
+      width: 3,
+      height: 4,
+      isTiled: true,
+    };
+    addGameObject(<GameObjects.Plane {...props} />, scene);
+    expect(Phaser.GameObjects.Plane).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      props.texture,
+      props.frame,
+      props.width,
+      props.height,
+      props.isTiled,
+    );
+  });
+});
+
 describe('Text', () => {
   it('adds Text with no props', () => {
     addGameObject(<GameObjects.Text />, scene);

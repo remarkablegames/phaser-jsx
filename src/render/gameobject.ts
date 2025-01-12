@@ -115,6 +115,19 @@ export function addGameObject(
       );
       break;
 
+    case element.type === Phaser.GameObjects.Plane:
+      gameObject = new element.type(
+        scene,
+        props.x,
+        props.y,
+        texture,
+        frame,
+        props.width,
+        props.height,
+        props.isTiled,
+      );
+      break;
+
     case element.type === Phaser.GameObjects.Rectangle:
       gameObject = new element.type(scene, props.x, props.y);
       break;
@@ -148,6 +161,6 @@ const gameObjects = Object.keys(GameObjects).map(
   (key) => GameObjects[key as keyof typeof GameObjects],
 );
 
-function toArray<T>(item: T | T[]) {
+function toArray<Type>(item: Type | Type[]) {
   return Array.isArray(item) ? item : [item];
 }
