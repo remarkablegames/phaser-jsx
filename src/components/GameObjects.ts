@@ -743,7 +743,14 @@ export const TextStyle = GameObjects.TextStyle as unknown as FC<
  * An important note about Tile Sprites and NPOT textures: Internally, TileSprite textures use GL_REPEAT to provide seamless repeating of the textures. This, combined with the way in which the textures are handled in WebGL, means they need to be POT (power-of-two) sizes in order to wrap. If you provide a NPOT (non power-of-two) texture to a TileSprite it will generate a POT sized canvas and draw your texture to it, scaled up to the POT size. It's then scaled back down again during rendering to the original dimensions. While this works, in that it allows you to use any size texture for a Tile Sprite, it does mean that NPOT textures are going to appear anti-aliased when rendered, due to the interpolation that took place when it was resized into a POT texture. This is especially visible in pixel art graphics. If you notice it and it becomes an issue, the only way to avoid it is to ensure that you provide POT textures for Tile Sprites.
  */
 export const TileSprite = GameObjects.TileSprite as unknown as FC<
-  Props<GameObjects.TileSprite>
+  Props<GameObjects.TileSprite> & {
+    x: GameObjects.TileSprite['x'];
+    y: GameObjects.TileSprite['y'];
+    width: GameObjects.TileSprite['width'];
+    height: GameObjects.TileSprite['height'];
+    texture: string;
+    frame?: string | number;
+  }
 >;
 
 /**
