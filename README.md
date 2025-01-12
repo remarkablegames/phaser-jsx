@@ -35,7 +35,7 @@ new Phaser.Game({
 
 Without JSX:
 
-```js
+```ts
 // index.js
 import Phaser from 'phaser';
 import { jsx, render } from 'phaser-jsx';
@@ -74,13 +74,13 @@ yarn add phaser-jsx
 
 ES Modules:
 
-```js
+```ts
 import { createElement, render } from 'phaser-jsx';
 ```
 
 CommonJS:
 
-```js
+```ts
 const { createElement, render } = require('phaser-jsx');
 ```
 
@@ -126,7 +126,7 @@ Update your `tsconfig.json`:
 
 Update your Vite config:
 
-```js
+```ts
 // vite.config.mjs
 import { defineConfig } from 'vite';
 
@@ -165,9 +165,9 @@ If you need nesting and relative positioning, use `Container`:
 
 ### `useScene`
 
-If you have a single Scene, retrieve it with the `useScene` hook:
+Retrieve the current Scene with the `useScene` hook:
 
-```js
+```ts
 import { useScene } from 'phaser-jsx';
 
 function MyComponent() {
@@ -179,7 +179,7 @@ function MyComponent() {
 > [!WARNING]
 > Don't use the `useScene` hook if you start multiple Scenes.
 
-To specify a Scene class in TypeScript:
+Type your Scene with TypeScript:
 
 ```ts
 class MyScene extends Phaser.Scene {
