@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.12](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.11...v0.12.12) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass props to Plane ([2eebeb1](https://github.com/remarkablegames/phaser-jsx/commit/2eebeb15839f78c8f7e9e1c8073d8ad18f1e7ea4))
+
 ## [0.12.11](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.10...v0.12.11) (2025-01-11)
 
 
