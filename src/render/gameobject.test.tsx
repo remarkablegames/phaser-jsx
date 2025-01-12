@@ -355,6 +355,36 @@ describe('Rectangle', () => {
   });
 });
 
+describe('Rope', () => {
+  it('instantiates game object', () => {
+    const props = {
+      x: 1,
+      y: 2,
+    };
+    const texture = 'texture';
+    const frame = 'frame';
+    const points = 2;
+    addGameObject(
+      <GameObjects.Rope
+        {...props}
+        texture={texture}
+        frame={frame}
+        points={points}
+      />,
+      scene,
+    );
+    expect(Phaser.GameObjects.Rope).toHaveBeenCalledWith(
+      scene,
+      props.x,
+      props.y,
+      texture,
+      frame,
+      points,
+    );
+    expect(setProps).toHaveBeenCalledWith(expect.anything(), props, scene);
+  });
+});
+
 describe('Text', () => {
   it('adds Text with no props', () => {
     addGameObject(<GameObjects.Text />, scene);

@@ -644,7 +644,13 @@ export const RenderTexture = GameObjects.RenderTexture as unknown as FC<
  *
  * A Ropes origin is always 0.5 x 0.5 and cannot be changed.
  */
-export const Rope = GameObjects.Rope as unknown as FC<Props<GameObjects.Rope>>;
+export const Rope = GameObjects.Rope as unknown as FC<
+  Props<Omit<GameObjects.Rope, 'points'>> & {
+    texture?: string;
+    frame?: string | number;
+    points?: number | GameObjects.Rope['points'];
+  }
+>;
 
 /**
  * A Shader Game Object.
