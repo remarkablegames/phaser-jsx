@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.2...v0.13.3) (2025-01-12)
+
+
+### Bug Fixes
+
+* **gameobject:** pass required prop to Shader ([6910276](https://github.com/remarkablegames/phaser-jsx/commit/691027648b468d533ca070a51e123fe6094ae982))
+
 ## [0.13.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.1...v0.13.2) (2025-01-12)
 
 
