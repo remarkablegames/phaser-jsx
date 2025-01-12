@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.12...v0.13.0) (2025-01-12)
+
+
+### Features
+
+* **hooks:** add useRef ([6a05c52](https://github.com/remarkablegames/phaser-jsx/commit/6a05c52921735ccbc1d27fbc1ffb5e7c6d30ff47))
+
 ## [0.12.12](https://github.com/remarkablegames/phaser-jsx/compare/v0.12.11...v0.12.12) (2025-01-12)
 
 
