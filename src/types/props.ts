@@ -6,7 +6,7 @@ type RefCallback<Type> = (gameObject: Type) => void;
 
 interface ObjectProps<Type> extends Partial<Events> {
   children?: JSX.Element | JSX.Element[] | null;
-  ref?: RefCallback<Type> | RefObject<Type>;
+  ref?: RefCallback<Type> | RefObject<Type | null>;
 }
 
 export type GameObjectProps<Type = GameObject> = ObjectProps<Type> &
