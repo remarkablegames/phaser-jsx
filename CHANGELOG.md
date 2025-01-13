@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.6](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.5...v0.13.6) (2025-01-13)
+
+
+### Bug Fixes
+
+* **types:** fix prop ref ([09b5f96](https://github.com/remarkablegames/phaser-jsx/commit/09b5f9633e34739444fc994d2da98d361fe7832a))
+
 ## [0.13.5](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.4...v0.13.5) (2025-01-12)
 
 
