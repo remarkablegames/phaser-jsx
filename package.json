@@ -67,7 +67,7 @@
     "prettier": "3.5.3",
     "react": "19.0.0",
     "rollup": "4.38.0",
-    "ts-jest": "29.3.0",
+    "ts-jest": "29.3.1",
     "ts-node": "10.9.2",
     "typedoc": "0.28.1",
     "typescript": "5.8.2"
