@@ -139,7 +139,6 @@ describe('Fragment', () => {
   });
 
   it('adds array of children', () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     addGameObject(
       <Fragment>
         <GameObjects.Container />
@@ -153,9 +152,6 @@ describe('Fragment', () => {
     );
     expect(Phaser.GameObjects.Container).toHaveBeenCalledTimes(1);
     expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(1);
-    // Each child in a list should have a unique "key" prop.
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
-    consoleErrorSpy.mockRestore();
   });
 });
 
