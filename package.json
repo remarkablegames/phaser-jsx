@@ -47,7 +47,7 @@
     "@rollup/plugin-typescript": "12.1.2",
     "@types/jest": "29.5.14",
     "@types/node": "22.15.23",
-    "@types/react": "19.1.5",
+    "@types/react": "19.1.6",
     "@typescript-eslint/eslint-plugin": "8.33.0",
     "@typescript-eslint/parser": "8.33.0",
     "canvas": "2.11.2",
