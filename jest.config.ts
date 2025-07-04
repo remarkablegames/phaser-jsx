@@ -10,6 +10,7 @@ const config: Config = {
       statements: 100,
     },
   },
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   preset: 'ts-jest',
   reporters:
     process.env.CI === 'true'
