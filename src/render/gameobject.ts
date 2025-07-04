@@ -45,6 +45,7 @@ export function addGameObject(
 
   switch (true) {
     case element.type === Fragment:
+      /* istanbul ignore else */
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
           addGameObject(child, scene, parent);
