@@ -64,7 +64,7 @@
     "lint-staged": "16.2.7",
     "phaser": "3.90.0",
     "phaser3spectorjs": "0.0.8",
-    "prettier": "3.6.2",
+    "prettier": "3.7.1",
     "react": "19.2.0",
     "rollup": "4.53.3",
     "ts-jest": "29.4.5",
