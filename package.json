@@ -65,7 +65,7 @@
     "phaser": "3.90.0",
     "phaser3spectorjs": "0.0.8",
     "prettier": "3.7.4",
-    "react": "19.2.1",
+    "react": "19.2.3",
     "rollup": "4.53.3",
     "ts-jest": "29.4.6",
     "ts-node": "10.9.2",
