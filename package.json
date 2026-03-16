@@ -61,7 +61,7 @@
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "jest-watch-typeahead": "3.0.1",
-    "lint-staged": "16.3.3",
+    "lint-staged": "16.4.0",
     "phaser": "3.90.0",
     "phaser3spectorjs": "0.0.8",
     "prettier": "3.8.1",
