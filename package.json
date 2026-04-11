@@ -16,7 +16,7 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --project tsconfig.test.json",
     "prepare": "husky",
-    "prepublishOnly": "npm run lint && npm run lint:tsc && npm run test:ci && npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run lint && npm run build && npm run lint:tsc && npm run test:ci",
     "test": "vitest run",
     "test:ci": "CI=true npm test -- --color --coverage",
     "test:watch": "vitest"
@@ -48,7 +48,6 @@
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "@vitest/coverage-v8": "4.1.4",
-    "@vitest/ui": "4.1.4",
     "eslint": "10.2.0",
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-simple-import-sort": "13.0.0",
