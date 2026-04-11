@@ -2,22 +2,41 @@ import Phaser from 'phaser';
 
 import { setProps, skipPropKeys } from './props';
 
-jest.mock('phaser', () => ({
-  GameObjects: {
-    Container: jest.fn(),
-    GameObject: jest.fn(),
-    Sprite: jest.fn(() => ({
-      originX: undefined as number | undefined,
-      originY: undefined as number | undefined,
-      setOrigin(originX?: number, originY?: number) {
-        this.originX = originX;
-        this.originY = originY;
+vi.mock('phaser', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Sprite = vi.fn(function Sprite(this: any) {
+    this.originX = undefined as number | undefined;
+    this.originY = undefined as number | undefined;
+  });
+  Sprite.prototype.setOrigin = function setOrigin(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this: any,
+    originX?: number,
+    originY?: number,
+  ) {
+    this.originX = originX;
+    this.originY = originY;
+  };
+  return {
+    __esModule: true,
+    default: {
+      GameObjects: {
+        Container: vi.fn(),
+        GameObject: vi.fn(),
+        Sprite,
+        Text: vi.fn(),
       },
-    })),
-    Text: jest.fn(),
-  },
-  Scene: jest.fn(),
-}));
+      Scene: vi.fn(),
+    },
+    GameObjects: {
+      Container: vi.fn(),
+      GameObject: vi.fn(),
+      Sprite,
+      Text: vi.fn(),
+    },
+    Scene: vi.fn(),
+  };
+});
 
 const scene = new Phaser.Scene();
 
@@ -35,7 +54,7 @@ it('does not set invalid props', () => {
 });
 
 describe('skip prop keys', () => {
-  it.each(skipPropKeys)('does not set prop %p', (key) => {
+  it.each(skipPropKeys)('does not set prop %s', (key) => {
     const gameObject = new Phaser.GameObjects.Container(scene);
     const props = { [key]: 'skip' };
     expect(setProps(gameObject, props, scene)).toBe(undefined);
@@ -53,7 +72,7 @@ describe('data', () => {
       },
     };
 
-    gameObject.setData = jest.fn();
+    gameObject.setData = vi.fn();
     expect(setProps(gameObject, props, scene)).toBe(undefined);
 
     expect(gameObject.setData).toHaveBeenCalledTimes(1);
@@ -65,11 +84,11 @@ describe('input', () => {
   it('sets prop onPointerDown', () => {
     const gameObject = new Phaser.GameObjects.Container(scene);
     const props = {
-      onPointerDown: jest.fn(),
+      onPointerDown: vi.fn(),
     };
 
-    gameObject.setInteractive = jest.fn();
-    gameObject.on = jest.fn();
+    gameObject.setInteractive = vi.fn();
+    gameObject.on = vi.fn();
     expect(setProps(gameObject, props, scene)).toBe(undefined);
 
     expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
@@ -85,12 +104,12 @@ describe('input', () => {
   it('sets props onPointerOver and input', () => {
     const gameObject = new Phaser.GameObjects.Container(scene);
     const props = {
-      onPointerOver: jest.fn(),
+      onPointerOver: vi.fn(),
       input: { cursor: 'pointer' },
     };
 
-    gameObject.setInteractive = jest.fn();
-    gameObject.on = jest.fn();
+    gameObject.setInteractive = vi.fn();
+    gameObject.on = vi.fn();
     expect(setProps(gameObject, props, scene)).toBe(undefined);
 
     expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
@@ -126,7 +145,7 @@ it.each([
   { originX: undefined, originY: 0 },
   { originX: 0, originY: undefined },
   { originX: undefined, originY: undefined },
-])('sets prop %p', (props) => {
+])('sets prop %s', (props) => {
   const gameObject = new Phaser.GameObjects.Sprite(scene, 0, 0, 'texture');
   expect(setProps(gameObject, props, scene)).toBe(undefined);
   expect(gameObject).toMatchObject(props);

@@ -24,6 +24,9 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Build package
+        run: npm run build
+
       - name: Check type
         run: npm run lint:tsc
 
@@ -34,12 +37,6 @@ jobs:
         uses: codecov/codecov-action@v6
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Run module tests
-        run: npm run test:esm
-
-      - name: Build package
-        run: npm run build
 
       - name: Generate docs
         run: npm run docs

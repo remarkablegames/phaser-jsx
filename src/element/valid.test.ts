@@ -1,15 +1,15 @@
 import { isValidElement } from './valid';
 
 beforeAll(() => {
-  jest.spyOn(console, 'warn').mockImplementation();
+  vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
 
 afterAll(() => {
   // eslint-disable-next-line no-console
-  (console.warn as jest.Mock).mockRestore();
+  (console.warn as ReturnType<typeof vi.fn>).mockRestore();
 });
 
-it.each([undefined, null, false, 0])('returns false for value: %p', (value) => {
+it.each([undefined, null, false, 0])('returns false for value: %s', (value) => {
   expect(isValidElement(value)).toBe(false);
 });
 
@@ -19,7 +19,7 @@ it.each([
   { type: false },
   { type: 0 },
   { type: 'invalid' },
-])('returns false for type: %p', (value) => {
+])('returns false for type: %s', (value) => {
   expect(isValidElement(value)).toBe(false);
 });
 

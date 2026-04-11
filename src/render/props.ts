@@ -18,7 +18,7 @@ export function setProps(
   scene: Phaser.Scene,
 ) {
   for (const key in props) {
-    if (skipPropKeys.indexOf(key) !== -1) {
+    if (skipPropKeys.includes(key)) {
       continue;
     }
 

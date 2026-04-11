@@ -12,7 +12,7 @@ it('does not attach ref', () => {
 });
 
 it('attaches ref callback', () => {
-  const callback = jest.fn();
+  const callback = vi.fn();
   expect(attachRef(gameObject, callback));
   expect(callback).toHaveBeenCalledTimes(1);
   expect(callback).toHaveBeenCalledWith(gameObject);

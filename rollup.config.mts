@@ -16,6 +16,7 @@ const config = (minify = false) => ({
   },
   plugins: [
     typescript({
+      tsconfig: './tsconfig.build.json',
       declaration: false,
       declarationMap: false,
       module: 'esnext',

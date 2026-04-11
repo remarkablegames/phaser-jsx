@@ -17,7 +17,7 @@ const keys = Object.keys(Phaser.GameObjects).filter(
     ].includes(key),
 );
 
-it.each(keys)('exports %p', (key) => {
+it.each(keys)('exports %s', (key) => {
   expect((GameObjects as Props)[key]).toBe((Phaser.GameObjects as Props)[key]);
 });
 

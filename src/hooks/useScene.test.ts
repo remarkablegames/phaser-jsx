@@ -3,11 +3,11 @@ import { Scene } from 'phaser';
 import { getScene } from '../helpers';
 import { useScene } from './useScene';
 
-jest.mock('../helpers/scene', () => ({
-  getScene: jest.fn(),
+vi.mock('../helpers/scene', () => ({
+  getScene: vi.fn(),
 }));
 
-const mockedGetScene = jest.mocked(getScene);
+const mockedGetScene = vi.mocked(getScene);
 
 it('returns scene', () => {
   const scene = new Scene();
