@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.8](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.7...v0.13.8) (2026-04-11)
+
+
+### Continuous Integration
+
+* **github:** set up trusted publishing for npm in release-please.yml ([656c4ae](https://github.com/remarkablegames/phaser-jsx/commit/656c4ae1939927c133e5c8f9b5450f1522d16c64))
+
 ## [0.13.7](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.6...v0.13.7) (2025-08-26)
 
 ### Miscellaneous Chores
