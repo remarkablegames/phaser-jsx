@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { setProps, skipPropKeys } from './props';
+import { setProps, skipPropKeys } from '../../src/render/props';
 
 vi.mock('phaser', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

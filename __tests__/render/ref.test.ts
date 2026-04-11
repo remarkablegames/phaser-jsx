@@ -1,7 +1,7 @@
 import type Phaser from 'phaser';
 
-import { createRef, useRef } from '..';
-import { attachRef } from './ref';
+import { createRef, useRef } from '../../src';
+import { attachRef } from '../../src/render/ref';
 
 const gameObject = {} as Phaser.GameObjects.GameObject;
 

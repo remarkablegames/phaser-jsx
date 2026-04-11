@@ -1,4 +1,4 @@
-import { createRef } from './createRef';
+import { createRef } from '../../src/ref/createRef';
 
 it('creates ref', () => {
   expect(createRef()).toEqual({ current: null });

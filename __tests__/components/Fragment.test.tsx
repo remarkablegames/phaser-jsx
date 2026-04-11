@@ -1,4 +1,4 @@
-import { Fragment } from './Fragment';
+import { Fragment } from '../../src/components/Fragment';
 
 it('returns children', () => {
   const props = { children: 'children' };

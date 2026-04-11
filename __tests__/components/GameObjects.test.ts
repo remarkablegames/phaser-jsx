@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
-import type { Props } from '../types';
-import * as GameObjects from './GameObjects';
+import * as GameObjects from '../../src/components/GameObjects';
+import type { Props } from '../../src/types';
 
 const keys = Object.keys(Phaser.GameObjects).filter(
   (key) =>

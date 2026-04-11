@@ -1,4 +1,4 @@
-import { createElement } from './create';
+import { createElement } from '../../src/element/create';
 
 function Component() {}
 

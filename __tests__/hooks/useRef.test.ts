@@ -1,4 +1,4 @@
-import { useRef } from './useRef';
+import { useRef } from '../../src/hooks/useRef';
 
 it('defaults initial value to null', () => {
   expect(useRef()).toEqual({ current: null });

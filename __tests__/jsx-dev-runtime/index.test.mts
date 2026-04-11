@@ -1,10 +1,5 @@
-import { createElement } from '../../cjs/element/create.js';
-import {
-  Fragment,
-  jsx,
-  jsxDEV,
-  jsxs,
-} from '../../cjs/jsx-dev-runtime/index.js';
+import { createElement } from '../../src/element/create';
+import { Fragment, jsx, jsxDEV, jsxs } from '../../src/jsx-dev-runtime';
 
 it('exports Fragment', () => {
   expect(Fragment).toBeInstanceOf(Function);

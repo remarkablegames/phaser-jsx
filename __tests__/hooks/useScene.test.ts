@@ -1,9 +1,9 @@
 import { Scene } from 'phaser';
 
-import { getScene } from '../helpers';
-import { useScene } from './useScene';
+import { getScene } from '../../src/helpers';
+import { useScene } from '../../src/hooks/useScene';
 
-vi.mock('../helpers/scene', () => ({
+vi.mock('../../src/helpers/scene', () => ({
   getScene: vi.fn(),
 }));
 

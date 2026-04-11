@@ -8,7 +8,7 @@ import {
   Text,
   useRef,
   useScene,
-} from '.';
+} from '../src';
 
 it.each([
   Container,

@@ -2,9 +2,9 @@ import Phaser from 'phaser';
 import type { JSX } from 'react';
 import type { Mock, MockInstance } from 'vitest';
 
-import { Fragment } from '..';
-import * as GameObjects from '../components/GameObjects';
-import { addGameObject, setProps } from '.';
+import { Fragment } from '../../src';
+import * as GameObjects from '../../src/components/GameObjects';
+import { addGameObject, setProps } from '../../src/render';
 
 vi.mock('phaser', () => {
   const mockAdd = vi.fn();
@@ -91,7 +91,7 @@ vi.mock('phaser', () => {
   };
 });
 
-vi.mock('./props', () => ({
+vi.mock('../../src/render/props', () => ({
   setProps: vi.fn(),
 }));
 
