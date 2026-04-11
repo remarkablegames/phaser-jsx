@@ -20,7 +20,9 @@ export function addGameObject(
   parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ) {
   if (Array.isArray(element)) {
-    element.forEach((current) => addGameObject(current, scene, parent));
+    element.forEach((current) => {
+      addGameObject(current, scene, parent);
+    });
     return;
   }
 
@@ -176,7 +178,7 @@ export function addGameObject(
       break;
 
     // Phaser component
-    case gameObjects.indexOf(element.type) !== -1:
+    case gameObjects.includes(element.type):
       gameObject = new element.type(scene);
       break;
 

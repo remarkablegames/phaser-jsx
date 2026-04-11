@@ -1,119 +1,119 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`creates element %p 1`] = `
+exports[`creates element function Component() {} 1`] = `
+{
+  "key": null,
+  "props": {},
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 2`] = `
+{
+  "key": null,
+  "props": {},
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 3`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      null,
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 4`] = `
+{
+  "key": null,
+  "props": {
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 5`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      null,
+    ],
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 6`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+    ],
+    "style": {
+      "height": 200,
+      "width": 100,
+    },
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 7`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 8`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element function Component() {} 9`] = `
+{
+  "key": null,
+  "props": {
+    "children": [
+      [Function],
+    ],
+  },
+  "type": [Function],
+}
+`;
+
+exports[`creates element undefined 1`] = `
 {
   "key": null,
   "props": {},
   "type": undefined,
-}
-`;
-
-exports[`creates element [Function Component] 1`] = `
-{
-  "key": null,
-  "props": {},
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 2`] = `
-{
-  "key": null,
-  "props": {},
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 3`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      null,
-    ],
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 4`] = `
-{
-  "key": null,
-  "props": {
-    "style": {
-      "height": 200,
-      "width": 100,
-    },
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 5`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      null,
-    ],
-    "style": {
-      "height": 200,
-      "width": 100,
-    },
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 6`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      [Function],
-    ],
-    "style": {
-      "height": 200,
-      "width": 100,
-    },
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 7`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      [Function],
-      [Function],
-    ],
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 8`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      [Function],
-    ],
-  },
-  "type": [Function],
-}
-`;
-
-exports[`creates element [Function Component] 9`] = `
-{
-  "key": null,
-  "props": {
-    "children": [
-      [Function],
-    ],
-  },
-  "type": [Function],
 }
 `;

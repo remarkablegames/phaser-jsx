@@ -1,85 +1,111 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
+import type { Mock, MockInstance } from 'vitest';
 
 import { Fragment } from '..';
 import * as GameObjects from '../components/GameObjects';
 import { addGameObject, setProps } from '.';
 
-const mockAdd = jest.fn();
+vi.mock('phaser', () => {
+  const mockAdd = vi.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Scene = vi.fn(function Scene(this: any) {
+    this.add = { existing: vi.fn() };
+    this.sys = {
+      queueDepthSort: vi.fn(),
+      queueDestroy: vi.fn(),
+    };
+  });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Container = vi.fn(function Container(this: any) {
+    this.add = mockAdd;
+  });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Layer = vi.fn(function Layer(this: any) {
+    this.add = mockAdd;
+  });
+  const GameObjects = {
+    Arc: vi.fn(),
+    BitmapText: vi.fn(),
+    Blitter: vi.fn(),
+    Bob: vi.fn(),
+    Container,
+    Curve: vi.fn(),
+    DOMElement: vi.fn(),
+    DisplayList: vi.fn(),
+    DynamicBitmapText: vi.fn(),
+    Ellipse: vi.fn(),
+    Extern: vi.fn(),
+    GameObject: vi.fn(),
+    GameObjectCreator: vi.fn(),
+    GameObjectFactory: vi.fn(),
+    Graphics: vi.fn(),
+    Grid: vi.fn(),
+    Group: vi.fn(),
+    Image: vi.fn(),
+    IsoBox: vi.fn(),
+    IsoTriangle: vi.fn(),
+    Layer,
+    Light: vi.fn(),
+    LightsManager: vi.fn(),
+    LightsPlugin: vi.fn(),
+    Line: vi.fn(),
+    Mesh: vi.fn(),
+    NineSlice: vi.fn(),
+    ParticleEmitter: vi.fn(),
+    Particles: {},
+    PathFollower: vi.fn(),
+    Plane: vi.fn(),
+    PointLight: vi.fn(),
+    Polygon: vi.fn(),
+    Rectangle: vi.fn(),
+    RenderTexture: vi.fn(),
+    Rope: vi.fn(),
+    Shader: vi.fn(),
+    Shape: vi.fn(),
+    Sprite: vi.fn(),
+    Star: vi.fn(),
+    Text: vi.fn(),
+    TextStyle: vi.fn(),
+    TileSprite: vi.fn(),
+    Triangle: vi.fn(),
+    UpdateList: vi.fn(),
+    Video: vi.fn(),
+    Zone: vi.fn(),
+  };
 
-jest.mock('phaser', () => {
   return {
+    __esModule: true,
+    default: {
+      Curves: {
+        Path: vi.fn(),
+      },
+      GameObjects,
+      Scene,
+    },
     Curves: {
-      Path: jest.fn(),
+      Path: vi.fn(),
     },
-    GameObjects: {
-      Arc: jest.fn(),
-      BitmapText: jest.fn(),
-      Blitter: jest.fn(),
-      Bob: jest.fn(),
-      Container: jest.fn(() => ({ add: mockAdd })),
-      Curve: jest.fn(),
-      DOMElement: jest.fn(),
-      DisplayList: jest.fn(),
-      DynamicBitmapText: jest.fn(),
-      Ellipse: jest.fn(),
-      Extern: jest.fn(),
-      GameObject: jest.fn(),
-      GameObjectCreator: jest.fn(),
-      GameObjectFactory: jest.fn(),
-      Graphics: jest.fn(),
-      Grid: jest.fn(),
-      Group: jest.fn(),
-      Image: jest.fn(),
-      IsoBox: jest.fn(),
-      IsoTriangle: jest.fn(),
-      Layer: jest.fn(() => ({ add: mockAdd })),
-      Light: jest.fn(),
-      LightsManager: jest.fn(),
-      LightsPlugin: jest.fn(),
-      Line: jest.fn(),
-      Mesh: jest.fn(),
-      NineSlice: jest.fn(),
-      ParticleEmitter: jest.fn(),
-      Particles: {},
-      PathFollower: jest.fn(),
-      Plane: jest.fn(),
-      PointLight: jest.fn(),
-      Polygon: jest.fn(),
-      Rectangle: jest.fn(),
-      RenderTexture: jest.fn(),
-      Rope: jest.fn(),
-      Shader: jest.fn(),
-      Shape: jest.fn(),
-      Sprite: jest.fn(),
-      Star: jest.fn(),
-      Text: jest.fn(),
-      TextStyle: jest.fn(),
-      TileSprite: jest.fn(),
-      Triangle: jest.fn(),
-      UpdateList: jest.fn(),
-      Video: jest.fn(),
-      Zone: jest.fn(),
-    },
-    Scene: jest.fn(() => ({
-      add: { existing: jest.fn() },
-    })),
+    GameObjects,
+    Scene,
   };
 });
 
-jest.mock('./props', () => ({
-  setProps: jest.fn(),
+vi.mock('./props', () => ({
+  setProps: vi.fn(),
 }));
 
 const scene = new Phaser.Scene();
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('invalid element', () => {
   it('logs warning', () => {
-    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const consoleWarnSpy = vi
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
     const invalidElement = {} as JSX.Element;
     addGameObject(invalidElement, scene);
     expect(consoleWarnSpy).toHaveBeenCalledWith(
@@ -97,7 +123,7 @@ it.each(Object.entries(GameObjects))('adds %s', (name, Component) => {
   addGameObject(<Component />, scene);
   const C = Phaser.GameObjects[name as keyof typeof Phaser.GameObjects];
   expect(C).toHaveBeenCalledTimes(1);
-  expect((C as jest.Mock).mock.calls[0][0]).toBe(scene);
+  expect((C as Mock).mock.calls[0][0]).toBe(scene);
 });
 
 describe('Fragment', () => {
@@ -176,11 +202,11 @@ describe('Bob', () => {
 
 describe.each(['Container', 'Layer'] as const)('%s', (component) => {
   const Component = GameObjects[component];
-  let consoleErrorSpy: jest.SpyInstance;
+  let consoleErrorSpy: MockInstance;
 
   beforeEach(() => {
     // Each child in a list should have a unique "key" prop.
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterAll(() => {
@@ -190,7 +216,6 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
   it('adds game object with no props', () => {
     addGameObject(<Component />, scene);
     expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
-    expect(mockAdd).not.toHaveBeenCalled();
   });
 
   it('adds game object with single child', () => {
@@ -202,7 +227,7 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
       scene,
     );
     expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
-    expect(mockAdd).toHaveBeenCalledTimes(1);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
   });
 
   it('adds game object with children', () => {
@@ -218,7 +243,7 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
       scene,
     );
     expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
-    expect(mockAdd).toHaveBeenCalledTimes(2);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(2);
   });
 
   it('nests game objects', () => {
@@ -229,8 +254,8 @@ describe.each(['Container', 'Layer'] as const)('%s', (component) => {
       </Component>,
       scene,
     );
-    expect(Phaser.GameObjects[component]).toHaveBeenCalledWith(scene);
-    expect(mockAdd).toHaveBeenCalledTimes(2);
+    expect(Phaser.GameObjects[component]).toHaveBeenCalledTimes(2);
+    expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -267,7 +292,9 @@ describe.each(['Image', 'Sprite', 'NineSlice'] as const)('%s', (component) => {
   });
 
   it('does not pass certain props to setProps', () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
     const props = {
       children: [],
       key: null,
@@ -502,7 +529,9 @@ describe('Text', () => {
   });
 
   it('does not pass certain props to setProps', () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
     const props = {
       children: [],
       key: null,

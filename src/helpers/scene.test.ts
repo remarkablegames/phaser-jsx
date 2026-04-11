@@ -10,7 +10,7 @@ afterEach(() => {
 
 describe('getScene', () => {
   it('gets scene', () => {
-    expect(getScene<typeof scene>()).toEqual(undefined);
+    expect(getScene()).toEqual(undefined);
   });
 });
 

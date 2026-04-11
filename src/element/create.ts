@@ -15,9 +15,7 @@ export function createElement(
   props?: Props | null,
   ...children: JSX.Element[]
 ): JSX.Element {
-  if (!props) {
-    props = {};
-  }
+  props ??= {};
 
   if (children.length) {
     props.children = children;

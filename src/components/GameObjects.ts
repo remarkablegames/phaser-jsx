@@ -208,9 +208,7 @@ export const Extern = GameObjects.Extern as unknown as FC<
 /**
  * The base class that all Game Objects extend. You don't create GameObjects directly and they cannot be added to the display list. Instead, use them as the base for your own custom classes.
  */
-export const GameObject = GameObjects.GameObject as unknown as FC<
-  Props<GameObjects.GameObject>
->;
+export const GameObject = GameObjects.GameObject as unknown as FC<Props>;
 
 /**
  * The Game Object Creator is a Scene plugin that allows you to quickly create many common types of Game Objects and return them using a configuration object, rather than having to specify a limited set of parameters such as with the GameObjectFactory.

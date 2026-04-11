@@ -13,7 +13,7 @@ it.each([
   [Component, {}, Component, Component],
   [Component, { children: Component }],
   [Component, { children: [Component] }],
-])('creates element %p', (...args) => {
+])('creates element %s', (...args) => {
   expect(
     // eslint-disable-next-line prefer-spread
     createElement.apply(null, args as Parameters<typeof createElement>),

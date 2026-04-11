@@ -19,7 +19,7 @@ it.each([
   render,
   useRef,
   useScene,
-])('exports %p', (fn) => {
+])('exports %s', (fn) => {
   expect(fn).toBeInstanceOf(Function);
 });
 

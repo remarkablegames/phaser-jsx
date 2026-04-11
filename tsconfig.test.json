@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["dom", "es2017", "scripthost"],
+    "types": ["vitest/globals"],
+    "allowJs": true,
+    "noEmit": true
+  },
+  "include": [
+    "src/**/*",
+    "jsx-runtime/**/*",
+    "jsx-dev-runtime/**/*",
+    "eslint.config.mts",
+    "rollup.config.mts",
+    "vitest.config.mts"
+  ],
+  "exclude": ["node_modules", "cjs", "coverage", "umd"]
+}
