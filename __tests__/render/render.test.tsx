@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Container, createElement, createRef, useRef } from '..';
-import { setScene } from '../helpers';
-import { render } from './render';
+import { Container, createElement, createRef, useRef } from '../../src';
+import { setScene } from '../../src/helpers';
+import { render } from '../../src/render/render';
 
 vi.mock('phaser', () => {
   const GameObject = vi.fn();
@@ -30,7 +30,7 @@ vi.mock('phaser', () => {
   };
 });
 
-vi.mock('../helpers/scene', () => ({
+vi.mock('../../src/helpers/scene', () => ({
   setScene: vi.fn(),
 }));
 

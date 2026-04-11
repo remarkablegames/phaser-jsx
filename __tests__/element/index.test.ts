@@ -1,4 +1,4 @@
-import { createElement, jsx } from '.';
+import { createElement, jsx } from '../../src/element';
 
 it('exports createElement', () => {
   expect(createElement).toBeInstanceOf(Function);

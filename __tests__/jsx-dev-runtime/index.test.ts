@@ -1,5 +1,5 @@
-import { createElement } from '..';
-import { Fragment, jsx, jsxDEV, jsxs } from '.';
+import { createElement } from '../../src';
+import { Fragment, jsx, jsxDEV, jsxs } from '../../src/jsx-dev-runtime';
 
 it.each([jsx, jsxs])('exports %s', (fun) => {
   expect(fun).toBe(createElement);

@@ -11,9 +11,10 @@
     "noEmit": true
   },
   "include": [
-    "src/**/*",
-    "jsx-runtime/**/*",
-    "jsx-dev-runtime/**/*",
+    "__tests__",
+    "src",
+    "jsx-runtime",
+    "jsx-dev-runtime",
     "eslint.config.mts",
     "rollup.config.mts",
     "vitest.config.mts"

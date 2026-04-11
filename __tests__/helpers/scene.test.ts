@@ -1,6 +1,6 @@
 import { Scene } from 'phaser';
 
-import { getScene, setScene } from './scene';
+import { getScene, setScene } from '../../src/helpers/scene';
 
 const scene = new Scene();
 

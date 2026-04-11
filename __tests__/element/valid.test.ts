@@ -1,4 +1,4 @@
-import { isValidElement } from './valid';
+import { isValidElement } from '../../src/element/valid';
 
 beforeAll(() => {
   vi.spyOn(console, 'warn').mockImplementation(() => {});
