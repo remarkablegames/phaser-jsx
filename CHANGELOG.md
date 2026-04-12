@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.9...v0.14.0) (2026-04-12)
+
+
+### Features
+
+* **hooks:** add useState hook with reconciliation ([#1009](https://github.com/remarkablegames/phaser-jsx/issues/1009)) ([7c59d00](https://github.com/remarkablegames/phaser-jsx/commit/7c59d00d86d61f5fd7dd50ae2ce271cac4ea5c4d))
+
 ## [0.13.9](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.8...v0.13.9) (2026-04-11)
 
 
