@@ -6,9 +6,18 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isValidElement(value: any) {
-  if (!value || typeof value !== 'object') {
+  if (
+    value === null ||
+    ['undefined', 'boolean', 'number', 'string'].includes(typeof value)
+  ) {
+    return false;
+  }
+
+  if (typeof value !== 'object') {
     // eslint-disable-next-line no-console
-    console.warn(`Invalid JSX element. Expected an object but got: ${value}`);
+    console.warn(
+      `Invalid JSX element. Expected an object but got: ${String(value)}`,
+    );
     return false;
   }
 

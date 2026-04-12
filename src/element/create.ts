@@ -1,4 +1,4 @@
-import type { ComponentClass, FC, JSX } from 'react';
+import type { ComponentClass, FC, JSX, ReactNode } from 'react';
 
 import type { Props } from '../types';
 
@@ -13,7 +13,7 @@ import type { Props } from '../types';
 export function createElement(
   type: FC | ComponentClass,
   props?: Props | null,
-  ...children: JSX.Element[]
+  ...children: ReactNode[]
 ): JSX.Element {
   props ??= {};
 

@@ -35,7 +35,10 @@ export function setProps(
       continue;
     }
 
-    if (key in gameObject) {
+    if (key === 'style' && value && typeof value === 'object') {
+      setStyle(gameObject, value);
+      continue;
+    } else if (key in gameObject) {
       (gameObject as unknown as Props)[key] = value;
       continue;
     }
@@ -49,5 +52,15 @@ export function setProps(
       props.originX as number | undefined,
       props.originY as number | undefined,
     );
+  }
+}
+
+function setStyle(gameObject: Phaser.GameObjects.GameObject, style: object) {
+  const text = gameObject as Phaser.GameObjects.Text;
+  text.setStyle?.(style);
+
+  const padding = (style as Phaser.Types.GameObjects.Text.TextStyle).padding;
+  if (padding !== undefined) {
+    text.setPadding?.(padding);
   }
 }

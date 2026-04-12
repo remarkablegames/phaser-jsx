@@ -346,6 +346,20 @@ describe('composite', () => {
     expect(Phaser.GameObjects.Text).toHaveBeenCalledTimes(2);
     expect(Phaser.GameObjects.Sprite).toHaveBeenCalledTimes(1);
   });
+
+  it('treats component as class when function returns non-JSX value', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    function OldStyleClass(this: unknown) {
+      return;
+    }
+    const element = {
+      type: OldStyleClass,
+      props: {},
+    } as unknown as Parameters<typeof addGameObject>[0];
+    addGameObject(element, scene);
+    expect(OldStyleClass).toBeDefined();
+    vi.restoreAllMocks();
+  });
 });
 
 describe('Light', () => {

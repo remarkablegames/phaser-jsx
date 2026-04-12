@@ -9,8 +9,17 @@ afterAll(() => {
   (console.warn as ReturnType<typeof vi.fn>).mockRestore();
 });
 
-it.each([undefined, null, false, 0])('returns false for value: %s', (value) => {
-  expect(isValidElement(value)).toBe(false);
+it.each([undefined, null, false, 0, ''])(
+  'returns false for value: %s',
+  (value) => {
+    expect(isValidElement(value)).toBe(false);
+  },
+);
+
+it('returns false and warns for non-object non-primitive value', () => {
+  expect(isValidElement(Symbol('test'))).toBe(false);
+  // eslint-disable-next-line no-console
+  expect(console.warn).toHaveBeenCalled();
 });
 
 it.each([

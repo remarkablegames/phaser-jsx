@@ -47,7 +47,7 @@ export function addGameObject(
 
   switch (true) {
     case element.type === Fragment:
-      /* istanbul ignore else */
+      /* v8 ignore else */
       if (children) {
         toArray(children).forEach((child: JSX.Element) => {
           addGameObject(child, scene, parent);
@@ -183,9 +183,20 @@ export function addGameObject(
       break;
 
     // composite component (class/function)
-    default:
+    default: {
+      // Try calling as function component first
+      const result = element.type(element.props);
+
+      // If result is a valid JSX element, it's a function component
+      if (isValidElement(result)) {
+        addGameObject(result, scene, parent);
+        return;
+      }
+
+      // Otherwise, treat as class component
       addGameObject(new element.type(element.props), scene, parent);
       return;
+    }
   }
 
   setProps(gameObject, props, scene);
