@@ -8,11 +8,7 @@
 
 📝 Use [JSX](https://facebook.github.io/jsx/) in [Phaser](https://phaser.io/).
 
-### Examples
-
-- [CodeSandbox](https://codesandbox.io/p/devbox/phaser-jsx-9ldp6n)
-- [JSFiddle](https://jsfiddle.net/remarkablemark/dLhvuo42/)
-- [Examples](https://github.com/remarkablegames/phaser-jsx/tree/master/examples)
+[Examples](https://github.com/remarkablegames/phaser-jsx/tree/master/examples) | [StackBlitz](https://stackblitz.com/edit/phaser-jsx) | [CodeSandbox](https://codesandbox.io/p/devbox/phaser-jsx-9ldp6n) | [JSFiddle](https://jsfiddle.net/remarkablemark/dLhvuo42/)
 
 ## Quick Start
 
