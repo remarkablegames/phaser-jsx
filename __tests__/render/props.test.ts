@@ -25,6 +25,7 @@ vi.mock('phaser', () => {
   });
 
   Text.prototype.setStyle = vi.fn();
+  Text.prototype.setPadding = vi.fn();
 
   return {
     __esModule: true,
@@ -168,6 +169,15 @@ describe('style', () => {
     };
     setProps(gameObject, props, scene);
     expect(gameObject.setStyle).toHaveBeenCalledWith(props.style);
+  });
+
+  it('calls setPadding when style contains padding', () => {
+    const gameObject = new Phaser.GameObjects.Text(scene, 0, 0, 'Hello', {});
+    const props = {
+      style: { fontSize: '16px', padding: { x: 12, y: 8 } },
+    };
+    setProps(gameObject, props, scene);
+    expect(gameObject.setPadding).toHaveBeenCalledWith({ x: 12, y: 8 });
   });
 
   it('does not call setStyle on non-Text game object', () => {

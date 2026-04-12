@@ -17,10 +17,9 @@ function Clicker() {
         x={16}
         y={40}
         style={{
-          fontSize: 16 + count,
           backgroundColor: '#fff',
           color: '#000',
-          padding: { x: 12, y: 8 },
+          padding: { x: 12 + count, y: 8 + count },
         }}
         input={{ cursor: 'pointer' }}
         onPointerDown={() => {
