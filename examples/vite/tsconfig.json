@@ -18,8 +18,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "types": ["vite/client"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "phaser-jsx"
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }
