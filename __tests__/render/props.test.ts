@@ -8,6 +8,7 @@ vi.mock('phaser', () => {
     this.originX = undefined as number | undefined;
     this.originY = undefined as number | undefined;
   });
+
   Sprite.prototype.setOrigin = function setOrigin(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this: any,
@@ -17,6 +18,14 @@ vi.mock('phaser', () => {
     this.originX = originX;
     this.originY = originY;
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Text = vi.fn(function Text(this: any) {
+    this.text = '';
+  });
+
+  Text.prototype.setStyle = vi.fn();
+
   return {
     __esModule: true,
     default: {
@@ -24,7 +33,7 @@ vi.mock('phaser', () => {
         Container: vi.fn(),
         GameObject: vi.fn(),
         Sprite,
-        Text: vi.fn(),
+        Text,
       },
       Scene: vi.fn(),
     },
@@ -32,7 +41,7 @@ vi.mock('phaser', () => {
       Container: vi.fn(),
       GameObject: vi.fn(),
       Sprite,
-      Text: vi.fn(),
+      Text,
     },
     Scene: vi.fn(),
   };
@@ -149,4 +158,24 @@ it.each([
   const gameObject = new Phaser.GameObjects.Sprite(scene, 0, 0, 'texture');
   expect(setProps(gameObject, props, scene)).toBe(undefined);
   expect(gameObject).toMatchObject(props);
+});
+
+describe('style', () => {
+  it('calls setStyle on Text game object', () => {
+    const gameObject = new Phaser.GameObjects.Text(scene, 0, 0, 'Hello', {});
+    const props = {
+      style: { fontSize: '16px', color: '#fff' },
+    };
+    setProps(gameObject, props, scene);
+    expect(gameObject.setStyle).toHaveBeenCalledWith(props.style);
+  });
+
+  it('does not call setStyle on non-Text game object', () => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = {
+      style: { fontSize: '16px' },
+    };
+    // Should not throw, just skip
+    expect(() => setProps(gameObject, props, scene)).not.toThrow();
+  });
 });

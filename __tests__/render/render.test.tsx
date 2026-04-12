@@ -30,9 +30,53 @@ vi.mock('phaser', () => {
   };
 });
 
-vi.mock('../../src/helpers/scene', () => ({
-  setScene: vi.fn(),
-}));
+vi.mock('../../src/helpers/scene', async () => {
+  const { addGameObject } = (await vi.importActual(
+    '../../src/render/gameobject',
+  )) as { addGameObject: (...args: unknown[]) => void };
+
+  const setScene = vi.fn();
+  const setRenderContext = vi.fn();
+  return {
+    getScene: vi.fn(),
+    setScene,
+    createRenderContext: vi.fn(
+      (element, scene, componentFn, componentProps) => ({
+        state: new Map(),
+        scene,
+        rootElement: element,
+        componentFn,
+        componentProps,
+        gameObjectTree: null,
+        getStateIndex: vi.fn(),
+        getNextStateIndex: vi.fn(),
+        resetStateIndex: vi.fn(),
+        rerender: () => {
+          if (componentFn && componentProps) {
+            const newElement = componentFn(componentProps);
+            addGameObject(newElement, scene);
+          } else {
+            addGameObject(element, scene);
+          }
+        },
+      }),
+    ),
+    setRenderContext,
+    getRenderContext: vi.fn(() => ({
+      state: new Map(),
+      scene: null,
+      rootElement: null,
+      componentFn: null,
+      componentProps: null,
+      gameObjectTree: null,
+      getStateIndex: vi.fn(),
+      getNextStateIndex: vi.fn(),
+      resetStateIndex: vi.fn(),
+      rerender: vi.fn(),
+    })),
+    resetRenderContext: vi.fn(),
+  };
+});
 
 function createMockScene() {
   return new Phaser.Scene() as Phaser.Scene & {
@@ -67,4 +111,19 @@ describe.each([createRef, useRef])('%s', (refFunction) => {
     expect(setScene).toHaveBeenCalledWith(scene);
     expect(ref).toEqual({ current: expect.any(Container) });
   });
+});
+
+it('renders function component to the scene', () => {
+  const Comp = () => createElement(Container);
+  const scene = createMockScene();
+  expect(render(<Comp />, scene)).toBe(undefined);
+  expect(scene.add.existing).toHaveBeenCalledTimes(1);
+});
+
+it('rerenders function component with updated props', () => {
+  const Comp = (props: { count: number }) =>
+    createElement(Container, { count: props.count });
+  const scene = createMockScene();
+  expect(render(<Comp count={0} />, scene)).toBe(undefined);
+  expect(scene.add.existing).toHaveBeenCalledTimes(1);
 });

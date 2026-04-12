@@ -17,7 +17,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "jsx": "react-jsx"
+    "types": ["vite/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "phaser-jsx"
   },
   "include": ["src"]
 }

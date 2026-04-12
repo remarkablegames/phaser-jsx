@@ -35,7 +35,10 @@ export function setProps(
       continue;
     }
 
-    if (key in gameObject) {
+    if (key === 'style' && value && typeof value === 'object') {
+      (gameObject as Phaser.GameObjects.Text).setStyle?.(value);
+      continue;
+    } else if (key in gameObject) {
       (gameObject as unknown as Props)[key] = value;
       continue;
     }

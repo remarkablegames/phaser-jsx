@@ -226,6 +226,34 @@ class MyScene extends Phaser.Scene {
 const scene = useScene<MyScene>();
 ```
 
+### `useState`
+
+Manage state that triggers a re-render of your game object:
+
+```ts
+import { useState } from 'phaser-jsx';
+
+function ScoreDisplay() {
+  const [score, setScore] = useState(0);
+
+  return (
+    <Container>
+      <Text text={`Score: ${score}`} />
+      <Text
+        text="Add Point"
+        onPointerDown={() => setScore(score + 1)}
+      />
+    </Container>
+  );
+}
+```
+
+The setter also accepts a function updater:
+
+```ts
+setScore((prev) => prev + 1);
+```
+
 ## Release
 
 Release is automated with [Release Please](https://github.com/googleapis/release-please).
