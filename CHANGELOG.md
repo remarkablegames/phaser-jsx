@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.0...v0.14.1) (2026-04-13)
+
+
+### Bug Fixes
+
+* **package:** add react as optional peer dependency ([#1014](https://github.com/remarkablegames/phaser-jsx/issues/1014)) ([7d3ace5](https://github.com/remarkablegames/phaser-jsx/commit/7d3ace5e65eea3ef6b9b86b39e66bb9b533fc794))
+
 ## [0.14.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.13.9...v0.14.0) (2026-04-12)
 
 
