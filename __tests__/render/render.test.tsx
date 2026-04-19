@@ -44,11 +44,9 @@ vi.mock('../../src/helpers/scene', async () => {
       (element, scene, componentFn, componentProps) => ({
         state: new Map(),
         scene,
-        rootElement: element,
         componentFn,
         componentProps,
         gameObjectTree: null,
-        getStateIndex: vi.fn(),
         getNextStateIndex: vi.fn(),
         resetStateIndex: vi.fn(),
         rerender: () => {
@@ -65,11 +63,9 @@ vi.mock('../../src/helpers/scene', async () => {
     getRenderContext: vi.fn(() => ({
       state: new Map(),
       scene: null,
-      rootElement: null,
       componentFn: null,
       componentProps: null,
       gameObjectTree: null,
-      getStateIndex: vi.fn(),
       getNextStateIndex: vi.fn(),
       resetStateIndex: vi.fn(),
       rerender: vi.fn(),

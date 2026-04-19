@@ -28,11 +28,9 @@ export interface GameObjectNode {
 export interface RenderContext {
   state: Map<number, unknown>;
   scene: Scene | null;
-  rootElement: JSX.Element | null;
   componentFn: ((...args: unknown[]) => JSX.Element) | null;
   componentProps: Record<string, unknown> | null;
   gameObjectTree: GameObjectNode | null;
-  getStateIndex: () => number;
   getNextStateIndex: () => number;
   resetStateIndex: () => void;
   rerender: () => void;
@@ -62,11 +60,9 @@ export function createRenderContext(
   return {
     state,
     scene,
-    rootElement: element,
     componentFn,
     componentProps,
     gameObjectTree,
-    getStateIndex: () => stateIndex,
     getNextStateIndex: () => stateIndex++,
     resetStateIndex: () => {
       stateIndex = 0;
