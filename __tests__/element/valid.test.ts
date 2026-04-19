@@ -27,10 +27,15 @@ it.each([
   { type: null },
   { type: false },
   { type: 0 },
-  { type: 'invalid' },
   { type: Symbol('test') },
 ])('returns false for type: %s', (value) => {
   expect(isValidElement(value)).toBe(false);
+});
+
+it('returns false and warns for invalid string type', () => {
+  expect(isValidElement({ type: 'invalid' })).toBe(false);
+  // eslint-disable-next-line no-console
+  expect(console.warn).toHaveBeenCalled();
 });
 
 it('returns true for valid element', () => {
