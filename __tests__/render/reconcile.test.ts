@@ -333,16 +333,6 @@ describe('reconcileTree', () => {
     expect(result?.children).toHaveLength(2);
   });
 
-  it('handles React Fragment symbol (<>...</> shorthand)', () => {
-    const element = {
-      type: Symbol.for('react.fragment'),
-      props: { children: [createElement(Text), createElement(Text)] },
-    } as unknown as JSX.Element;
-    const result = reconcileTree(element, null, scene);
-    expect(result).toBeDefined();
-    expect(result?.children).toHaveLength(2);
-  });
-
   it('destroys extra old children when array shrinks in reconcileArray', () => {
     const child1 = { active: true, destroy: vi.fn() };
     const child2 = { active: true, destroy: vi.fn() };
@@ -678,21 +668,6 @@ describe('reconcileTree', () => {
     const element = { type: Fragment, props: {} } as unknown as JSX.Element;
     const result = reconcileTree(element, null, scene);
     expect(result?.children).toHaveLength(0);
-  });
-
-  it('handles element with undefined type and no children', () => {
-    const element = { type: undefined, props: {} } as unknown as JSX.Element;
-    const result = reconcileTree(element, null, scene);
-    expect(result?.children).toHaveLength(0);
-  });
-
-  it('handles element with undefined type and children', () => {
-    const element = {
-      type: undefined,
-      props: { children: [createElement(Text)] },
-    } as unknown as JSX.Element;
-    const result = reconcileTree(element, null, scene);
-    expect(result?.children).toHaveLength(1);
   });
 
   it('handles Fragment with single non-array child', () => {

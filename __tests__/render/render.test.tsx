@@ -130,20 +130,6 @@ it('rerenders function component with updated props', () => {
   expect(scene.add.existing).toHaveBeenCalledTimes(1);
 });
 
-it('renders <></> shorthand with children', () => {
-  const scene = createMockScene();
-  expect(
-    render(
-      <>
-        <Container />
-        <Container />
-      </>,
-      scene,
-    ),
-  ).toBe(undefined);
-  expect(scene.add.existing).toHaveBeenCalledTimes(2);
-});
-
 it('renders <Fragment> with children', () => {
   const scene = createMockScene();
   expect(
@@ -156,10 +142,4 @@ it('renders <Fragment> with children', () => {
     ),
   ).toBe(undefined);
   expect(scene.add.existing).toHaveBeenCalledTimes(2);
-});
-
-it('renders empty <></> shorthand', () => {
-  const scene = createMockScene();
-  expect(render(<></>, scene)).toBe(undefined);
-  expect(scene.add.existing).not.toHaveBeenCalled();
 });
