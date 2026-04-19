@@ -680,6 +680,21 @@ describe('reconcileTree', () => {
     expect(result?.children).toHaveLength(0);
   });
 
+  it('handles element with undefined type and no children', () => {
+    const element = { type: undefined, props: {} } as unknown as JSX.Element;
+    const result = reconcileTree(element, null, scene);
+    expect(result?.children).toHaveLength(0);
+  });
+
+  it('handles element with undefined type and children', () => {
+    const element = {
+      type: undefined,
+      props: { children: [createElement(Text)] },
+    } as unknown as JSX.Element;
+    const result = reconcileTree(element, null, scene);
+    expect(result?.children).toHaveLength(1);
+  });
+
   it('handles Fragment with single non-array child', () => {
     const element = {
       type: Fragment,

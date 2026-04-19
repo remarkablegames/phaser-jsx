@@ -1,7 +1,13 @@
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
-import { Container, createElement, createRef, useRef } from '../../src';
+import {
+  Container,
+  createElement,
+  createRef,
+  Fragment,
+  useRef,
+} from '../../src';
 import { setScene } from '../../src/helpers';
 import { render } from '../../src/render/render';
 
@@ -122,4 +128,38 @@ it('rerenders function component with updated props', () => {
   const scene = createMockScene();
   expect(render(<Comp count={0} />, scene)).toBe(undefined);
   expect(scene.add.existing).toHaveBeenCalledTimes(1);
+});
+
+it('renders <></> shorthand with children', () => {
+  const scene = createMockScene();
+  expect(
+    render(
+      <>
+        <Container />
+        <Container />
+      </>,
+      scene,
+    ),
+  ).toBe(undefined);
+  expect(scene.add.existing).toHaveBeenCalledTimes(2);
+});
+
+it('renders <Fragment> with children', () => {
+  const scene = createMockScene();
+  expect(
+    render(
+      <Fragment>
+        <Container />
+        <Container />
+      </Fragment>,
+      scene,
+    ),
+  ).toBe(undefined);
+  expect(scene.add.existing).toHaveBeenCalledTimes(2);
+});
+
+it('renders empty <></> shorthand', () => {
+  const scene = createMockScene();
+  expect(render(<></>, scene)).toBe(undefined);
+  expect(scene.add.existing).not.toHaveBeenCalled();
 });
