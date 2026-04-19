@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.2...v0.15.0) (2026-04-19)
+
+
+### Features
+
+* **events:** add gameObject as 2nd argument to pointer events ([#1022](https://github.com/remarkablegames/phaser-jsx/issues/1022)) ([2ac1782](https://github.com/remarkablegames/phaser-jsx/commit/2ac1782ca4b5cdca09e782eb3d6990e66760241e))
+
 ## [0.14.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.1...v0.14.2) (2026-04-19)
 
 
