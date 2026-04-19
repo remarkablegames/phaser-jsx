@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.1...v0.14.2) (2026-04-19)
+
+
+### Bug Fixes
+
+* **types:** update pointer events to match Phaser's event signatures ([#1020](https://github.com/remarkablegames/phaser-jsx/issues/1020)) ([c74c3cb](https://github.com/remarkablegames/phaser-jsx/commit/c74c3cb03909e3f42173a5178c30d4da3be9151d))
+
 ## [0.14.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.0...v0.14.1) (2026-04-13)
 
 
