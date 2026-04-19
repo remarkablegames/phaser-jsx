@@ -31,7 +31,25 @@ export function setProps(
 
     if (events[key] && typeof value === 'function') {
       gameObject.setInteractive(props.input);
-      gameObject.on(key.slice(2).toLowerCase(), value, scene);
+      const eventName = key.slice(2).toLowerCase();
+      const pointerEvents = [
+        'pointerdown',
+        'pointerdownoutside',
+        'pointermove',
+        'pointerout',
+        'pointerover',
+        'pointerup',
+        'pointerupoutside',
+        'pointerwheel',
+      ];
+      if (pointerEvents.includes(eventName)) {
+        const wrappedHandler = (pointer: unknown, ...rest: unknown[]) => {
+          value(pointer, gameObject, ...rest);
+        };
+        gameObject.on(eventName, wrappedHandler, scene);
+      } else {
+        gameObject.on(eventName, value, scene);
+      }
       continue;
     }
 
