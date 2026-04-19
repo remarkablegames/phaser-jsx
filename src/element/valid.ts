@@ -6,28 +6,31 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isValidElement(value: any) {
-  if (
-    value === null ||
-    ['undefined', 'boolean', 'number', 'string'].includes(typeof value)
-  ) {
-    return false;
-  }
+  const valueType = typeof value;
 
-  if (typeof value !== 'object') {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `Invalid JSX element. Expected an object but got: ${String(value)}`,
-    );
-    return false;
-  }
+  switch (true) {
+    case value === null:
+    case value === undefined:
+    case valueType === 'boolean':
+    case valueType === 'number':
+    case valueType === 'string':
+      return false;
 
-  if (typeof value.type !== 'function') {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `Invalid JSX type. Expected a class or function but got: ${typeof value.type === 'symbol' ? 'Symbol' : value.type}`,
-    );
-    return false;
-  }
+    case valueType !== 'object':
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Invalid JSX element. Expected an object but got: ${String(value)}`,
+      );
+      return false;
 
-  return true;
+    case typeof value.type !== 'function':
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Invalid JSX type. Expected a class or function but got: ${typeof value.type === 'symbol' ? 'Symbol' : value.type}`,
+      );
+      return false;
+
+    default:
+      return true;
+  }
 }

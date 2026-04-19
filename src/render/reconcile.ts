@@ -36,7 +36,9 @@ export function reconcileTree(
       return reconcileArray(element, oldNode?.children ?? null, scene, parent);
 
     case element?.type === Fragment:
-    case element?.type === Symbol.for('react.fragment'): {
+    case element?.type === Symbol.for('react.fragment'):
+    case element?.type === undefined &&
+      element?.props?.children !== undefined: {
       const children = element.props?.children;
       return reconcileArray(
         children ? toArray(children) : [],
