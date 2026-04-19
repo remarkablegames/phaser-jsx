@@ -30,17 +30,12 @@ describe('setScene', () => {
 });
 
 describe('createRenderContext', () => {
-  it('getStateIndex returns current index', () => {
-    const context = createRenderContext();
-    expect(context.getStateIndex()).toBe(0);
-  });
-
   it('resetStateIndex resets state index to 0', () => {
     const context = createRenderContext();
     context.getNextStateIndex();
     context.getNextStateIndex();
     context.resetStateIndex();
-    expect(context.getStateIndex()).toBe(0);
+    expect(context.getNextStateIndex()).toBe(0);
   });
 
   it('rerender calls componentFn when componentFn, componentProps, and scene are set', () => {
