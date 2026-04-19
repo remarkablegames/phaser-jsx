@@ -25,7 +25,8 @@ export function reconcileTree(
   parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ): GameObjectNode | null {
   switch (true) {
-    case [undefined, null].includes(element as unknown as undefined | null):
+    case element === undefined:
+    case element === null:
       if (oldNode) {
         destroyNode(oldNode);
       }
@@ -34,22 +35,22 @@ export function reconcileTree(
     case Array.isArray(element):
       return reconcileArray(element, oldNode?.children ?? null, scene, parent);
 
-    case !isValidElement(element):
-      if (oldNode) {
-        destroyNode(oldNode);
-      }
-      return null;
-
-    case element?.type === Fragment: {
+    case element?.type === Fragment:
+    case element?.type === Symbol.for('react.fragment'): {
       const children = element.props?.children;
-      const childArray = children ? toArray(children) : [];
       return reconcileArray(
-        childArray,
+        children ? toArray(children) : [],
         oldNode?.children ?? null,
         scene,
         parent,
       );
     }
+
+    case !isValidElement(element):
+      if (oldNode) {
+        destroyNode(oldNode);
+      }
+      return null;
 
     // function component
     case typeof element?.type === 'function' && !isGameObject(element.type):
