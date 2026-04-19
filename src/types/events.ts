@@ -439,17 +439,24 @@ export interface Events {
   /**
    * The Pointer Down Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer is pressed down anywhere.
+   * This event is dispatched by an interactive Game Object if a pointer is pressed down on it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param currentlyOver - An array containing all interactive Game Objects that the pointer was over when the event was created.
+   * @param localX - The x coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param localY - The y coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
-  onPointerDown: (pointer: Pointer, currentlyOver: GameObject[]) => void;
+  onPointerDown: (
+    pointer: Pointer,
+    localX: number,
+    localY: number,
+    event: EventData,
+  ) => void;
 
   /**
    * The Pointer Down Outside Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer is pressed down anywhere outside of the game canvas.
+   * This event is dispatched by an interactive Game Object if a pointer is pressed down outside of it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
    */
@@ -458,47 +465,68 @@ export interface Events {
   /**
    * The Pointer Move Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer is moved anywhere.
+   * This event is dispatched by an interactive Game Object if a pointer is moved while over it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param currentlyOver - An array containing all interactive Game Objects that the pointer was over when the event was created.
+   * @param localX - The x coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param localY - The y coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
-  onPointerMove: (pointer: Pointer, currentlyOver: GameObject[]) => void;
+  onPointerMove: (
+    pointer: Pointer,
+    localX: number,
+    localY: number,
+    event: EventData,
+  ) => void;
 
   /**
    * The Pointer Out Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer moves out of any interactive Game Object.
+   * This event is dispatched by an interactive Game Object if a pointer moves out of it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param justOut - An array containing all interactive Game Objects that the pointer moved out of when the event was created.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
-  onPointerOut: (pointer: Pointer, justOut: GameObject[]) => void;
+  onPointerOut: (pointer: Pointer, event: EventData) => void;
 
   /**
    * The Pointer Over Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer moves over any interactive Game Object.
+   * This event is dispatched by an interactive Game Object if a pointer moves over it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param justOver - An array containing all interactive Game Objects that the pointer moved over when the event was created.
+   * @param localX - The x coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param localY - The y coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
-  onPointerOver: (pointer: Pointer, justOver: GameObject[]) => void;
+  onPointerOver: (
+    pointer: Pointer,
+    localX: number,
+    localY: number,
+    event: EventData,
+  ) => void;
 
   /**
    * The Pointer Up Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer is released anywhere.
+   * This event is dispatched by an interactive Game Object if a pointer is released while over it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param currentlyOver - An array containing all interactive Game Objects that the pointer was over when the event was created.
+   * @param localX - The x coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param localY - The y coordinate that the Pointer interacted with this object on, relative to the Game Object's top-left position.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
-  onPointerUp: (pointer: Pointer, currentlyOver: GameObject[]) => void;
+  onPointerUp: (
+    pointer: Pointer,
+    localX: number,
+    localY: number,
+    event: EventData,
+  ) => void;
 
   /**
    * The Pointer Up Outside Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer is released anywhere outside of the game canvas.
+   * This event is dispatched by an interactive Game Object if a pointer is released outside of it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
    */
@@ -507,20 +535,20 @@ export interface Events {
   /**
    * The Pointer Wheel Input Event.
    *
-   * This event is dispatched by the Input Plugin belonging to a Scene if a pointer has its wheel updated.
+   * This event is dispatched by an interactive Game Object if a pointer has its wheel updated while over it.
    *
    * @param pointer - The Pointer responsible for triggering this event.
-   * @param currentlyOver - An array containing all interactive Game Objects that the pointer was over when the event was created.
    * @param deltaX - The horizontal scroll amount that occurred due to the user moving a mouse wheel or similar input device.
    * @param deltaY - The vertical scroll amount that occurred due to the user moving a mouse wheel or similar input device. This value will typically be less than 0 if the user scrolls up and greater than zero if scrolling down.
    * @param deltaZ - The z-axis scroll amount that occurred due to the user moving a mouse wheel or similar input device.
+   * @param event - The Phaser input event. You can call `stopPropagation()` to halt it from going any further in the event flow.
    */
   onPointerWheel: (
     pointer: Pointer,
-    currentlyOver: GameObject[],
     deltaX: number,
     deltaY: number,
     deltaZ: number,
+    event: EventData,
   ) => void;
 
   /**
