@@ -4,6 +4,7 @@ import { render, Text, useState } from '../../src';
 
 function Clicker() {
   const [count, setCount] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <>
@@ -21,11 +22,17 @@ function Clicker() {
         x={16}
         y={40}
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: hovered ? '#87ceeb' : '#fff',
           color: '#000',
           padding: { x: 12 + count, y: 8 + count },
         }}
         input={{ cursor: 'pointer' }}
+        onPointerOver={() => {
+          setHovered(true);
+        }}
+        onPointerOut={() => {
+          setHovered(false);
+        }}
         onPointerDown={() => {
           setCount(count + 1);
         }}
