@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.15.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.0...v0.15.1) (2026-04-19)
+
+
+### Bug Fixes
+
+* **element:** fix TypeError in isValidElement ([7366b8a](https://github.com/remarkablegames/phaser-jsx/commit/7366b8aeae9bb8c9a9b0a2a2dfd618b567d32a85))
+* **render:** support React fragment symbols ([fa49791](https://github.com/remarkablegames/phaser-jsx/commit/fa49791816e017edb10b5c4295ee9a38a1a85714))
+
 ## [0.15.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.14.2...v0.15.0) (2026-04-19)
 
 
