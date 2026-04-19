@@ -1,17 +1,21 @@
 import { Game } from 'phaser';
 
-import { Container, render, Text, useState } from '../../src';
+import { render, Text, useState } from '../../src';
 
 function Clicker() {
   const [count, setCount] = useState(0);
 
   return (
-    <Container>
+    <>
       {undefined}
       {null}
       {false}
       {0}
-      {count > 0 ? <Text text={`Clicks: ${count}`} x={16} y={16} /> : <Text text="You clicked 0 times" x={16} y={16} />}
+      {count > 0 ? (
+        <Text text={`Clicks: ${count}`} x={16} y={16} />
+      ) : (
+        <Text text="You clicked 0 times" x={16} y={16} />
+      )}
       <Text
         text="Click"
         x={16}
@@ -26,7 +30,7 @@ function Clicker() {
           setCount(count + 1);
         }}
       />
-    </Container>
+    </>
   );
 }
 
