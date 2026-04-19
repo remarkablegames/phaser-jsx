@@ -31,9 +31,9 @@ vi.mock('phaser', () => {
 });
 
 vi.mock('../../src/helpers/scene', async () => {
-  const { addGameObject } = (await vi.importActual(
-    '../../src/render/gameobject',
-  )) as { addGameObject: (...args: unknown[]) => void };
+  const { reconcileTree } = (await vi.importActual(
+    '../../src/render/reconcile',
+  )) as { reconcileTree: (...args: unknown[]) => unknown };
 
   const setScene = vi.fn();
   const setRenderContext = vi.fn();
@@ -54,9 +54,9 @@ vi.mock('../../src/helpers/scene', async () => {
         rerender: () => {
           if (componentFn && componentProps) {
             const newElement = componentFn(componentProps);
-            addGameObject(newElement, scene);
+            reconcileTree(newElement, null, scene);
           } else {
-            addGameObject(element, scene);
+            reconcileTree(element, null, scene);
           }
         },
       }),
