@@ -11,8 +11,8 @@
     "phaser": "^3.90.0"
   },
   "devDependencies": {
-    "typescript": "^6.0.2",
-    "vite": "^8.0.5"
+    "typescript": "^6.0.3",
+    "vite": "^8.0.8"
   },
   "license": "MIT"
 }
