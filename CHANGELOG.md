@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.3...v0.15.4) (2026-04-19)
+
+
+### Bug Fixes
+
+* **render:** remove support for implicit Fragment ([1f7902c](https://github.com/remarkablegames/phaser-jsx/commit/1f7902c72b61280507f5e8a81b447ec5fbbd3ce2))
+
 ## [0.15.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.2...v0.15.3) (2026-04-19)
 
 
