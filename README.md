@@ -156,6 +156,20 @@ If you need nesting and relative positioning, use `Container`:
 </Container>
 ```
 
+Use `Fragment` to render children without a parent:
+
+```tsx
+import { Fragment } from 'phaser-jsx';
+
+<Fragment>
+  <Text text="Item 1" />
+  <Text text="Item 2" />
+</Fragment>;
+```
+
+> [!NOTE]
+> The shorthand syntax `<></>` doesn't work here.
+
 ## Hooks
 
 ### `useRef`
