@@ -42,11 +42,7 @@ export function reconcileTree(
 
     case element?.type === Fragment: {
       const children = element.props?.children;
-      const childArray = children
-        ? Array.isArray(children)
-          ? children
-          : [children]
-        : [];
+      const childArray = children ? toArray(children) : [];
       return reconcileArray(
         childArray,
         oldNode?.children ?? null,
@@ -141,11 +137,7 @@ function reconcileGameObject(
     element.type === Phaser.GameObjects.Container ||
     element.type === Phaser.GameObjects.Layer
   ) {
-    const childArray = children
-      ? Array.isArray(children)
-        ? children
-        : [children]
-      : [];
+    const childArray = children ? toArray(children) : [];
     const oldChildren = oldNode?.children ?? null;
 
     const oldLength = oldChildren?.length ?? 0;
@@ -312,4 +304,8 @@ const gameObjects = Object.keys(GameObjects).map(
 
 function isGameObject(type: unknown): boolean {
   return gameObjects.some((gameObject) => gameObject === type);
+}
+
+function toArray<Type>(item: Type | Type[]) {
+  return Array.isArray(item) ? item : [item];
 }
