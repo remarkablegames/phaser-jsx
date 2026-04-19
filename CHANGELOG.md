@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.1...v0.15.2) (2026-04-19)
+
+
+### Bug Fixes
+
+* **render:** treat undefined `element.type` as `Fragment` ([3a8ece3](https://github.com/remarkablegames/phaser-jsx/commit/3a8ece3b24124e183ae5d86fc657a48386e6a9ea))
+
 ## [0.15.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.0...v0.15.1) (2026-04-19)
 
 
