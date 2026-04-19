@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import type { Mock } from 'vitest';
 
 import { setProps, skipPropKeys } from '../../src/render/props';
 
@@ -106,8 +107,23 @@ describe('input', () => {
     expect(gameObject.on).toHaveBeenCalledTimes(1);
     expect(gameObject.on).toHaveBeenCalledWith(
       'pointerdown',
-      props.onPointerDown,
+      expect.any(Function),
       scene,
+    );
+
+    // Verify wrapped handler passes gameObject as 2nd argument
+    const wrappedHandler = (gameObject.on as Mock).mock.calls[0][1];
+    const pointer = {} as Phaser.Input.Pointer;
+    const localX = 10;
+    const localY = 20;
+    const event = { stopPropagation: vi.fn() };
+    wrappedHandler(pointer, localX, localY, event);
+    expect(props.onPointerDown).toHaveBeenCalledWith(
+      pointer,
+      gameObject,
+      localX,
+      localY,
+      event,
     );
   });
 
@@ -127,9 +143,40 @@ describe('input', () => {
     expect(gameObject.on).toHaveBeenCalledTimes(1);
     expect(gameObject.on).toHaveBeenCalledWith(
       'pointerover',
-      props.onPointerOver,
+      expect.any(Function),
       scene,
     );
+
+    // Verify wrapped handler passes gameObject as 2nd argument
+    const wrappedHandler = (gameObject.on as Mock).mock.calls[0][1];
+    const pointer = {} as Phaser.Input.Pointer;
+    const localX = 10;
+    const localY = 20;
+    const event = { stopPropagation: vi.fn() };
+    wrappedHandler(pointer, localX, localY, event);
+    expect(props.onPointerOver).toHaveBeenCalledWith(
+      pointer,
+      gameObject,
+      localX,
+      localY,
+      event,
+    );
+  });
+
+  it('sets non-pointer event without wrapping handler', () => {
+    const gameObject = new Phaser.GameObjects.Container(scene);
+    const props = {
+      onUpdate: vi.fn(),
+    };
+
+    gameObject.setInteractive = vi.fn();
+    gameObject.on = vi.fn();
+    expect(setProps(gameObject, props, scene)).toBe(undefined);
+
+    expect(gameObject.setInteractive).toHaveBeenCalledTimes(1);
+    expect(gameObject.setInteractive).toHaveBeenCalledWith(undefined);
+    expect(gameObject.on).toHaveBeenCalledTimes(1);
+    expect(gameObject.on).toHaveBeenCalledWith('update', props.onUpdate, scene);
   });
 });
 
