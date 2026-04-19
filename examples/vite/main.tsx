@@ -1,13 +1,13 @@
 import { Game } from 'phaser';
 
-import { render, Text, useState } from '../../src';
+import { render, Fragment, Text, useState } from '../../src';
 
 function Clicker() {
   const [count, setCount] = useState(0);
   const [hovered, setHovered] = useState(false);
 
   return (
-    <>
+    <Fragment>
       {undefined}
       {null}
       {false}
@@ -37,7 +37,7 @@ function Clicker() {
           setCount(count + 1);
         }}
       />
-    </>
+    </Fragment>
   );
 }
 
