@@ -24,7 +24,7 @@ export function isValidElement(value: any) {
   if (typeof value.type !== 'function') {
     // eslint-disable-next-line no-console
     console.warn(
-      `Invalid JSX type. Expected a class or function but got: ${value.type}`,
+      `Invalid JSX type. Expected a class or function but got: ${typeof value.type === 'symbol' ? 'Symbol' : value.type}`,
     );
     return false;
   }

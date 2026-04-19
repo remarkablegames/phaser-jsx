@@ -28,6 +28,7 @@ it.each([
   { type: false },
   { type: 0 },
   { type: 'invalid' },
+  { type: Symbol('test') },
 ])('returns false for type: %s', (value) => {
   expect(isValidElement(value)).toBe(false);
 });
