@@ -63,23 +63,43 @@ export function createRenderContext(
   let stateIndex = 0;
   let effectIndex = 0;
   let gameObjectTree: GameObjectNode | null = null;
+  let isRendering = false;
+  let needsEffectFlush = false;
 
   function flushEffects(): void {
-    for (const { key, callback, deps } of pendingEffects) {
-      const prev = effects.get(key);
-      const shouldRun =
-        !prev || deps === undefined || !areDepsEqual(prev.deps, deps);
+    if (isRendering) {
+      needsEffectFlush = true;
+      return;
+    }
 
-      if (shouldRun) {
-        if (typeof prev?.cleanup === 'function') {
-          prev.cleanup();
+    isRendering = true;
+    needsEffectFlush = false;
+
+    try {
+      for (const { key, callback, deps } of pendingEffects) {
+        const prev = effects.get(key);
+        const shouldRun =
+          !prev || deps === undefined || !areDepsEqual(prev.deps, deps);
+
+        if (shouldRun) {
+          if (typeof prev?.cleanup === 'function') {
+            prev.cleanup();
+          }
+          const cleanup = callback();
+          effects.set(key, { deps, cleanup });
         }
-        const cleanup = callback();
-        effects.set(key, { deps, cleanup });
+      }
+      pendingEffects.length = 0;
+      effectIndex = 0;
+    } finally {
+      isRendering = false;
+
+      // If effects were queued during effect execution, flush them
+      if (needsEffectFlush && pendingEffects.length > 0) {
+        // Use setTimeout to break the synchronous cycle
+        setTimeout(flushEffects);
       }
     }
-    pendingEffects.length = 0;
-    effectIndex = 0;
   }
 
   return {
@@ -110,7 +130,8 @@ export function createRenderContext(
         gameObjectTree = reconcileTree(element, gameObjectTree, scene);
       }
 
-      flushEffects();
+      // Defer effect flushing to prevent infinite loops
+      setTimeout(flushEffects);
     },
   };
 }
