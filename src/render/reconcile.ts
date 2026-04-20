@@ -5,7 +5,7 @@ import { Fragment } from '../components';
 import * as GameObjects from '../components/GameObjects';
 import { events } from '../constants';
 import { isValidElement } from '../element';
-import type { GameObjectNode } from '../helpers';
+import type { GameObjectNode } from '../types';
 import { setProps } from './props';
 import { attachRef } from './ref';
 

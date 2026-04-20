@@ -2,7 +2,7 @@ import type { Scene } from 'phaser';
 import type { JSX } from 'react';
 
 import { reconcileTree } from '../render/reconcile';
-import type { GameObjectNode } from './scene';
+import type { GameObjectNode } from '../types';
 
 /**
  * Stored data for a single effect slot.
