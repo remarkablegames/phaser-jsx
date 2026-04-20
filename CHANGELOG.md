@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.0...v0.16.1) (2026-04-20)
+
+
+### Bug Fixes
+
+* **useEffect:** prevent infinite loop when state is set ([3b4166e](https://github.com/remarkablegames/phaser-jsx/commit/3b4166ea1a1a68b9fe9f24c2319bd79391cb3184))
+
 ## [0.16.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.4...v0.16.0) (2026-04-20)
 
 
