@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.4...v0.16.0) (2026-04-20)
+
+
+### Features
+
+* add useEffect hook ([2fff9b5](https://github.com/remarkablegames/phaser-jsx/commit/2fff9b598761141b1eb9099852244fbdd9cc25ab))
+
 ## [0.15.4](https://github.com/remarkablegames/phaser-jsx/compare/v0.15.3...v0.15.4) (2026-04-19)
 
 
