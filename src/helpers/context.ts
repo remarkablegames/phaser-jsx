@@ -7,7 +7,7 @@ import type { GameObjectNode } from '../types';
 /**
  * Stored data for a single effect slot.
  */
-export interface EffectRecord {
+interface EffectRecord {
   deps: unknown[] | undefined;
   cleanup: (() => void) | void;
 }
@@ -15,7 +15,7 @@ export interface EffectRecord {
 /**
  * An effect queued during render, to be flushed after reconciliation.
  */
-export interface PendingEffect {
+interface PendingEffect {
   key: number;
   callback: () => (() => void) | void;
   deps: unknown[] | undefined;
