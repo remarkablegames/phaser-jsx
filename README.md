@@ -264,6 +264,47 @@ The setter also accepts a function updater:
 setScore((prev) => prev + 1);
 ```
 
+### `useEffect`
+
+Run a side effect after render:
+
+```ts
+import { useEffect } from 'phaser-jsx';
+
+function MyComponent() {
+  useEffect(() => {
+    console.log('mounted');
+  }, []);
+}
+```
+
+The second argument is a dependency array. The effect re-runs whenever a dependency changes:
+
+```ts
+const [score, setScore] = useState(0);
+
+useEffect(() => {
+  console.log('score:', score);
+}, [score]);
+```
+
+Omit the dependency array to run the effect after every render:
+
+```ts
+useEffect(() => {
+  console.log('rendered');
+});
+```
+
+Return a cleanup function to run before the next effect or on unmount:
+
+```ts
+useEffect(() => {
+  const listener = scene.input.on('pointerdown', handleClick);
+  return () => listener.destroy();
+}, []);
+```
+
 ## Release
 
 Release is automated with [Release Please](https://github.com/googleapis/release-please).

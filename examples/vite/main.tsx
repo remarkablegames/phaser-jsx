@@ -1,10 +1,14 @@
 import { Game } from 'phaser';
 
-import { render, Fragment, Text, useState } from '../../src';
+import { Fragment, render, Text, useEffect, useState } from '../../src';
 
 function Clicker() {
   const [count, setCount] = useState(0);
   const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    console.log('count:', count);
+  }, [count]);
 
   return (
     <Fragment>
