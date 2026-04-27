@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 
 import {
   createRenderContext,
+  getRenderContext,
   setRenderContext,
 } from '../../src/helpers/context';
 import { reconcileTree } from '../../src/render/reconcile';
@@ -98,5 +99,25 @@ describe('createRenderContext', () => {
     const context = createRenderContext(element, scene);
     context.rerender();
     expect(reconcileTree).toHaveBeenCalledWith(element, null, scene);
+  });
+
+  it('rerender restores global context to its own context so multiple renders do not corrupt each other', () => {
+    const componentFn1 = vi.fn((): null => null) as unknown as Parameters<
+      typeof createRenderContext
+    >[2];
+    const componentFn2 = vi.fn((): null => null) as unknown as Parameters<
+      typeof createRenderContext
+    >[2];
+
+    const ctx1 = createRenderContext(null, scene, componentFn1, {});
+    const ctx2 = createRenderContext(null, scene, componentFn2, {});
+
+    setRenderContext(ctx2);
+
+    ctx1.rerender();
+    expect(getRenderContext()).toBe(ctx1);
+
+    ctx2.rerender();
+    expect(getRenderContext()).toBe(ctx2);
   });
 });

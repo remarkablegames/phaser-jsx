@@ -102,7 +102,7 @@ export function createRenderContext(
     }
   }
 
-  return {
+  const context: RenderContext = {
     state,
     effects,
     pendingEffects,
@@ -119,7 +119,9 @@ export function createRenderContext(
       effectIndex = 0;
     },
     flushEffects,
+
     rerender: () => {
+      setRenderContext(context);
       stateIndex = 0;
       effectIndex = 0;
 
@@ -134,6 +136,8 @@ export function createRenderContext(
       setTimeout(flushEffects);
     },
   };
+
+  return context;
 }
 
 export function resetRenderContext(): void {
