@@ -1,6 +1,13 @@
 import { Game } from 'phaser';
 
-import { Fragment, render, Text, useEffect, useState } from '../../src';
+import {
+  Fragment,
+  render,
+  Text,
+  useEffect,
+  useScene,
+  useState,
+} from '../../src';
 
 function Clicker() {
   const [count, setCount] = useState(0);
@@ -45,10 +52,36 @@ function Clicker() {
   );
 }
 
+function Time() {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+  const scene = useScene();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Text
+      text={time}
+      x={scene.scale.width - 16}
+      y={16}
+      style={{ color: '#fff' }}
+      originX={1}
+      originY={0}
+    />
+  );
+}
+
 new Game({
+  width: 800,
+  height: 600,
   scene: {
     create() {
       render(<Clicker />, this);
+      render(<Time />, this);
     },
   },
 });
