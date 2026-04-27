@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.1...v0.16.2) (2026-04-27)
+
+
+### Bug Fixes
+
+* **context:** restore render context before re-render to fix multiple renders bug ([b1eb865](https://github.com/remarkablegames/phaser-jsx/commit/b1eb865f9973c75fded466d88e6aa80f542dbba8))
+
 ## [0.16.1](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.0...v0.16.1) (2026-04-20)
 
 
