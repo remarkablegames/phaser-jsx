@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.2...v0.16.3) (2026-05-31)
+
+
+### Bug Fixes
+
+* **render:** pass width, height, fillColor, fillAlpha to Rectangle; use setFillStyle in setProps ([d2e563e](https://github.com/remarkablegames/phaser-jsx/commit/d2e563ea4ee65387cb686f756454f487f58fea58))
+
 ## [0.16.2](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.1...v0.16.2) (2026-04-27)
 
 
