@@ -2,6 +2,7 @@ import { Game } from 'phaser';
 
 import {
   Fragment,
+  Rectangle,
   render,
   Text,
   useEffect,
@@ -23,15 +24,18 @@ function Clicker() {
       {null}
       {false}
       {0}
+
       {count > 0 ? (
         <Text text={`Clicks: ${count}`} x={16} y={16} />
       ) : (
         <Text text="You clicked 0 times" x={16} y={16} />
       )}
+
       <Text
         text="Click"
         x={16}
         y={40}
+        depth={1}
         style={{
           backgroundColor: hovered ? '#87ceeb' : '#fff',
           color: '#000',
@@ -47,6 +51,16 @@ function Clicker() {
         onPointerDown={() => {
           setCount(count + 1);
         }}
+      />
+
+      <Rectangle
+        x={16}
+        y={80}
+        width={120}
+        height={60}
+        fillColor={0x6495ed}
+        originX={0}
+        originY={0}
       />
     </Fragment>
   );

@@ -56,6 +56,20 @@ export function setProps(
     if (key === 'style' && value && typeof value === 'object') {
       setStyle(gameObject, value);
       continue;
+    } else if (
+      (key === 'fillColor' || key === 'fillAlpha') &&
+      typeof (gameObject as Phaser.GameObjects.Rectangle).setFillStyle ===
+        'function'
+    ) {
+      const rect = gameObject as Phaser.GameObjects.Rectangle;
+      const fillColor =
+        key === 'fillColor' ? (value as number) : (props.fillColor as number);
+      const fillAlpha =
+        key === 'fillAlpha'
+          ? (value as number)
+          : (props.fillAlpha as number | undefined);
+      rect.setFillStyle(fillColor, fillAlpha);
+      continue;
     } else if (key in gameObject) {
       (gameObject as unknown as Props)[key] = value;
       continue;

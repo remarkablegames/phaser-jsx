@@ -232,6 +232,16 @@ function createGameObject(
       return new element.type(scene, props?.x, props?.y, color);
 
     case element.type === Phaser.GameObjects.Rectangle:
+      return new element.type(
+        scene,
+        props?.x,
+        props?.y,
+        props?.width,
+        props?.height,
+        props?.fillColor,
+        props?.fillAlpha,
+      );
+
     case element.type === Phaser.GameObjects.Zone:
       return new element.type(scene, props?.x, props?.y);
 
