@@ -28,12 +28,29 @@ vi.mock('phaser', () => {
   Text.prototype.setStyle = vi.fn();
   Text.prototype.setPadding = vi.fn();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Rectangle = vi.fn(function Rectangle(this: any) {
+    this.fillColor = undefined as number | undefined;
+    this.fillAlpha = undefined as number | undefined;
+  });
+
+  Rectangle.prototype.setFillStyle = vi.fn(function (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this: any,
+    fillColor?: number,
+    fillAlpha?: number,
+  ) {
+    this.fillColor = fillColor;
+    this.fillAlpha = fillAlpha;
+  });
+
   return {
     __esModule: true,
     default: {
       GameObjects: {
         Container: vi.fn(),
         GameObject: vi.fn(),
+        Rectangle,
         Sprite,
         Text,
       },
@@ -42,6 +59,7 @@ vi.mock('phaser', () => {
     GameObjects: {
       Container: vi.fn(),
       GameObject: vi.fn(),
+      Rectangle,
       Sprite,
       Text,
     },
@@ -234,5 +252,28 @@ describe('style', () => {
     };
     // Should not throw, just skip
     expect(() => setProps(gameObject, props, scene)).not.toThrow();
+  });
+});
+
+describe('fillColor', () => {
+  it('calls setFillStyle with fillColor', () => {
+    const gameObject = new Phaser.GameObjects.Rectangle(scene, 0, 0, 100, 100);
+    const props = { fillColor: 0x6495ed };
+    setProps(gameObject, props, scene);
+    expect(gameObject.setFillStyle).toHaveBeenCalledWith(0x6495ed, undefined);
+  });
+
+  it('calls setFillStyle with fillColor and fillAlpha', () => {
+    const gameObject = new Phaser.GameObjects.Rectangle(scene, 0, 0, 100, 100);
+    const props = { fillColor: 0xff0000, fillAlpha: 0.5 };
+    setProps(gameObject, props, scene);
+    expect(gameObject.setFillStyle).toHaveBeenCalledWith(0xff0000, 0.5);
+  });
+
+  it('calls setFillStyle with fillAlpha only', () => {
+    const gameObject = new Phaser.GameObjects.Rectangle(scene, 0, 0, 100, 100);
+    const props = { fillAlpha: 0.8 };
+    setProps(gameObject, props, scene);
+    expect(gameObject.setFillStyle).toHaveBeenCalledWith(undefined, 0.8);
   });
 });
