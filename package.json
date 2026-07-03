@@ -74,7 +74,7 @@
   },
   "peerDependencies": {
     "@types/react": "17 || 18 || 19",
-    "phaser": "3",
+    "phaser": "4",
     "react": "17 || 18 || 19"
   },
   "peerDependenciesMeta": {
