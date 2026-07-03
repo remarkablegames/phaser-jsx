@@ -64,7 +64,7 @@ vi.mock('phaser', () => {
     Light: makeGameObject('Light'),
     NineSlice: makeGameObject('NineSlice'),
     PathFollower: makeGameObject('PathFollower'),
-    Plane: makeGameObject('Plane'),
+    Mesh2D: makeGameObject('Mesh2D'),
     PointLight: makeGameObject('PointLight'),
     Rectangle: makeGameObject('Rectangle'),
     Rope: makeGameObject('Rope'),
@@ -584,10 +584,10 @@ describe('reconcileTree', () => {
     expect(reconcileTree(element, null, scene)).toBeDefined();
   });
 
-  it('creates Plane via createGameObject', () => {
+  it('creates Mesh2D via createGameObject', () => {
     const element = {
-      type: Phaser.GameObjects.Plane,
-      props: { texture: 'tex' },
+      type: Phaser.GameObjects.Mesh2D,
+      props: { texture: 'tex', vertices: [], indices: [] },
     } as unknown as JSX.Element;
     expect(reconcileTree(element, null, scene)).toBeDefined();
   });
