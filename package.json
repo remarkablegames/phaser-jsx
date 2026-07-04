@@ -59,7 +59,7 @@
     "husky": "9.1.7",
     "jsdom": "29.1.1",
     "lint-staged": "17.0.8",
-    "phaser": "3.90.0",
+    "phaser": "4.2.0",
     "phaser3spectorjs": "0.0.8",
     "prettier": "3.9.4",
     "react": "19.2.7",
@@ -74,7 +74,7 @@
   },
   "peerDependencies": {
     "@types/react": "17 || 18 || 19",
-    "phaser": "3",
+    "phaser": "4",
     "react": "17 || 18 || 19"
   },
   "peerDependenciesMeta": {

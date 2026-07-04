@@ -216,16 +216,15 @@ function createGameObject(
         frame,
       );
 
-    case element.type === Phaser.GameObjects.Plane:
+    case element.type === Phaser.GameObjects.Mesh2D:
       return new element.type(
         scene,
         props?.x,
         props?.y,
         texture,
-        frame,
-        props?.width,
-        props?.height,
-        props?.isTiled,
+        props?.vertices,
+        props?.indices,
+        props?.flipV,
       );
 
     case element.type === Phaser.GameObjects.PointLight:

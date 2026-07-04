@@ -389,23 +389,22 @@ export const LightsPlugin = createComponent(GameObjects.LightsPlugin);
 export const Line = createComponent(GameObjects.Line);
 
 /**
- * A Mesh Game Object.
+ * A Mesh2D game object renders a 2D mesh made from textured triangles.
  *
- * The Mesh Game Object allows you to render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.
+ * Connects bodies in the composite with constraints in a grid pattern, with optional cross braces.
  *
- * Support for generating mesh data from grids, model data or Wavefront OBJ Files is included.
+ * It only works in WebGL render mode.
  *
- * Although you can use this to render 3D objects, its primary use is for displaying more complex Sprites, or Sprites where you need fine-grained control over the vertice positions in order to achieve special effects in your games. Note that rendering still takes place using Phasers orthographic camera. As a result, all depth and face tests are done in orthographic space.
- *
- * The rendering process will iterate through the faces of this Mesh and render out each face that is considered as being in view of the camera. No depth buffer is used, and because of this, you should be careful not to use model data with too many vertices, or overlapping geometry, or you'll probably encounter z-depth fighting. The Mesh was designed to allow for more advanced 2D layouts, rather than displaying 3D objects, even though it can do this to a degree.
- *
- * In short, if you want to remake Crysis, use a 3D engine, not a Mesh. However, if you want to easily add some small fun 3D elements into your game, or create some special effects involving vertex warping, this is the right object for you. Mesh data becomes part of the WebGL batch, just like standard Sprites, so doesn't introduce any additional shader overhead. Because the Mesh just generates vertices into the WebGL batch, like any other Sprite, you can use all of the common Game Object components on a Mesh too, such as a custom pipeline, mask, blend mode or texture.
- *
- * Note that the Mesh object is WebGL only and does not have a Canvas counterpart.
- *
- * The Mesh origin is always 0.5 x 0.5 and cannot be changed.
+ * Mesh2D does not generate vertices from a texture frame. Each vertex provides its own position and texture coordinate.
  */
-export const Mesh = createComponent(GameObjects.Mesh);
+export const Mesh2D = createComponent(GameObjects.Mesh2D) as FC<
+  Props<GameObjects.Mesh2D> & {
+    texture: string | Phaser.Textures.Texture;
+    vertices: number[];
+    indices: number[];
+    flipV?: boolean;
+  }
+>;
 
 /**
  * A Nine Slice Game Object allows you to display a texture-based object that
@@ -517,30 +516,6 @@ export const PathFollower = createComponent(GameObjects.PathFollower) as FC<
 >;
 
 /**
- * A Plane Game Object.
- *
- * The Plane Game Object is a helper class that takes the Mesh Game Object and extends it, allowing for fast and easy creation of Planes. A Plane is a one-sided grid of cells, where you specify the number of cells in each dimension. The Plane can have a texture that is either repeated (tiled) across each cell, or applied to the full Plane.
- *
- * The Plane can then be manipulated in 3D space, with rotation across all 3 axis.
- *
- * This allows you to create effects not possible with regular Sprites, such as perspective distortion. You can also adjust the vertices on a per-vertex basis. Plane data becomes part of the WebGL batch, just like standard Sprites, so doesn't introduce any additional shader overhead. Because the Plane just generates vertices into the WebGL batch, like any other Sprite, you can use all of the common Game Object components on a Plane too, such as a custom pipeline, mask, blend mode or texture.
- *
- * You can use the uvScroll and uvScale methods to adjust the placement and scaling of the texture if this Plane is using a single texture, and not a frame from a texture atlas or sprite sheet.
- *
- * The Plane Game Object also has the Animation component, allowing you to play animations across the Plane just as you would with a Sprite.
- *
- * Note that the Plane object is WebGL only and does not have a Canvas counterpart.
- *
- * The Plane origin is always 0.5 x 0.5 and cannot be changed.
- */
-export const Plane = createComponent(GameObjects.Plane) as FC<
-  Props<GameObjects.Plane> & {
-    texture: string | Phaser.Textures.Texture;
-    frame?: string | number;
-  }
->;
-
-/**
  * The Point Light Game Object provides a way to add a point light effect into your game, without the expensive shader processing requirements of the traditional Light Game Object.
  *
  * The difference is that the Point Light renders using a custom shader, designed to give the impression of a point light source, of variable radius, intensity and color, in your game. However, unlike the Light Game Object, it does not impact any other Game Objects, or use their normal maps for calcuations. This makes them extremely fast to render compared to Lights and perfect for special effects, such as flickering torches or muzzle flashes.
@@ -616,11 +591,259 @@ export const Rope = createComponent(GameObjects.Rope) as FC<
 /**
  * A Shader Game Object.
  *
- * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. Shaders can be masked with either Bitmap or Geometry masks and can also be used as a Bitmap Mask for a Camera or other Game Object. They can also be made interactive and used for input events.
+ * This Game Object allows you to easily add a quad with its own shader into the display list, and manipulate it as you would any other Game Object, including scaling, rotating, positioning and adding to Containers. The Shader can be made interactive and used for input events. It can also be used in filters to create visually stunning effects.
+ *
+ * It works by creating a custom RenderNode which runs a custom shader program to draw a quad. The shader program can be loaded from the Shader Cache, or provided in-line as strings.
+ *
+ * Please see the Phaser Examples GitHub repo for several examples of loading and creating shaders dynamically.
+ *
+ * Due to the way in which they work, you cannot directly change the alpha of a Shader. It should be handled via uniforms in the shader code itself.
+ *
+ * By default, a Shader has a uniform called `uProjectionMatrix` which is set automatically. You can control additional uniforms using the `setupUniforms` method in the Shader configuration object, which runs every time the shader renders.
+ *
+ * Shaders are stand-alone renders: they finish any current render batch and run once by themselves. As this costs a draw call, you should use them sparingly. If you need to have a fully batched custom shader, then please look at using a custom RenderNode instead. However, for background or special masking effects, they are extremely effective.
+ *
+ * Note: be careful when using texture coordinates in shader code. The built-in variable `gl_FragCoord` and the default uniform `outTexCoord` both use WebGL coordinates, which are `0,0` in the bottom-left. Additionally, `gl_FragCoord` says it's in "window relative" coordinates. But this is actually relative to the framebuffer size.
  */
 export const Shader = createComponent(GameObjects.Shader) as FC<
   Props<GameObjects.Shader> & {
-    shader: string | GameObjects.Shader['shader'];
+    shader: string;
+  }
+>;
+
+/**
+ * A Gradient Game Object.
+ *
+ * This Game Object is a quad which displays a gradient. You can manipulate this object like any other, make it interactive, and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a Gradient is a `Phaser.GameObjects.Shader` using a specific shader program.
+ *
+ * The gradient color is determined by a `Phaser.Display.ColorRamp`, containing one or more `Phaser.Display.ColorBand` objects. The ramp is laid out along the `shape` of the gradient, originating from the `start` location. The `shapeMode` describes how the gradient fills elsewhere, e.g. a LINEAR gradient creates straight bands while a RADIAL gradient creates circles.
+ *
+ * Note that the shape of the gradient is fitted to a square. If its width and height are not equal, the shape will be distorted. This may be what you want.
+ *
+ * A Gradient can be animated by modifying its `offset` property, or by modifying the ramp data. If you modify ramp data, you may have to call `gradient.ramp.encode()` to rebuild it.
+ */
+export const Gradient = createComponent(GameObjects.Gradient) as FC<
+  Props<GameObjects.Gradient> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A Noise Game Object.
+ *
+ * This game object is a quad which displays random noise. You can manipulate this object like any other, make it interactive, and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a Noise is a `Phaser.GameObjects.Shader` using a specific shader program.
+ *
+ * Noise or 'white noise' is simply random values. These are created by hashing the offset pixel coordinates, so the same noise is always created at the same position. This creates a reproducible effect.
+ *
+ * You can set the color and transparency of the noise.
+ *
+ * You can scroll the noise by animating the `noiseOffset` property. Note that floating-point precision is very important to this effect. Scrolling very large distances may cause blockiness in the output. Scrolling very small distances may cause the output to change completely, as it is not processing the same exact values. If you scroll by an exact fraction of the resolution of the object, the output will remain mostly the same, but it is not guaranteed to be stable. It's more effective to use `setRenderToTexture` and use this as a texture in a `TileSprite`.
+ *
+ * You can set `noisePower` to sculpt the output levels. Higher power reduces higher values. Lower power reduces lower values.
+ */
+export const Noise = createComponent(GameObjects.Noise) as FC<
+  Props<GameObjects.Noise> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A NoiseCell2D Game Object.
+ *
+ * This game object is a quad which displays cellular noise.
+ * You can manipulate this object like any other, make it interactive,
+ * and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a NoiseCell2D is a {@link Phaser.GameObjects.Shader}
+ * using a specific shader program.
+ *
+ * Cellular noise, also called Worley Noise or Voronoi Noise,
+ * consists of a pattern of cells. This is good for modeling natural phenomena
+ * like waves, clouds, or scales.
+ *
+ * You can set the color and transparency, cell count, variation,
+ * and seed value of the noise.
+ * You can change the detail level by increasing `noiseIterations`.
+ * You can change the noise mode to output sharp edges, soft edges,
+ * or flat colors for the cells.
+ *
+ * You can scroll the noise by animating the `noiseOffset` property.
+ *
+ * You can set `noiseNormalMap` to output a normal map.
+ * This is a quick way to add texture for lighting.
+ */
+export const NoiseCell2D = createComponent(GameObjects.NoiseCell2D) as FC<
+  Props<GameObjects.NoiseCell2D> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A NoiseCell3D Game Object.
+ *
+ * This game object is a quad which displays cellular noise.
+ * You can manipulate this object like any other, make it interactive,
+ * and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a NoiseCell3D is a {@link Phaser.GameObjects.Shader}
+ * using a specific shader program.
+ *
+ * Cellular noise, also called Worley Noise or Voronoi Noise,
+ * consists of a pattern of cells. This is good for modeling natural phenomena
+ * like waves, clouds, or scales.
+ *
+ * You can set the color and transparency, cell count, variation,
+ * and seed value of the noise.
+ * You can change the detail level by increasing `noiseIterations`.
+ * You can change the noise mode to output sharp edges, soft edges,
+ * or flat colors for the cells.
+ *
+ * You can scroll the noise by animating the `noiseOffset` property.
+ *
+ * You can set `noiseNormalMap` to output a normal map.
+ * This is a quick way to add texture for lighting.
+ *
+ * The 3D version of NoiseCell has one extra dimension: Z.
+ * The shader only renders the XY slice through the noise field.
+ * Because the centers of cells typically lie elsewhere in the hypervolume,
+ * cells appear with variation in brightness.
+ * You can scroll on the Z axis to shift the slice, smoothly changing the cell pattern.
+ */
+export const NoiseCell3D = createComponent(GameObjects.NoiseCell3D) as FC<
+  Props<GameObjects.NoiseCell3D> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A NoiseCell4D Game Object.
+ *
+ * This game object is a quad which displays cellular noise.
+ * You can manipulate this object like any other, make it interactive,
+ * and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a NoiseCell4D is a {@link Phaser.GameObjects.Shader}
+ * using a specific shader program.
+ *
+ * Cellular noise, also called Worley Noise or Voronoi Noise,
+ * consists of a pattern of cells. This is good for modeling natural phenomena
+ * like waves, clouds, or scales.
+ *
+ * You can set the color and transparency, cell count, variation,
+ * and seed value of the noise.
+ * You can change the detail level by increasing `noiseIterations`.
+ * You can change the noise mode to output sharp edges, soft edges,
+ * or flat colors for the cells.
+ *
+ * You can scroll the noise by animating the `noiseOffset` property.
+ *
+ * You can set `noiseNormalMap` to output a normal map.
+ * This is a quick way to add texture for lighting.
+ *
+ * The 4D version of NoiseCell has two extra dimensions: Z and W.
+ * The shader only renders the XY slice through the noise field.
+ * Because the centers of cells typically lie elsewhere in the hypervolume,
+ * cells appear with variation in brightness.
+ * You can scroll on the Z axis to shift the slice, smoothly changing the cell pattern.
+ * In 4D, you can instead move the ZW offset in a circle,
+ * creating a constantly changing pattern which repeats without reversing
+ * or resetting.
+ * This ZW circling technique is advised for long-term effects,
+ * because it avoids large offsets which can cause floating-point precision issues.
+ */
+export const NoiseCell4D = createComponent(GameObjects.NoiseCell4D) as FC<
+  Props<GameObjects.NoiseCell4D> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A NoiseSimplex2D object.
+ *
+ * This game object is a quad which displays simplex noise.
+ * You can manipulate this object like any other, make it interactive,
+ * and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a NoiseSimplex2D is a {@link Phaser.GameObjects.Shader}
+ * using a specific shader program.
+ *
+ * Simplex noise is a smooth pattern ideal for soft, natural phenomena.
+ * It is useful for clouds, flame, water, and many other effects.
+ * Ken Perlin, the creator of Perlin Noise, created Simplex Noise
+ * to improve performance and quality over the original.
+ *
+ * By default, the noise pattern is periodic: it repeats.
+ * You can scroll in X and Y.
+ * You can also change the `noiseFlow` value to evolve the pattern
+ * along a periodic course.
+ *
+ * You can set the cell count, color and transparency of the pattern.
+ * You can add fine detail with `noiseIterations`.
+ * You can add turbulence with `noiseWarpAmount`.
+ *
+ * You can change the basic pattern with `noiseSeed`.
+ * Different seeds create completely different patterns.
+ *
+ * You can set `noiseNormalMap` to output a normal map.
+ * This is a quick way to add texture for lighting.
+ *
+ * For advanced users, you can configure the characteristics of octave iteration.
+ * Use `noiseDetailPower`, `noiseFlowPower`, and `noiseContributionPower`
+ * to adjust the exponential scaling rate of these values.
+ * Use `noiseWarpDetailPower`, `noiseWarpFlowPower`, and
+ * `noiseWarpContributionPower` to do the same for the warp effect.
+ */
+export const NoiseSimplex2D = createComponent(GameObjects.NoiseSimplex2D) as FC<
+  Props<GameObjects.NoiseSimplex2D> & {
+    shader: string;
+  }
+>;
+
+/**
+ * A NoiseSimplex3D object.
+ *
+ * This game object is a quad which displays simplex noise.
+ * You can manipulate this object like any other, make it interactive,
+ * and use it in filters and masks to create visually stunning effects.
+ *
+ * Behind the scenes, a NoiseSimplex3D is a {@link Phaser.GameObjects.Shader}
+ * using a specific shader program.
+ *
+ * Simplex noise is a smooth pattern ideal for soft, natural phenomena.
+ * It is useful for clouds, flame, water, and many other effects.
+ * Ken Perlin, the creator of Perlin Noise, created Simplex Noise
+ * to improve performance and quality over the original.
+ *
+ * By default, the noise pattern is periodic: it repeats.
+ * You can scroll in X, Y, and Z.
+ * You can also change the `noiseFlow` value to evolve the pattern
+ * along a periodic course. This is useful to avoid scrolling into
+ * regions of reduced floating-point precision with very large numbers.
+ *
+ * You can set the cell count, color and transparency of the pattern.
+ * You can add fine detail with `noiseIterations`.
+ * You can add turbulence with `noiseWarpAmount`.
+ *
+ * You can change the basic pattern with `noiseSeed`.
+ * Different seeds create completely different patterns.
+ * You must use integers for the seed, or bad things will happen.
+ *
+ * You can set `noiseNormalMap` to output a normal map.
+ * This is a quick way to add texture for lighting.
+ *
+ * For advanced users, you can configure the characteristics of octave iteration.
+ * Use `noiseDetailPower`, `noiseFlowPower`, and `noiseContributionPower`
+ * to adjust the exponential scaling rate of these values.
+ * Use `noiseWarpDetailPower`, `noiseWarpFlowPower`, and
+ * `noiseWarpContributionPower` to do the same for the warp effect.
+ */
+export const NoiseSimplex3D = createComponent(GameObjects.NoiseSimplex3D) as FC<
+  Props<GameObjects.NoiseSimplex3D> & {
+    shader: string;
   }
 >;
 
@@ -628,6 +851,167 @@ export const Shader = createComponent(GameObjects.Shader) as FC<
  * The Shape Game Object is a base class for the various different shapes, such as the Arc, Star or Polygon. You cannot add a Shape directly to your Scene, it is meant as a base for your own custom Shape classes.
  */
 export const Shape = createComponent(GameObjects.Shape);
+
+/**
+ * A SpriteGPULayer GameObject. This is a WebGL only GameObject.
+ * It is optimized for rendering very large numbers of quads
+ * following simple tween animations.
+ * It is suited to complex backgrounds with animation.
+ *
+ * A SpriteGPULayer is a composite object that contains a collection of
+ * Member objects. It stores the rendering data for these
+ * objects in a GPU buffer, and renders them in a single draw call.
+ * Because it only updates the GPU buffer when necessary,
+ * it is up to 100 times faster than rendering the objects individually.
+ * Avoid changing the contents of the SpriteGPULayer frequently, as this
+ * requires the whole buffer to be updated.
+ *
+ * The layer can generally perform well with a million small quads.
+ * The exact performance will depend on the device and the size of the quads.
+ * If the quads are large, the layer will be fill-rate limited.
+ * Avoid drawing more than a few million pixels per frame.
+ *
+ * Notes on textures:
+ *
+ * This layer gains much of its speed from inflexibility. It can only use one
+ * texture, and that texture must be a single image.
+ * It cannot use multi-atlas textures.
+ *
+ * Further, if the texture is not a power of two in size,
+ * some texture seaming may occur if you line up sprites exactly.
+ * This is because the GPU precision is limited by binary logic,
+ * and texture coordinates will only be perfectly accurate for power of two textures.
+ * This can be avoided by adding/extruding a pixel of padding around each frame
+ * in the texture, or by using a power of two texture.
+ */
+export const SpriteGPULayer = createComponent(GameObjects.SpriteGPULayer) as FC<
+  Props<GameObjects.SpriteGPULayer> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
+>;
+
+/**
+ * A Stamp Game Object.
+ *
+ * A Stamp is a lightweight Game Object which ignores camera scroll and transform,
+ * so it is always rendered at a fixed position on-screen regardless of where the
+ * camera is looking. This makes it ideal for HUDs, score counters, overlays, and
+ * other screen-space elements that should not move with the game world.
+ *
+ * Its primary role is as an internal helper for DynamicTexture rendering, where it
+ * is used to draw (stamp) textures onto a DynamicTexture surface without the overhead
+ * of a full scene Game Object lifecycle. It is otherwise functionally similar to
+ * an Image Game Object.
+ */
+export const Stamp = createComponent(GameObjects.Stamp) as FC<
+  Props<GameObjects.Stamp> & {
+    texture: string | Phaser.Textures.Texture;
+    frame?: string | number;
+  }
+>;
+
+/**
+ * A Stencil Game Object.
+ *
+ * A Stencil is a special type of Game Object used to place stencils over the canvas.
+ * You can use it to efficiently control where subsequent objects are rendered.
+ * It is WebGL-only.
+ * Study the documentation carefully to understand how it works.
+ *
+ * A Stencil is an extended Container Game Object.
+ * It contains a list of child Game Objects to render to the stencil buffer.
+ * Think of these as opaque sheets of card held up over the canvas,
+ * preventing anything from being drawn through them.
+ *
+ * The stencil buffer is provided by WebGL.
+ * It is available if the game render config set `stencil` to `true`.
+ * It is an 8-bit attachment to framebuffers, like an extra alpha channel.
+ * But if the stencil channel is not 0 at a pixel, WebGL will skip rendering that pixel.
+ * There are no degrees of transparency, only on or off.
+ *
+ * Stencil is best used for efficient, sharp-edged, reused masks.
+ * You can draw a stencil once, and it will affect everything that is drawn later.
+ * Its rendering cost is minimal: it is just the draw cost of its children.
+ *
+ * If you need better quality alpha handling, consider using a Mask filter instead.
+ * Filters have a higher rendering cost, and apply to just 1 object at a time,
+ * but they have the best quality.
+ */
+export const Stencil = createComponent(GameObjects.Stencil);
+
+/**
+ * A StencilReference Game Object.
+ *
+ * A StencilReference is a special type of Game Object that uses a Stencil
+ * as a reference for its own rendering. This allows you to re-render a Stencil
+ * using different settings.
+ *
+ * For example, you can add a layer with a Stencil with some complex geometry,
+ * draw objects affected by the stencil layer,
+ * then use a StencilReference to subtract the same layer without recreating it.
+ *
+ * It is WebGL-only.
+ *
+ * A StencilReference temporarily changes the settings on the target Stencil,
+ * then restores them after rendering.
+ * Thus, it keeps the original Stencil's transforms.
+ * The stencil options can be changed by setting the properties on this object.
+ * Note that these properties will be set to default values,
+ * so if you have configured the targetStencil with its own properties,
+ * you should configure this with those properties as well,
+ * altered to your requirements.
+ *
+ * See the {@link Phaser.GameObjects.Stencil} documentation for more details.
+ */
+export const StencilReference = createComponent(GameObjects.StencilReference);
+
+/**
+ * A CaptureFrame is a special type of GameObject that allows you to
+ * capture the current state of the render.
+ * For example, if you place a CaptureFrame between two other objects,
+ * it will capture the first object to a texture, but not the second.
+ * This is useful for full-scene post-processing prior to render completion,
+ * such as a layer of water.
+ *
+ * This is a WebGL only feature and is not available in Canvas mode.
+ *
+ * You must activate the `forceComposite` property of the Camera,
+ * or otherwise use this object within a framebuffer, to use this feature.
+ * Examples of framebuffer situations include Filters, DynamicTexture,
+ * and a camera with alpha between 0 and 1.
+ *
+ * This object does not render anything. It simply captures a texture
+ * from the current framebuffer at the moment it 'renders'.
+ * If you add filters to this object, it will capture the clear, temporary
+ * framebuffer used for the filter, not the main framebuffer.
+ * If you add filters to a Container that contains this object,
+ * it will capture only objects within that Container.
+ * If you set `visible` to `false`, it will just stop capturing.
+ */
+export const CaptureFrame = createComponent(GameObjects.CaptureFrame);
+
+/**
+ * The Custom Context is a game object that allows you to modify the drawing context before it is used.
+ *
+ * The Custom Context is an extended Container Game Object.
+ * Before game objects are rendered,
+ * it clones the current DrawingContext and passes it to a callback.
+ * You can configure this callback to set options on the DrawingContext.
+ *
+ * See the {@link Phaser.Renderer.WebGL.DrawingContext} documentation for more details
+ * on DrawingContext settings.
+ * This is an advanced rendering system and should be used carefully.
+ * You should mostly only use the setter methods on the DrawingContext object.
+ * Methods that don't begin with `set` are typically for internal use.
+ *
+ * If you modify the DrawingContext to create a new framebuffer,
+ * it will not render to the canvas.
+ * It is your responsibility to use the texture from the DrawingContext.
+ * It is very inefficient to create a new framebuffer every frame,
+ * though, so you should use a `DynamicTexture` with a retained framebuffer instead.
+ */
+export const CustomContext = createComponent(GameObjects.CustomContext);
 
 /**
  * A Sprite Game Object.
