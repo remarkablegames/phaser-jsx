@@ -7,6 +7,7 @@
     "moduleResolution": "bundler",
     "lib": ["dom", "es2017", "scripthost"],
     "types": ["vitest/globals"],
+    "rootDir": ".",
     "allowJs": true,
     "noEmit": true
   },

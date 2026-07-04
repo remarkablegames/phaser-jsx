@@ -20,6 +20,7 @@ const config = (minify = false) => ({
       declaration: false,
       declarationMap: false,
       module: 'esnext',
+      moduleResolution: 'bundler',
       compilerOptions: {
         outDir: 'umd',
       },
