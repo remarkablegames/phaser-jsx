@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.3...v1.0.0) (2026-07-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **package:** update Phaser peer dependency from 3 to 4
+* Update GameObjects for Phaser 4
+
+### Features
+
+* upgrade Phaser 3 to 4 ([3e55c0a](https://github.com/remarkablegames/phaser-jsx/commit/3e55c0a3fda842157bce729e14db2d2a187e3476))
+
+
+### Build System
+
+* **package:** bump phaser from 3 to 4 in peerDependencies ([260fc5a](https://github.com/remarkablegames/phaser-jsx/commit/260fc5a4f7ba655e0a96324ccd89f75ffdc607c4))
+
 ## [0.16.3](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.2...v0.16.3) (2026-05-31)
 
 
