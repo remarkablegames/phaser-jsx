@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --project tsconfig.test.json",
+    "lint:types": "npx @arethetypeswrong/cli --pack",
     "prepare": "husky",
     "prepublishOnly": "npm run clean && npm run lint && npm run build && npm run lint:tsc && npm run test:ci",
     "test": "vitest run",
@@ -39,6 +40,7 @@
     "game"
   ],
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.4",
     "@commitlint/cli": "21.2.0",
     "@commitlint/config-conventional": "21.2.0",
     "@eslint/compat": "2.1.0",
