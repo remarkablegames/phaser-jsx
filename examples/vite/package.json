@@ -8,11 +8,11 @@
     "start": "vite --open --force"
   },
   "dependencies": {
-    "phaser": "^3.90.0"
+    "phaser": "^4.2.0"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
-    "vite": "^8.0.8"
+    "vite": "^8.1.3"
   },
   "license": "MIT"
 }
