@@ -1,11 +1,11 @@
-name: build
+name: test
 on: [push, pull_request]
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,11 +23,10 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Generate docs
-        run: npm run docs
+      - name: Run unit tests
+        run: npm run test:ci
 
-      - name: Deploy
-        if: github.ref_name == 'master'
-        uses: remarkablemark/gitploy-action@v1
-        with:
-          directory: docs
+      - name: Codecov
+        uses: codecov/codecov-action@v7
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
