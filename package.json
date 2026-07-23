@@ -61,7 +61,7 @@
     "globals": "17.7.0",
     "husky": "9.1.7",
     "jsdom": "29.1.1",
-    "lint-staged": "17.1.0",
+    "lint-staged": "17.1.1",
     "phaser": "4.2.1",
     "phaser3spectorjs": "0.0.8",
     "prettier": "3.9.6",
