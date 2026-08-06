@@ -60,7 +60,7 @@
     "global-jsdom": "29.0.0",
     "globals": "17.9.0",
     "husky": "9.1.7",
-    "jsdom": "29.1.1",
+    "jsdom": "30.0.1",
     "lint-staged": "17.3.0",
     "phaser": "4.2.1",
     "phaser3spectorjs": "0.0.8",
