@@ -74,7 +74,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.67.0",
     "vitest": "4.1.10",
-    "vitest-canvas-mock": "1.1.4"
+    "vitest-canvas-mock": "1.1.5"
   },
   "peerDependencies": {
     "@types/react": "17 || 18 || 19",
