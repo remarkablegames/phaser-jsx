@@ -229,127 +229,201 @@ function createGameObject(
   const { props, color, frame, points, shader, style, texture } =
     element.props as CreateElementProps;
 
-  /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
+  /* eslint-disable @typescript-eslint/non-nullable-type-assertion-style, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
   switch (true) {
     case element.type === Phaser.GameObjects.BitmapText:
     case element.type === Phaser.GameObjects.DynamicBitmapText: {
-      return new element.type(scene, props?.x, props?.y, props?.font);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+        props?.font as string,
+      ] satisfies ConstructorParameters<
+        | typeof Phaser.GameObjects.BitmapText
+        | typeof Phaser.GameObjects.DynamicBitmapText
+      >;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Bob: {
-      return new element.type(scene, props?.x, props?.y, frame, props?.visible);
+      const blitter = new Phaser.GameObjects.Blitter(scene);
+      scene.add.existing(blitter);
+      const args = [
+        blitter,
+        props?.x as number,
+        props?.y as number,
+        frame as string | number,
+        props?.visible as boolean,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Bob>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Container:
     case element.type === Phaser.GameObjects.Layer: {
-      return new element.type(scene);
+      const args = [scene] satisfies ConstructorParameters<
+        typeof Phaser.GameObjects.Container | typeof Phaser.GameObjects.Layer
+      >;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.GameObject: {
-      return new element.type(scene, props?.type);
+      const args = [
+        scene,
+        props?.type as string,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.GameObject>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Image:
     case element.type === Phaser.GameObjects.Sprite:
     case element.type === Phaser.GameObjects.NineSlice: {
-      return new element.type(scene, props?.x, props?.y, texture, frame);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+        texture as string | Phaser.Textures.Texture,
+        frame,
+      ] satisfies ConstructorParameters<
+        | typeof Phaser.GameObjects.Image
+        | typeof Phaser.GameObjects.Sprite
+        | typeof Phaser.GameObjects.NineSlice
+      >;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Light: {
-      return new element.type(
-        scene,
-        props?.x,
-        props?.y,
-        props?.radius,
-        color?.r,
-        color?.g,
-        color?.b,
-        props?.intensity,
-      );
+      const args = [
+        props?.x as number,
+        props?.y as number,
+        props?.radius as number,
+        color?.r as number,
+        color?.g as number,
+        color?.b as number,
+        props?.intensity as number,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Light>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.PathFollower: {
-      return new element.type(
+      const args = [
         scene,
-        props?.path,
-        props?.x,
-        props?.y,
-        texture,
+        props?.path as Phaser.Curves.Path,
+        props?.x as number,
+        props?.y as number,
+        texture as string | Phaser.Textures.Texture,
         frame,
-      );
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.PathFollower>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Mesh2D: {
-      return new element.type(
+      const args = [
         scene,
-        props?.x,
-        props?.y,
-        texture,
-        props?.vertices,
-        props?.indices,
+        props?.x as number,
+        props?.y as number,
+        texture as string | Phaser.Textures.Texture,
+        props?.vertices as number[],
+        props?.indices as number[],
         props?.flipV,
-      );
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Mesh2D>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.PointLight: {
-      return new element.type(scene, props?.x, props?.y, color);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+        // v8 ignore start
+        color
+          ? Phaser.Display.Color.GetColor(color.r, color.g, color.b)
+          : // v8 ignore end
+            undefined,
+        props?.radius,
+        props?.intensity,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.PointLight>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Rectangle: {
-      return new element.type(
+      const args = [
         scene,
-        props?.x,
-        props?.y,
+        props?.x as number,
+        props?.y as number,
         props?.width,
         props?.height,
         props?.fillColor,
         props?.fillAlpha,
-      );
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Rectangle>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Zone: {
-      return new element.type(scene, props?.x, props?.y);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Zone>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Rope: {
-      return new element.type(
+      const args = [
         scene,
         props?.x,
         props?.y,
-        texture,
+        texture as string,
         frame,
         points,
-      );
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Rope>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Shader: {
-      return new element.type(scene, shader);
+      const args = [scene, shader as string] satisfies ConstructorParameters<
+        typeof Phaser.GameObjects.Shader
+      >;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Text: {
-      return new element.type(scene, props?.x, props?.y, props?.text, style);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+        props?.text as string,
+        style as Phaser.Types.GameObjects.Text.TextStyle,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Text>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.TileSprite: {
-      return new element.type(
+      const args = [
         scene,
-        props?.x,
-        props?.y,
-        props?.width,
-        props?.height,
-        texture,
+        props?.x as number,
+        props?.y as number,
+        props?.width as number,
+        props?.height as number,
+        texture as string,
         frame,
-      );
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.TileSprite>;
+      return new element.type(...args);
     }
 
     case element.type === Phaser.GameObjects.Video: {
-      return new element.type(scene, props?.x, props?.y, props?.cacheKey);
+      const args = [
+        scene,
+        props?.x as number,
+        props?.y as number,
+        props?.cacheKey,
+      ] satisfies ConstructorParameters<typeof Phaser.GameObjects.Video>;
+      return new element.type(...args);
     }
 
     default:
       return new element.type(scene);
   }
-  /* eslint-enable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
+  /* eslint-enable @typescript-eslint/non-nullable-type-assertion-style, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
 }
 
 function patchProps(
