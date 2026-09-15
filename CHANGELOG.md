@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.0...v1.0.1) (2026-09-15)
+
+
+### Bug Fixes
+
+* **jsx-runtime:** export JSX type from react ([98569e2](https://github.com/remarkablegames/phaser-jsx/commit/98569e261e404f1a0f7a380a2008c6cd1d19683b))
+
 ## [1.0.0](https://github.com/remarkablegames/phaser-jsx/compare/v0.16.3...v1.0.0) (2026-07-04)
 
 
