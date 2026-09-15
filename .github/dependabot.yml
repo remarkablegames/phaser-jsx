@@ -17,6 +17,9 @@ updates:
         patterns:
           - '*eslint*'
           - prettier
+      jsdom:
+        patterns:
+          - '*jsdom*'
       vitest:
         patterns:
           - '*vitest*'
