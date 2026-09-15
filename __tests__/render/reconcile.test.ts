@@ -17,8 +17,7 @@ vi.mock('phaser', () => {
       Object.defineProperty(this, '_name', { value: name });
     });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const MockText = vi.fn(function Text(this: any) {
+  const MockText = vi.fn(function Text(this: Record<string, unknown>) {
     this.x = 0;
     this.y = 0;
     this.text = '';
@@ -30,24 +29,23 @@ vi.mock('phaser', () => {
     this.active = true;
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const MockContainer = vi.fn(function Container(this: any) {
+  const MockContainer = vi.fn(function Container(
+    this: Record<string, unknown>,
+  ) {
     this.add = vi.fn();
     this.children = [];
     this.destroy = vi.fn();
     this.active = true;
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const MockLayer = vi.fn(function Layer(this: any) {
+  const MockLayer = vi.fn(function Layer(this: Record<string, unknown>) {
     this.add = vi.fn();
     this.children = [];
     this.destroy = vi.fn();
     this.active = true;
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Scene = vi.fn(function Scene(this: any) {
+  const Scene = vi.fn(function Scene(this: Record<string, unknown>) {
     this.add = { existing: vi.fn() };
     this.input = { on: vi.fn() };
   });
@@ -55,6 +53,7 @@ vi.mock('phaser', () => {
   const MockParticleEmitter = vi.fn();
   const GameObjects = {
     BitmapText: makeGameObject('BitmapText'),
+    Blitter: makeGameObject('Blitter'),
     Bob: makeGameObject('Bob'),
     Container: MockContainer,
     DynamicBitmapText: makeGameObject('DynamicBitmapText'),
@@ -89,6 +88,11 @@ vi.mock('phaser', () => {
     Scene,
   };
 });
+
+function expectDefined<T>(value: T | null | undefined): T {
+  expect(value).toBeDefined();
+  return value as T;
+}
 
 describe('reconcileTree', () => {
   let scene: Phaser.Scene;
@@ -165,7 +169,7 @@ describe('reconcileTree', () => {
 
   it('handles function components with props', () => {
     const Comp = (props: { count: number }) =>
-      createElement(Text, { text: `Count: ${props.count}` });
+      createElement(Text, { text: `Count: ${String(props.count)}` });
     const element = { type: Comp, props: { count: 5 } } as JSX.Element;
     const result = reconcileTree(element, null, scene);
     expect(result).toBeDefined();
@@ -365,12 +369,7 @@ describe('reconcileTree', () => {
 
   it('skips null slots when destroying extra old children in Container', () => {
     const node1 = reconcileTree(
-      createElement(
-        Container,
-        {},
-        null as unknown as JSX.Element,
-        createElement(Text),
-      ),
+      createElement(Container, {}, null, createElement(Text)),
       null,
       scene,
     );
@@ -447,9 +446,11 @@ describe('reconcileTree', () => {
       null,
       scene,
     );
-    node1!.children[0]!.gameObject =
+    const firstChild = expectDefined(expectDefined(node1).children[0]);
+    const secondChild = expectDefined(expectDefined(node1).children[1]);
+    firstChild.gameObject =
       child1GameObject as unknown as Phaser.GameObjects.GameObject;
-    node1!.children[1]!.gameObject =
+    secondChild.gameObject =
       child2GameObject as unknown as Phaser.GameObjects.GameObject;
     reconcileTree(
       createElement(Container, {}, createElement(Text)),
@@ -470,20 +471,21 @@ describe('reconcileTree', () => {
       null,
       scene,
     );
-    const gameObjectA = node1!.children[0]!.gameObject;
-    const gameObjectB = node1!.children[1]!.gameObject;
+    const gameObjectA = expectDefined(
+      expectDefined(node1).children[0],
+    ).gameObject;
+    const gameObjectB = expectDefined(
+      expectDefined(node1).children[1],
+    ).gameObject;
     const node2 = reconcileTree(
-      createElement(
-        Container,
-        {},
-        null as unknown as JSX.Element,
-        createElement(Text, { text: 'b' }),
-      ),
+      createElement(Container, {}, null, createElement(Text, { text: 'b' })),
       node1,
       scene,
     );
-    expect(node2!.children.filter(Boolean)).toHaveLength(1);
-    expect(node2!.children.find(Boolean)!.gameObject).toBe(gameObjectB);
+    expect(expectDefined(node2).children.filter(Boolean)).toHaveLength(1);
+    expect(
+      expectDefined(expectDefined(node2).children.find(Boolean)).gameObject,
+    ).toBe(gameObjectB);
     expect(gameObjectA).toBeDefined();
   });
 
@@ -496,14 +498,18 @@ describe('reconcileTree', () => {
       null,
       scene,
     );
-    const gameObjectB = node1!.children[1]!.gameObject;
+    const gameObjectB = expectDefined(
+      expectDefined(node1).children[1],
+    ).gameObject;
     const node2 = reconcileTree(
       [null, createElement(Text, { text: 'b' })] as unknown as JSX.Element,
       node1,
       scene,
     );
-    expect(node2!.children.filter(Boolean)).toHaveLength(1);
-    expect(node2!.children.find(Boolean)!.gameObject).toBe(gameObjectB);
+    expect(expectDefined(node2).children.filter(Boolean)).toHaveLength(1);
+    expect(
+      expectDefined(expectDefined(node2).children.find(Boolean)).gameObject,
+    ).toBe(gameObjectB);
   });
 
   it('creates BitmapText via createGameObject', () => {

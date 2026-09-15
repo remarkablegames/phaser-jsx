@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression, @typescript-eslint/unbound-method */
+
 import Phaser from 'phaser';
 import type { Mock } from 'vitest';
 
 import { setProps, skipPropKeys } from '../../src/render/props';
 
 vi.mock('phaser', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Sprite = vi.fn(function Sprite(this: any) {
+  const Sprite = vi.fn(function Sprite(this: Record<string, unknown>) {
     this.originX = undefined as number | undefined;
     this.originY = undefined as number | undefined;
   });
 
-  Sprite.prototype.setOrigin = function setOrigin(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this: any,
+  (
+    Sprite as unknown as { prototype: Record<string, unknown> }
+  ).prototype.setOrigin = function setOrigin(
+    this: Record<string, unknown>,
     originX?: number,
     originY?: number,
   ) {
@@ -20,23 +22,26 @@ vi.mock('phaser', () => {
     this.originY = originY;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Text = vi.fn(function Text(this: any) {
+  const Text = vi.fn(function Text(this: Record<string, unknown>) {
     this.text = '';
   });
 
-  Text.prototype.setStyle = vi.fn();
-  Text.prototype.setPadding = vi.fn();
+  (
+    Text as unknown as { prototype: Record<string, unknown> }
+  ).prototype.setStyle = vi.fn();
+  (
+    Text as unknown as { prototype: Record<string, unknown> }
+  ).prototype.setPadding = vi.fn();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Rectangle = vi.fn(function Rectangle(this: any) {
+  const Rectangle = vi.fn(function Rectangle(this: Record<string, unknown>) {
     this.fillColor = undefined as number | undefined;
     this.fillAlpha = undefined as number | undefined;
   });
 
-  Rectangle.prototype.setFillStyle = vi.fn(function (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this: any,
+  (
+    Rectangle as unknown as { prototype: Record<string, unknown> }
+  ).prototype.setFillStyle = vi.fn(function (
+    this: Record<string, unknown>,
     fillColor?: number,
     fillAlpha?: number,
   ) {
@@ -130,7 +135,8 @@ describe('input', () => {
     );
 
     // Verify wrapped handler passes gameObject as 2nd argument
-    const wrappedHandler = (gameObject.on as Mock).mock.calls[0][1];
+    const wrappedHandler = (gameObject.on as unknown as Mock).mock
+      .calls[0][1] as (...args: unknown[]) => void;
     const pointer = {} as Phaser.Input.Pointer;
     const localX = 10;
     const localY = 20;
@@ -166,7 +172,8 @@ describe('input', () => {
     );
 
     // Verify wrapped handler passes gameObject as 2nd argument
-    const wrappedHandler = (gameObject.on as Mock).mock.calls[0][1];
+    const wrappedHandler = (gameObject.on as unknown as Mock).mock
+      .calls[0][1] as (...args: unknown[]) => void;
     const pointer = {} as Phaser.Input.Pointer;
     const localX = 10;
     const localY = 20;
@@ -251,7 +258,9 @@ describe('style', () => {
       style: { fontSize: '16px' },
     };
     // Should not throw, just skip
-    expect(() => setProps(gameObject, props, scene)).not.toThrow();
+    expect(() => {
+      setProps(gameObject, props, scene);
+    }).not.toThrow();
   });
 });
 

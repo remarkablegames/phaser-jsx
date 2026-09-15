@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { events } from '../constants';
+import { isEventKey } from '../constants';
 import type { Props } from '../types';
 
 export const skipPropKeys = ['input'];
@@ -29,7 +29,7 @@ export function setProps(
       continue;
     }
 
-    if (events[key] && typeof value === 'function') {
+    if (isEventKey(key) && typeof value === 'function') {
       gameObject.setInteractive(props.input);
       const eventName = key.slice(2).toLowerCase();
       const pointerEvents = [
@@ -43,8 +43,9 @@ export function setProps(
         'pointerwheel',
       ];
       if (pointerEvents.includes(eventName)) {
+        const handler = value as (...args: unknown[]) => void;
         const wrappedHandler = (pointer: unknown, ...rest: unknown[]) => {
-          value(pointer, gameObject, ...rest);
+          handler(pointer, gameObject, ...rest);
         };
         gameObject.on(eventName, wrappedHandler, scene);
       } else {
@@ -88,7 +89,7 @@ export function setProps(
 }
 
 function setStyle(gameObject: Phaser.GameObjects.GameObject, style: object) {
-  const text = gameObject as Phaser.GameObjects.Text;
+  const text = gameObject as Partial<Phaser.GameObjects.Text>;
   text.setStyle?.(style);
 
   const padding = (style as Phaser.Types.GameObjects.Text.TextStyle).padding;

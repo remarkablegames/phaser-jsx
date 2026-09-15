@@ -17,5 +17,6 @@ it('returns scene', () => {
 });
 
 it('returns undefined', () => {
+  // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
   expect(useScene<undefined>()).toEqual(undefined);
 });

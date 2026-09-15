@@ -9,6 +9,7 @@ import { getScene } from '../helpers';
  *
  * @returns Phaser.Scene
  */
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export function useScene<Type = Scene>() {
   return getScene<Type>();
 }

@@ -9,7 +9,7 @@ import type { GameObjectNode } from '../types';
  */
 interface EffectRecord {
   deps: unknown[] | undefined;
-  cleanup: (() => void) | void;
+  cleanup: (() => void) | undefined;
 }
 
 /**
@@ -17,7 +17,7 @@ interface EffectRecord {
  */
 interface PendingEffect {
   key: number;
-  callback: () => (() => void) | void;
+  callback: () => (() => void) | undefined;
   deps: unknown[] | undefined;
 }
 
@@ -66,14 +66,22 @@ export function createRenderContext(
   let isRendering = false;
   let needsEffectFlush = false;
 
+  function markEffectFlush(): void {
+    needsEffectFlush = true;
+  }
+
+  function clearEffectFlush(): void {
+    needsEffectFlush = false;
+  }
+
   function flushEffects(): void {
     if (isRendering) {
-      needsEffectFlush = true;
+      markEffectFlush();
       return;
     }
 
     isRendering = true;
-    needsEffectFlush = false;
+    clearEffectFlush();
 
     try {
       for (const { key, callback, deps } of pendingEffects) {
@@ -96,6 +104,7 @@ export function createRenderContext(
 
       // If effects were queued during effect execution, flush them
       if (needsEffectFlush && pendingEffects.length > 0) {
+        clearEffectFlush();
         // Use setTimeout to break the synchronous cycle
         setTimeout(flushEffects);
       }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression, @typescript-eslint/unbound-method */
+
 import Phaser from 'phaser';
 import type { JSX } from 'react';
 
@@ -13,8 +15,8 @@ import { render } from '../../src/render/render';
 
 vi.mock('phaser', () => {
   const GameObject = vi.fn();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Scene = vi.fn(function Scene(this: any) {
+
+  const Scene = vi.fn(function Scene(this: Record<string, unknown>) {
     this.add = { existing: vi.fn() };
   });
   return {
@@ -37,9 +39,9 @@ vi.mock('phaser', () => {
 });
 
 vi.mock('../../src/helpers/scene', async () => {
-  const { reconcileTree } = (await vi.importActual(
-    '../../src/render/reconcile',
-  )) as { reconcileTree: (...args: unknown[]) => unknown };
+  const { reconcileTree } = await vi.importActual<
+    typeof import('../../src/render/reconcile')
+  >('../../src/render/reconcile');
 
   const setScene = vi.fn();
   const setRenderContext = vi.fn();
@@ -47,7 +49,12 @@ vi.mock('../../src/helpers/scene', async () => {
     getScene: vi.fn(),
     setScene,
     createRenderContext: vi.fn(
-      (element, scene, componentFn, componentProps) => ({
+      (
+        element: JSX.Element,
+        scene: Phaser.Scene,
+        componentFn: ((props: Record<string, unknown>) => JSX.Element) | null,
+        componentProps: Record<string, unknown> | null,
+      ) => ({
         state: new Map(),
         scene,
         componentFn,
@@ -104,6 +111,7 @@ it('renders element to the scene', () => {
   expect(setScene).toHaveBeenCalledWith(scene);
 });
 
+// eslint-disable-next-line @typescript-eslint/no-deprecated
 describe.each([createRef, useRef])('%s', (refFunction) => {
   it('renders element with ref to the scene', () => {
     const scene = createMockScene();
@@ -111,7 +119,7 @@ describe.each([createRef, useRef])('%s', (refFunction) => {
     expect(render(<Container ref={ref} />, scene)).toBe(undefined);
     expect(scene.add.existing).toHaveBeenCalledTimes(1);
     expect(setScene).toHaveBeenCalledWith(scene);
-    expect(ref).toEqual({ current: expect.any(Container) });
+    expect(ref).toEqual({ current: expect.any(Container) as unknown });
   });
 });
 

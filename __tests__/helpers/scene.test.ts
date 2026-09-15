@@ -16,6 +16,7 @@ describe('getScene', () => {
 
 describe('setScene', () => {
   it('sets scene', () => {
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     expect(setScene(scene)).toEqual(undefined);
     expect(getScene()).toEqual(scene);
   });

@@ -13,16 +13,19 @@ export function render(element: JSX.Element, scene: Phaser.Scene) {
   setScene(scene);
 
   // Detect if element is a function component for re-rendering
+  const componentType = element.type as JSX.ElementType;
   let componentFn: ((...args: unknown[]) => JSX.Element) | null = null;
   let componentProps: Record<string, unknown> | null = null;
 
-  if (
-    typeof element?.type === 'function' &&
-    element.type.prototype?.constructor !== element.type
-  ) {
-    // Function component
-    componentFn = element.type as (...args: unknown[]) => JSX.Element;
-    componentProps = element.props as Record<string, unknown>;
+  if (typeof componentType === 'function') {
+    const { prototype } = componentType as {
+      prototype?: { constructor?: unknown };
+    };
+    if (prototype?.constructor !== componentType) {
+      // Function component
+      componentFn = componentType as (...args: unknown[]) => JSX.Element;
+      componentProps = element.props as Record<string, unknown>;
+    }
   }
 
   const context = createRenderContext(

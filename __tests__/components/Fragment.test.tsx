@@ -20,7 +20,10 @@ it('renders Fragment with children', () => {
       <li>2</li>
     </Fragment>
   );
+  const props = (element as unknown as { props: { children?: unknown[] } })
+    .props;
+  const children = props.children;
   expect(element.type).toBe(Fragment);
-  expect(element.props.children).toHaveLength(2);
-  expect(element.props.children[0].type).toBe('li');
+  expect(children).toHaveLength(2);
+  expect(children?.[0]).toMatchObject({ type: 'li' });
 });

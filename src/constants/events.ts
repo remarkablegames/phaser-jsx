@@ -49,3 +49,7 @@ export const events = [
   map[event] = 1;
   return map;
 }, {});
+
+export function isEventKey(key: string): boolean {
+  return Object.prototype.hasOwnProperty.call(events, key);
+}

@@ -12,7 +12,7 @@ import { getRenderContext } from '../helpers';
  *   Pass an empty array to run only once on mount.
  */
 export function useEffect(
-  callback: () => (() => void) | void,
+  callback: () => (() => void) | undefined,
   deps?: unknown[],
 ): void {
   const context = getRenderContext();

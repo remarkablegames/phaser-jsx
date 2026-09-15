@@ -3,11 +3,44 @@ import type { JSX } from 'react';
 
 import { Fragment } from '../components';
 import * as GameObjects from '../components/GameObjects';
-import { events } from '../constants';
+import { isEventKey } from '../constants';
 import { isValidElement } from '../element';
-import type { GameObjectNode } from '../types';
+import type { GameObjectNode, GameObjectProps, Props } from '../types';
 import { setProps } from './props';
 import { attachRef } from './ref';
+
+type ChildElement = JSX.Element | JSX.Element[];
+
+/**
+ * Props read by {@link createGameObject} to construct each game object.
+ */
+interface CreateElementProps {
+  color?: { r: number; g: number; b: number };
+  frame?: string | number;
+  points?: number | Phaser.GameObjects.Rope['points'];
+  props?: {
+    cacheKey?: string;
+    fillAlpha?: number;
+    fillColor?: number;
+    flipV?: boolean;
+    font?: string;
+    height?: number;
+    indices?: number[];
+    intensity?: number;
+    path?: Phaser.Curves.Path;
+    radius?: number;
+    text?: string;
+    type?: string;
+    vertices?: number[];
+    visible?: boolean;
+    width?: number;
+    x?: number;
+    y?: number;
+  };
+  shader?: string;
+  style?: Phaser.Types.GameObjects.Text.TextStyle;
+  texture?: string | Phaser.Textures.Texture;
+}
 
 /**
  * Reconciles a new JSX element tree against the existing game object tree.
@@ -24,41 +57,54 @@ export function reconcileTree(
   scene: Phaser.Scene,
   parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ): GameObjectNode | null {
-  switch (true) {
-    case element === undefined:
-    case element === null:
-      if (oldNode) {
-        destroyNode(oldNode);
-      }
-      return null;
-
-    case Array.isArray(element):
-      return reconcileArray(element, oldNode?.children ?? null, scene, parent);
-
-    case element?.type === Fragment: {
-      const children = element.props?.children;
-      return reconcileArray(
-        children ? toArray(children) : [],
-        oldNode?.children ?? null,
-        scene,
-        parent,
-      );
-    }
-
-    case !isValidElement(element):
-      if (oldNode) {
-        destroyNode(oldNode);
-      }
-      return null;
-
-    // function component
-    case typeof element?.type === 'function' && !isGameObject(element.type):
-      return reconcileTree(element.type(element.props), oldNode, scene, parent);
-
-    case isGameObject(element?.type):
-    default:
-      return reconcileGameObject(element!, oldNode, scene, parent);
+  if (element == null) {
+    return destroyIfOld(oldNode);
   }
+
+  if (Array.isArray(element)) {
+    return reconcileArray(
+      element as JSX.Element[],
+      oldNode?.children ?? null,
+      scene,
+      parent,
+    );
+  }
+
+  if (element.type === Fragment) {
+    const children = (element.props as { children?: ChildElement }).children;
+    return reconcileArray(
+      children ? toArray(children) : [],
+      oldNode?.children ?? null,
+      scene,
+      parent,
+    );
+  }
+
+  if (!isValidElement(element)) {
+    return destroyIfOld(oldNode);
+  }
+
+  // function component
+  if (typeof element.type === 'function' && !isGameObject(element.type)) {
+    const Component = element.type as (
+      props: Record<string, unknown>,
+    ) => JSX.Element | null;
+    return reconcileTree(
+      Component(element.props as Record<string, unknown>),
+      oldNode,
+      scene,
+      parent,
+    );
+  }
+
+  return reconcileGameObject(element, oldNode, scene, parent);
+}
+
+function destroyIfOld(oldNode: GameObjectNode | null): null {
+  if (oldNode) {
+    destroyNode(oldNode);
+  }
+  return null;
 }
 
 function reconcileArray(
@@ -68,7 +114,7 @@ function reconcileArray(
   parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ): GameObjectNode {
   const node: GameObjectNode = {
-    gameObject: null as unknown as Phaser.GameObjects.GameObject,
+    gameObject: null,
     props: {},
     children: [],
   };
@@ -86,7 +132,7 @@ function reconcileArray(
 
   // Destroy any extra old children beyond new length
   for (let i = elements.length; i < oldLength; i++) {
-    const oldChild = oldChildren![i];
+    const oldChild = oldChildren?.[i];
     if (oldChild) {
       destroyNode(oldChild);
     }
@@ -101,15 +147,23 @@ function reconcileGameObject(
   scene: Phaser.Scene,
   parent?: Phaser.GameObjects.Container | Phaser.GameObjects.Layer,
 ): GameObjectNode | null {
-  const { children, ref, ...props } = element.props;
+  const elementProps = element.props as {
+    children?: ChildElement;
+    ref?: GameObjectProps['ref'];
+  } & Props;
+  const { children, ref, ...props } = elementProps;
 
   let gameObject: Phaser.GameObjects.GameObject | null;
 
   if (oldNode) {
     // Reuse existing game object - just patch changed props
     gameObject = oldNode.gameObject;
-    patchProps(gameObject, oldNode.props, props, scene);
-    attachRef(gameObject, ref);
+
+    // v8 ignore next
+    if (gameObject) {
+      patchProps(gameObject, oldNode.props, props, scene);
+      attachRef(gameObject, ref);
+    }
   } else {
     // Create new game object
     const newGameObject = createGameObject(element, scene);
@@ -158,7 +212,7 @@ function reconcileGameObject(
 
     // Destroy extra old children beyond new length
     for (let i = childArray.length; i < oldLength; i++) {
-      const oldChild = oldChildren![i];
+      const oldChild = oldChildren?.[i];
       if (oldChild) {
         destroyNode(oldChild);
       }
@@ -172,29 +226,36 @@ function createGameObject(
   element: JSX.Element,
   scene: Phaser.Scene,
 ): Phaser.GameObjects.GameObject {
-  const { props, color, frame, points, shader, style, texture } = element.props;
+  const { props, color, frame, points, shader, style, texture } =
+    element.props as CreateElementProps;
 
+  /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
   switch (true) {
     case element.type === Phaser.GameObjects.BitmapText:
-    case element.type === Phaser.GameObjects.DynamicBitmapText:
+    case element.type === Phaser.GameObjects.DynamicBitmapText: {
       return new element.type(scene, props?.x, props?.y, props?.font);
+    }
 
-    case element.type === Phaser.GameObjects.Bob:
+    case element.type === Phaser.GameObjects.Bob: {
       return new element.type(scene, props?.x, props?.y, frame, props?.visible);
+    }
 
     case element.type === Phaser.GameObjects.Container:
-    case element.type === Phaser.GameObjects.Layer:
+    case element.type === Phaser.GameObjects.Layer: {
       return new element.type(scene);
+    }
 
-    case element.type === Phaser.GameObjects.GameObject:
+    case element.type === Phaser.GameObjects.GameObject: {
       return new element.type(scene, props?.type);
+    }
 
     case element.type === Phaser.GameObjects.Image:
     case element.type === Phaser.GameObjects.Sprite:
-    case element.type === Phaser.GameObjects.NineSlice:
+    case element.type === Phaser.GameObjects.NineSlice: {
       return new element.type(scene, props?.x, props?.y, texture, frame);
+    }
 
-    case element.type === Phaser.GameObjects.Light:
+    case element.type === Phaser.GameObjects.Light: {
       return new element.type(
         scene,
         props?.x,
@@ -205,8 +266,9 @@ function createGameObject(
         color?.b,
         props?.intensity,
       );
+    }
 
-    case element.type === Phaser.GameObjects.PathFollower:
+    case element.type === Phaser.GameObjects.PathFollower: {
       return new element.type(
         scene,
         props?.path,
@@ -215,8 +277,9 @@ function createGameObject(
         texture,
         frame,
       );
+    }
 
-    case element.type === Phaser.GameObjects.Mesh2D:
+    case element.type === Phaser.GameObjects.Mesh2D: {
       return new element.type(
         scene,
         props?.x,
@@ -226,11 +289,13 @@ function createGameObject(
         props?.indices,
         props?.flipV,
       );
+    }
 
-    case element.type === Phaser.GameObjects.PointLight:
+    case element.type === Phaser.GameObjects.PointLight: {
       return new element.type(scene, props?.x, props?.y, color);
+    }
 
-    case element.type === Phaser.GameObjects.Rectangle:
+    case element.type === Phaser.GameObjects.Rectangle: {
       return new element.type(
         scene,
         props?.x,
@@ -240,11 +305,13 @@ function createGameObject(
         props?.fillColor,
         props?.fillAlpha,
       );
+    }
 
-    case element.type === Phaser.GameObjects.Zone:
+    case element.type === Phaser.GameObjects.Zone: {
       return new element.type(scene, props?.x, props?.y);
+    }
 
-    case element.type === Phaser.GameObjects.Rope:
+    case element.type === Phaser.GameObjects.Rope: {
       return new element.type(
         scene,
         props?.x,
@@ -253,14 +320,17 @@ function createGameObject(
         frame,
         points,
       );
+    }
 
-    case element.type === Phaser.GameObjects.Shader:
+    case element.type === Phaser.GameObjects.Shader: {
       return new element.type(scene, shader);
+    }
 
-    case element.type === Phaser.GameObjects.Text:
+    case element.type === Phaser.GameObjects.Text: {
       return new element.type(scene, props?.x, props?.y, props?.text, style);
+    }
 
-    case element.type === Phaser.GameObjects.TileSprite:
+    case element.type === Phaser.GameObjects.TileSprite: {
       return new element.type(
         scene,
         props?.x,
@@ -270,13 +340,16 @@ function createGameObject(
         texture,
         frame,
       );
+    }
 
-    case element.type === Phaser.GameObjects.Video:
+    case element.type === Phaser.GameObjects.Video: {
       return new element.type(scene, props?.x, props?.y, props?.cacheKey);
+    }
 
     default:
       return new element.type(scene);
   }
+  /* eslint-enable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return */
 }
 
 function patchProps(
@@ -287,7 +360,7 @@ function patchProps(
 ): void {
   // Remove old event listeners
   for (const key in oldProps) {
-    if (events[key] && typeof oldProps[key] === 'function') {
+    if (isEventKey(key) && typeof oldProps[key] === 'function') {
       const eventName = key.slice(2).toLowerCase();
       gameObject.off(eventName);
     }

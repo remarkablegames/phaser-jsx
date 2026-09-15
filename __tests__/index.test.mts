@@ -9,6 +9,7 @@ import {
   Video,
 } from '../cjs/index.js';
 
+// eslint-disable-next-line @typescript-eslint/no-deprecated
 it.each([createElement, createRef, Image, render, Video, useRef, useScene])(
   'exports %s',
   (fn) => {
@@ -24,6 +25,7 @@ it('exports createElement', () => {
   });
 });
 
+// eslint-disable-next-line @typescript-eslint/no-deprecated
 it.each([createRef, useRef])('exports %s', (fn) => {
   expect(fn()).toEqual({ current: null });
 });

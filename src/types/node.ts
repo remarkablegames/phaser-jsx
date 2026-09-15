@@ -4,7 +4,7 @@ import type Phaser from 'phaser';
  * Info about a tracked game object in the tree.
  */
 export interface GameObjectNode {
-  gameObject: Phaser.GameObjects.GameObject;
+  gameObject: Phaser.GameObjects.GameObject | null;
   props: Record<string, unknown>;
   children: (GameObjectNode | null)[];
 }

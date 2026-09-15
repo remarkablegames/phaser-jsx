@@ -41,10 +41,8 @@
     "game"
   ],
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.5",
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",
-    "@eslint/compat": "2.1.1",
     "@eslint/eslintrc": "3.3.7",
     "@eslint/js": "10.0.1",
     "@rollup/plugin-commonjs": "29.0.3",
