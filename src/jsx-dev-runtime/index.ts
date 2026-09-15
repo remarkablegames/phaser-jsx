@@ -1,6 +1,7 @@
 import { createElement } from '..';
 
 export { Fragment, jsx, jsx as jsxs } from '..';
+export type { JSX } from 'react';
 
 type Args = Parameters<typeof createElement>;
 
