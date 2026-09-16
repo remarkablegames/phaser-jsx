@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.1...v1.0.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* **render:** correct GameObject constructor arguments ([1874a5a](https://github.com/remarkablegames/phaser-jsx/commit/1874a5a32cab93d81b8d96734fdce68aeb99e6c8))
+
 ## [1.0.1](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.0...v1.0.1) (2026-09-15)
 
 
