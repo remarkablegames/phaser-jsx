@@ -56,7 +56,7 @@
     "eslint-plugin-simple-import-sort": "14.0.0",
     "eslint-plugin-tsdoc": "0.5.4",
     "global-jsdom": "30.0.0",
-    "globals": "17.12.0",
+    "globals": "17.13.0",
     "husky": "9.1.7",
     "jsdom": "30.1.1",
     "lint-staged": "17.6.0",
