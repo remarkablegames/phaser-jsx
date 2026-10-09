@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.2...v1.0.3) (2026-10-09)
+
+
+### Bug Fixes
+
+* **types:** use InputConfiguration for input prop ([#1221](https://github.com/remarkablegames/phaser-jsx/issues/1221)) ([0289bdb](https://github.com/remarkablegames/phaser-jsx/commit/0289bdb256529d9ed8cf57d7ebd79cef6e11611b))
+
 ## [1.0.2](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.1...v1.0.2) (2026-09-16)
 
 
