@@ -62,7 +62,7 @@
     "lint-staged": "17.6.0",
     "phaser": "4.2.1",
     "phaser3spectorjs": "0.0.8",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "publint": "0.3.25",
     "react": "19.3.0",
     "rollup": "4.64.3",
