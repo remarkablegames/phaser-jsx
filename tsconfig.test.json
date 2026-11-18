@@ -6,19 +6,11 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "lib": ["dom", "es2017", "scripthost"],
-    "types": ["vitest/globals"],
+    "types": ["node", "vitest/globals"],
     "rootDir": ".",
     "allowJs": true,
     "noEmit": true
   },
-  "include": [
-    "__tests__",
-    "src",
-    "jsx-runtime",
-    "jsx-dev-runtime",
-    "eslint.config.mts",
-    "rollup.config.mts",
-    "vitest.config.mts"
-  ],
+  "include": ["__tests__", "src", "jsx-runtime", "jsx-dev-runtime", "*.mts"],
   "exclude": ["node_modules", "cjs", "coverage", "umd"]
 }

@@ -1,5 +1,6 @@
 import { createElement } from '../../src/element/create';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 function Component() {}
 
 it.each([

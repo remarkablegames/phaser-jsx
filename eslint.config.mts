@@ -1,5 +1,3 @@
-import { fileURLToPath } from 'node:url';
-
 import js from '@eslint/js';
 import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import prettier from 'eslint-plugin-prettier';
@@ -8,7 +6,7 @@ import tsdoc from 'eslint-plugin-tsdoc';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
+const gitignorePath = new URL('.gitignore', import.meta.url).pathname;
 
 export default defineConfig([
   includeIgnoreFile(gitignorePath),
@@ -47,9 +45,7 @@ export default defineConfig([
     },
 
     rules: {
-      '@typescript-eslint/no-empty-function': 'off',
       'no-console': 'error',
-      'no-debugger': 'error',
       'prettier/prettier': 'error',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': 'error',

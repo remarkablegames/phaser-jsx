@@ -1,7 +1,7 @@
 import { isValidElement } from '../../src/element/valid';
 
 beforeAll(() => {
-  vi.spyOn(console, 'warn').mockImplementation(() => {});
+  vi.spyOn(console, 'warn').mockImplementation(vi.fn());
 });
 
 afterAll(() => {

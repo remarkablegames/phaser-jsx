@@ -94,7 +94,7 @@ function createMockScene() {
 }
 
 it('does not render invalid element to the scene', () => {
-  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const spy = vi.spyOn(console, 'warn').mockImplementation(vi.fn());
   const element = { type: 'div', props: {} } as unknown as JSX.Element;
   const scene = createMockScene();
   expect(render(element, scene)).toBe(undefined);
