@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.3...v1.0.4) (2026-11-18)
+
+
+### Bug Fixes
+
+* **types:** allow useEffect callback return type to accept void ([#1265](https://github.com/remarkablegames/phaser-jsx/issues/1265)) ([1de8dd0](https://github.com/remarkablegames/phaser-jsx/commit/1de8dd0cd6c402aa16f2a6dc90f1583ef7e8e605))
+
 ## [1.0.3](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.2...v1.0.3) (2026-10-09)
 
 
