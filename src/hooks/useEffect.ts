@@ -12,7 +12,8 @@ import { getRenderContext } from '../helpers';
  *   Pass an empty array to run only once on mount.
  */
 export function useEffect(
-  callback: () => (() => void) | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  callback: () => void | (() => void),
   deps?: unknown[],
 ): void {
   const context = getRenderContext();
