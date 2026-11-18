@@ -9,7 +9,8 @@ import type { GameObjectNode } from '../types';
  */
 interface EffectRecord {
   deps: unknown[] | undefined;
-  cleanup: (() => void) | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  cleanup: void | (() => void);
 }
 
 /**
@@ -17,7 +18,8 @@ interface EffectRecord {
  */
 interface PendingEffect {
   key: number;
-  callback: () => (() => void) | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  callback: () => void | (() => void);
   deps: unknown[] | undefined;
 }
 
