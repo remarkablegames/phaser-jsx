@@ -26,9 +26,9 @@ function Clicker() {
       {0}
 
       {count > 0 ? (
-        <Text text={`Clicks: ${count}`} x={16} y={16} />
+        <Text text={`Clicks: ${count}`} x={16} y={16} depth={1} />
       ) : (
-        <Text text="You clicked 0 times" x={16} y={16} />
+        <Text text="You clicked 0 times" x={16} y={16} depth={1} />
       )}
 
       <Text
@@ -54,13 +54,11 @@ function Clicker() {
       />
 
       <Rectangle
-        x={16}
+        x={80}
         y={80}
         width={120}
         height={60}
         fillColor={0x6495ed}
-        originX={0}
-        originY={0}
       />
     </Fragment>
   );
