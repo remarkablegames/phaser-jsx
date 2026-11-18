@@ -1,9 +1,12 @@
-import type Phaser from 'phaser';
+import Phaser from 'phaser';
 
 import { createRef, useRef } from '../../src';
 import { attachRef } from '../../src/render/ref';
 
-const gameObject = {} as Phaser.GameObjects.GameObject;
+const gameObject: Phaser.GameObjects.GameObject = Object.assign(
+  {},
+  Phaser.GameObjects.GameObject.prototype,
+);
 
 it('does not attach ref', () => {
   expect(() => {

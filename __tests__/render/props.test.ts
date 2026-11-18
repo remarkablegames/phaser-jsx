@@ -137,7 +137,7 @@ describe('input', () => {
     // Verify wrapped handler passes gameObject as 2nd argument
     const wrappedHandler = (gameObject.on as unknown as Mock).mock
       .calls[0][1] as (...args: unknown[]) => void;
-    const pointer = {} as Phaser.Input.Pointer;
+    const pointer = {};
     const localX = 10;
     const localY = 20;
     const event = { stopPropagation: vi.fn() };
@@ -174,7 +174,7 @@ describe('input', () => {
     // Verify wrapped handler passes gameObject as 2nd argument
     const wrappedHandler = (gameObject.on as unknown as Mock).mock
       .calls[0][1] as (...args: unknown[]) => void;
-    const pointer = {} as Phaser.Input.Pointer;
+    const pointer = {};
     const localX = 10;
     const localY = 20;
     const event = { stopPropagation: vi.fn() };

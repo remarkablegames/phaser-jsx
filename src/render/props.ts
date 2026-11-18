@@ -59,10 +59,9 @@ export function setProps(
       continue;
     } else if (
       (key === 'fillColor' || key === 'fillAlpha') &&
-      typeof (gameObject as Phaser.GameObjects.Rectangle).setFillStyle ===
-        'function'
+      gameObject instanceof Phaser.GameObjects.Rectangle
     ) {
-      const rect = gameObject as Phaser.GameObjects.Rectangle;
+      const rect = gameObject;
       const fillColor =
         key === 'fillColor' ? (value as number) : (props.fillColor as number);
       const fillAlpha =
@@ -79,9 +78,9 @@ export function setProps(
 
   if (
     (typeof props.originX === 'number' || typeof props.originY === 'number') &&
-    typeof (gameObject as Phaser.GameObjects.Sprite).setOrigin === 'function'
+    gameObject instanceof Phaser.GameObjects.Sprite
   ) {
-    (gameObject as Phaser.GameObjects.Sprite).setOrigin(
+    gameObject.setOrigin(
       props.originX as number | undefined,
       props.originY as number | undefined,
     );
