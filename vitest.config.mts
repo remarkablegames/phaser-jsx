@@ -7,6 +7,7 @@ export default defineConfig({
     setupFiles: ['__tests__/setup.ts'],
     include: ['__tests__/**/*.test.{ts,tsx,mts}'],
     coverage: {
+      enabled: true,
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/**/*.d.ts', 'src/**/index.ts', 'src/types/'],
       thresholds: {
