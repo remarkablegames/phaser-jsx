@@ -230,7 +230,7 @@ it.each([
 ])('sets prop %s', (props) => {
   const gameObject = new Phaser.GameObjects.Sprite(scene, 0, 0, 'texture');
   expect(setProps(gameObject, props, scene)).toBe(undefined);
-  expect(gameObject).toMatchObject(props);
+  expect(gameObject).toMatchSnapshot();
 });
 
 describe('style', () => {

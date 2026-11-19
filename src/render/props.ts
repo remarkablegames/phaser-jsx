@@ -57,18 +57,17 @@ export function setProps(
     if (key === 'style' && value && typeof value === 'object') {
       setStyle(gameObject, value);
       continue;
-    } else if (
-      (key === 'fillColor' || key === 'fillAlpha') &&
-      gameObject instanceof Phaser.GameObjects.Rectangle
-    ) {
-      const rect = gameObject;
+    } else if (key === 'fillColor' || key === 'fillAlpha') {
       const fillColor =
         key === 'fillColor' ? (value as number) : (props.fillColor as number);
+
       const fillAlpha =
         key === 'fillAlpha'
           ? (value as number)
           : (props.fillAlpha as number | undefined);
-      rect.setFillStyle(fillColor, fillAlpha);
+
+      const rectangle = gameObject as Phaser.GameObjects.Rectangle | undefined;
+      rectangle?.setFillStyle(fillColor, fillAlpha);
       continue;
     } else if (key in gameObject) {
       (gameObject as unknown as Props)[key] = value;
@@ -76,13 +75,11 @@ export function setProps(
     }
   }
 
-  if (
-    (typeof props.originX === 'number' || typeof props.originY === 'number') &&
-    gameObject instanceof Phaser.GameObjects.Sprite
-  ) {
-    gameObject.setOrigin(
-      props.originX as number | undefined,
-      props.originY as number | undefined,
+  if (typeof props.originX === 'number' || typeof props.originY === 'number') {
+    const sprite = gameObject as Phaser.GameObjects.Sprite | undefined;
+    sprite?.setOrigin(
+      (props.originX as number | undefined) ?? 0.5,
+      (props.originY as number | undefined) ?? 0.5,
     );
   }
 }

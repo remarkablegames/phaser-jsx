@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`sets prop { originX: 0, originY: 0 } 1`] = `
+Mock {
+  "originX": 0,
+  "originY": 0,
+}
+`;
+
+exports[`sets prop { originX: 0, originY: 1 } 1`] = `
+Mock {
+  "originX": 0,
+  "originY": 1,
+}
+`;
+
+exports[`sets prop { originX: 0, originY: undefined } 1`] = `
+Mock {
+  "originX": 0,
+  "originY": 0.5,
+}
+`;
+
+exports[`sets prop { originX: 1, originY: 0 } 1`] = `
+Mock {
+  "originX": 1,
+  "originY": 0,
+}
+`;
+
+exports[`sets prop { originX: 1, originY: 1 } 1`] = `
+Mock {
+  "originX": 1,
+  "originY": 1,
+}
+`;
+
+exports[`sets prop { originX: undefined, originY: 0 } 1`] = `
+Mock {
+  "originX": 0.5,
+  "originY": 0,
+}
+`;
+
+exports[`sets prop { originX: undefined, …(1) } 1`] = `
+Mock {
+  "originX": undefined,
+  "originY": undefined,
+}
+`;
