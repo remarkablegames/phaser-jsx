@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.4...v1.0.5) (2026-11-19)
+
+
+### Bug Fixes
+
+* **render:** revert changes to props `setFillStyle` and `setOrigin` ([e577536](https://github.com/remarkablegames/phaser-jsx/commit/e577536f42765de0c50089483136e3c46cd7bd5d))
+
 ## [1.0.4](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.3...v1.0.4) (2026-11-18)
 
 
