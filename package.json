@@ -58,7 +58,7 @@
     "globals": "17.14.0",
     "husky": "9.1.7",
     "jsdom": "31.0.1",
-    "lint-staged": "17.6.1",
+    "lint-staged": "17.6.2",
     "phaser": "4.2.1",
     "prettier": "3.10.1",
     "publint": "0.3.25",
