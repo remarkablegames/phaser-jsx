@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import type { JSX } from 'react';
 
 import { Container, createElement, Fragment, Text } from '../../src';
+import { setProps } from '../../src/render/props';
 import { reconcileTree } from '../../src/render/reconcile';
 
 // Mock phaser for game object creation
@@ -418,6 +419,96 @@ describe('reconcileTree', () => {
       scene,
     );
     expect(gameObject.off).toHaveBeenCalledWith('pointerdown');
+  });
+
+  it('does not remove or re-add unchanged event listeners on patch', () => {
+    const onPointerDown = vi.fn();
+    const gameObject = {
+      active: true,
+      destroy: vi.fn(),
+      off: vi.fn(),
+      on: vi.fn(),
+      setStyle: vi.fn(),
+      setInteractive: vi.fn(),
+    };
+
+    setProps(
+      gameObject as unknown as Phaser.GameObjects.GameObject,
+      { onPointerDown },
+      scene,
+    );
+    expect(gameObject.on).toHaveBeenCalledTimes(1);
+    expect(gameObject.off).not.toHaveBeenCalled();
+
+    const oldNode = {
+      gameObject: gameObject as unknown as Phaser.GameObjects.GameObject,
+      props: { onPointerDown },
+      children: [],
+    };
+    reconcileTree(createElement(Text, { x: 1, onPointerDown }), oldNode, scene);
+    expect(gameObject.on).toHaveBeenCalledTimes(1);
+    expect(gameObject.off).not.toHaveBeenCalled();
+  });
+
+  it('removes and re-adds event listener when handler changes', () => {
+    const oldHandler = vi.fn();
+    const newHandler = vi.fn();
+    const gameObject = {
+      active: true,
+      destroy: vi.fn(),
+      off: vi.fn(),
+      on: vi.fn(),
+      setStyle: vi.fn(),
+      setInteractive: vi.fn(),
+    };
+
+    setProps(
+      gameObject as unknown as Phaser.GameObjects.GameObject,
+      { onPointerDown: oldHandler },
+      scene,
+    );
+
+    const oldNode = {
+      gameObject: gameObject as unknown as Phaser.GameObjects.GameObject,
+      props: { onPointerDown: oldHandler },
+      children: [],
+    };
+    reconcileTree(
+      createElement(Text, { x: 1, onPointerDown: newHandler }),
+      oldNode,
+      scene,
+    );
+    expect(gameObject.off).toHaveBeenCalledWith('pointerdown');
+    expect(gameObject.on).toHaveBeenCalledWith(
+      'pointerdown',
+      expect.any(Function),
+      scene,
+    );
+  });
+
+  it('adds event listener when handler is newly provided on patch', () => {
+    const onPointerDown = vi.fn();
+    const gameObject = {
+      active: true,
+      destroy: vi.fn(),
+      off: vi.fn(),
+      on: vi.fn(),
+      setStyle: vi.fn(),
+      setInteractive: vi.fn(),
+    };
+
+    const oldNode = {
+      gameObject: gameObject as unknown as Phaser.GameObjects.GameObject,
+      props: {},
+      children: [],
+    };
+    reconcileTree(createElement(Text, { x: 1, onPointerDown }), oldNode, scene);
+    expect(gameObject.off).not.toHaveBeenCalled();
+    expect(gameObject.on).toHaveBeenCalledWith(
+      'pointerdown',
+      expect.any(Function),
+      scene,
+    );
   });
 
   it('destroys nested children recursively', () => {
