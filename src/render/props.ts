@@ -11,11 +11,13 @@ export const skipPropKeys = ['input'];
  * @param gameObject - Phaser game object.
  * @param props - Element props.
  * @param scene - Phaser scene.
+ * @param skipEventKeys - Optional set of event prop keys whose listeners are already registered and should not be re-attached.
  */
 export function setProps(
   gameObject: Phaser.GameObjects.GameObject,
   props: Props,
   scene: Phaser.Scene,
+  skipEventKeys?: Set<string>,
 ) {
   for (const key in props) {
     if (skipPropKeys.includes(key)) {
@@ -30,6 +32,9 @@ export function setProps(
     }
 
     if (isEventKey(key) && typeof value === 'function') {
+      if (skipEventKeys?.has(key)) {
+        continue;
+      }
       gameObject.setInteractive(props.input);
       const eventName = key.slice(2).toLowerCase();
       const pointerEvents = [

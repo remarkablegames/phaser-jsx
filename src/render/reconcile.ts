@@ -432,15 +432,28 @@ function patchProps(
   newProps: Record<string, unknown>,
   scene: Phaser.Scene,
 ): void {
-  // Remove old event listeners
+  const skipEventKeys = new Set<string>();
+
+  // Remove old event listeners whose handlers changed or were removed
   for (const key in oldProps) {
     if (isEventKey(key) && typeof oldProps[key] === 'function') {
       const eventName = key.slice(2).toLowerCase();
+
+      if (
+        key in newProps &&
+        typeof newProps[key] === 'function' &&
+        oldProps[key] === newProps[key]
+      ) {
+        // Handler unchanged so keep the listener registered
+        skipEventKeys.add(key);
+        continue;
+      }
+
       gameObject.off(eventName);
     }
   }
 
-  setProps(gameObject, newProps, scene);
+  setProps(gameObject, newProps, scene, skipEventKeys);
 }
 
 function destroyNode(node: GameObjectNode): void {
