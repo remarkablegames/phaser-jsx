@@ -1,8 +1,10 @@
 import { createElement } from '../../src';
 import { Fragment, jsx, jsxDEV, jsxs } from '../../src/jsx-dev-runtime';
 
-it.each([jsx, jsxs])('exports %s', (fun) => {
-  expect(fun).toBe(createElement);
+it.each([jsx, jsxs])('exports %s', (fn) => {
+  expect(fn).not.toBe(createElement);
+  expect(fn).toBe(jsx);
+  expect(fn).toBeInstanceOf(Function);
 });
 
 it('exports Fragment', () => {

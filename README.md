@@ -142,6 +142,9 @@ If you're not using `jsxImportSource`, you can set a JSX pragma at the top of yo
 import { jsx } from 'phaser-jsx';
 ```
 
+> [!NOTE]
+> The `jsx` pragma passes children as arguments after `props`. Because `jsx` now ignores all arguments after `props` (including the automatic-runtime `key`), use `createElement(type, props, ...children)` to pass children positionally.
+
 ## How Does It Work?
 
 This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.

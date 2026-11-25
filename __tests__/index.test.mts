@@ -31,5 +31,6 @@ it.each([createRef, useRef])('exports %s', (fn) => {
 });
 
 it('exports jsx', () => {
-  expect(jsx).toBe(createElement);
+  expect(jsx).not.toBe(createElement);
+  expect(jsx).toBeInstanceOf(Function);
 });
