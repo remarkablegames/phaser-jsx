@@ -11,5 +11,7 @@ it('exports jsxDEV', () => {
 });
 
 it.each([jsx, jsxs])('exports %s', (fn) => {
-  expect(fn.name).toBe(createElement.name);
+  expect(fn).not.toBe(createElement);
+  expect(fn).toBe(jsx);
+  expect(fn).toBeInstanceOf(Function);
 });

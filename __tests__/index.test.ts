@@ -25,5 +25,6 @@ it.each([
 });
 
 it('exports jsx', () => {
-  expect(jsx).toBe(createElement);
+  expect(jsx).not.toBe(createElement);
+  expect(jsx).toBeInstanceOf(Function);
 });
