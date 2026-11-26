@@ -120,7 +120,7 @@ Update your `tsconfig.json`:
 
 ## Vite
 
-Update your Vite config:
+_Optional:_ Update your Vite config:
 
 ```ts
 // vite.config.mjs
@@ -135,7 +135,7 @@ export default defineConfig({
 
 ### JSX Pragma
 
-If you're not using `jsxImportSource`, you can set a JSX pragma at the top of your file:
+If you're not using `jsxImportSource`, add a JSX pragma at the top of the file.
 
 ```tsx
 /** @jsx jsx */
@@ -143,13 +143,11 @@ import { jsx } from 'phaser-jsx';
 ```
 
 > [!NOTE]
-> The `jsx` pragma passes children as arguments after `props`. Because `jsx` now ignores all arguments after `props` (including the automatic-runtime `key`), use `createElement(type, props, ...children)` to pass children positionally.
+> The `jsx` pragma passes children as arguments after `props`. Because `jsx` ignores all arguments after `props` (including the automatic-runtime `key`) since [v1.0.6](https://github.com/remarkablegames/phaser-jsx/releases/tag/v1.0.6), use `createElement(type, props, ...children)` to pass children positionally.
 
-## How Does It Work?
+## How It Works
 
-This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`.
-
-The `render` function renders game objects inside a scene.
+This package follows [React](https://react.dev/) conventions like having `createElement` and `jsx-runtime`. The `render` function renders game objects inside a scene.
 
 If you need nesting and relative positioning, use `Container`:
 
@@ -172,7 +170,7 @@ import { Fragment } from 'phaser-jsx';
 ```
 
 > [!NOTE]
-> The shorthand syntax `<></>` doesn't work here.
+> The shorthand syntax `<></>` doesn't work here and a `key` prop is unnecessary since the reconciler is index-based.
 
 ## Hooks
 
