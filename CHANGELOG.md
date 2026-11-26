@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.6](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.5...v1.0.6) (2026-11-26)
+
+
+### Bug Fixes
+
+* **jsx-runtime:** discard automatic-runtime key argument in jsx/jsxs ([#1269](https://github.com/remarkablegames/phaser-jsx/issues/1269)) ([0011be3](https://github.com/remarkablegames/phaser-jsx/commit/0011be3eb716ae0f844c8da8bdf58b9b03464e3e))
+
+
+### Performance Improvements
+
+* **render:** avoid removing unchanged event listeners on patch ([#1272](https://github.com/remarkablegames/phaser-jsx/issues/1272)) ([ea5ee40](https://github.com/remarkablegames/phaser-jsx/commit/ea5ee40ee49245d8805f5af9af9a126685c0cec1))
+
 ## [1.0.5](https://github.com/remarkablegames/phaser-jsx/compare/v1.0.4...v1.0.5) (2026-11-19)
 
 
